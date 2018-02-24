@@ -14,46 +14,11 @@
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<context:component-scan base-package="com.fradou.springdemo" />
+	<context:component-scan base-package="com.fradou.nutrition" />
 
 	<mvc:annotation-driven/>
-	<tx:annotation-driven transaction-manager="mtransactionManager" />
-	
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
-    <!-- dataSource / connection pool -->
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/my_database?useSSL=false" />
-        <property name="user" value="root" />
-        <property name="password" value="root" /> 
-
-        <!-- C3P0 -->
-        <property name="minPoolSize" value="5" />
-        <property name="maxPoolSize" value="20" />
-        <property name="maxIdleTime" value="30000" />
-	</bean>  
-	
-    <!-- hibernate -->
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<!-- id de la dataSource defini au dessus-->
-		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="com.fradou.nutrition.entity" />
-		<property name="hibernateProperties">
-		   <props>
-		      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-		      <prop key="hibernate.show_sql">true</prop>
-		   </props>
-		</property>
-   </bean>	  
-
-    <!-- Step 3: Setup Hibernate transaction manager (pour créer/ recup session) -->
-	<bean id="transactionManager"
-            class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<!-- fait reference a session factory crée au dessus -->
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>	
 </beans>
 
 
