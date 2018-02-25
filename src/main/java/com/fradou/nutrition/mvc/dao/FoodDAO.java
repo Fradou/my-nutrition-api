@@ -1,5 +1,8 @@
 package com.fradou.nutrition.mvc.dao;
 
-public interface FoodDAO {
+import com.fradou.nutrition.mvc.dao.generic.GenericDAO;
+import com.fradou.nutrition.mvc.entity.Food;
+
+public interface FoodDAO extends GenericDAO <Food> {
 
 }
