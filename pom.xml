@@ -15,13 +15,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.9</java.version>
-		<maven.compiler.source>1.9</maven.compiler.source>
-   		<maven.compiler.target>1.9</maven.compiler.target>
+		<maven.compiler.source>9</maven.compiler.source>
+   		<maven.compiler.target>9</maven.compiler.target>
 		<spring.version>5.0.3.RELEASE</spring.version>
 		<jackson.version>2.4.0</jackson.version>
 		<jaxb-api.version>2.2.11</jaxb-api.version>
-	</properties>  
+	</properties>
+	  
 	<dependencies>
 		
 		<!-- SPRING -->
@@ -58,14 +58,21 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>5.0.3.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>5.0.3.RELEASE</version>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		
 		
@@ -95,26 +102,27 @@
 		
 		<!-- JSON -->
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-
-
-		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>${jaxb-api.version}</version>
-		<scope>runtime</scope>
+			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.9.3</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.9.3</version>
+		</dependency>		
 		
 		<!-- MYSQL -->
+		
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -159,10 +167,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version> <!-- or whatever current version -->
+				<version>3.2</version>
 				<configuration>
-					<source>1.9</source>
-					<target>1.9</target>
+					<source>9</source>
+					<target>9</target>
 				</configuration>
 			</plugin>
 		</plugins>
