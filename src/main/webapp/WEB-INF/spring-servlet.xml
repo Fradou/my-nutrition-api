@@ -18,6 +18,13 @@
 
 	<mvc:annotation-driven/>
 	
+	<!-- Spring view resolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
 	<!-- dataSource / connection pool -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">

@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.controller;
+package com.fradou.nutrition.mvc.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import com.fradou.nutrition.mvc.entity.Food;
 import com.fradou.nutrition.mvc.service.FoodService;
 
 @RestController
-@RequestMapping("/food")
+@RequestMapping("/api/food")
 public class FoodApiController {
 	
 	@Autowired
