@@ -11,12 +11,4 @@ public class FoodDAOImpl extends GenericDAOImpl<Food> implements FoodDAO {
 	public FoodDAOImpl() {
 		setClazz(Food.class);
 	}
-	
-	@Override
-	public Food find(int id) {
-		Food food = new Food("Steak");
-		food.setId(id);
-		return food;
-	}
-
 }
