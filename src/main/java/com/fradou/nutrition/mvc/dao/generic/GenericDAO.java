@@ -2,6 +2,9 @@ package com.fradou.nutrition.mvc.dao.generic;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public interface GenericDAO<T> {
 	
 	public int create(T entity);

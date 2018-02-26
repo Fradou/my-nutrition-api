@@ -11,13 +11,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class GenericDAOImpl<T> implements GenericDAO<T> {
 
-	private final Class<T> type;
+	private Class<T> clazz;
 	
 	@Autowired
 	protected SessionFactory sf;
 	
-	public GenericDAOImpl(Class<T> type) {
-		this.type = type;
+	public final void setClazz( Class< T > clazzToSet ){
+		this.clazz = clazzToSet;
 	}
 	
 	@Override
@@ -27,7 +27,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	@Override
 	public T find(int id) {
-		return getSession().get(type, id);
+		return getSession().get(clazz, id);
 	}
 
 	@Override
@@ -42,13 +42,13 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	@Override
 	public List<T> findAll() {
-		Query<T> query = getSession().createQuery("FROM " + type.getName());
+		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
 		return query.getResultList();
 	}
 
 	@Override
 	public int count() {
-		Query<T> query = getSession().createQuery("SELECT COUNT(*) FROM " + type.getName());
+		Query<T> query = getSession().createQuery("SELECT COUNT(*) FROM " + clazz.getName());
 		return (int) query.getSingleResult();
 	}
 	

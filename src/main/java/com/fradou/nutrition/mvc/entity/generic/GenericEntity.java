@@ -3,47 +3,37 @@ package com.fradou.nutrition.mvc.entity.generic;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
-@Entity
+@Component
+@JsonIgnoreProperties(value = { "entityPath" })
 public class GenericEntity {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
-	private int id;
 	
 	protected String entityPath;
+	
 	protected Map<RelationType,String> links;
 
 	public GenericEntity() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+		setLinks();
 	}
 
 	public Map<RelationType, String> getLinks() {
 		return links;
 	}
 
-	protected void setLinks(Map<RelationType, String> links) {
+	protected void setLinks() {
 		
 		Map<RelationType,String> linksList = new HashMap<>();
 		linksList.put(RelationType.LIST, entityPath);
-		linksList.put(RelationType.SELF, entityPath + "/" + String.valueOf(id));
-		this.links = links;
+		linksList.put(RelationType.SELF, entityPath + "/");
+		this.links = linksList;
 	}
 	
+	protected void setEntityPath(String path) {
+		this.entityPath = path;
+	}
 }
