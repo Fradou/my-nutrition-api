@@ -40,6 +40,10 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 				// URL to check login
 				.loginProcessingUrl("/authenticateUser")
 				// Allow everyone to see login page
+				.permitAll()
+			.and()
+				// Enable standard logout
+				.logout()
 				.permitAll();
 	}
 }

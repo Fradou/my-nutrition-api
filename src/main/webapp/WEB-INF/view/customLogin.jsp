@@ -9,6 +9,10 @@ Hello
 		<i>Sorry, wrong login</i>
 	</c:if>
 	
+	<c:if test="${param.logout != null}">
+		<i>C'est ok vous êtes deco</i>
+	</c:if>
+	
 	<p>
 		<input name="username" placeholder="Login"/>
 		<input type="password" name="password"/>
