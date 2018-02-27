@@ -6,6 +6,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.User.UserBuilder;
+
+import com.mchange.v2.c3p0.DataSources;
 
 import java.lang.Exception;
 
@@ -34,7 +38,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.jdbcAuthentication().dataSource(securityDataSource);
 	}
 	
-		/**
+	/**
 	 * Setup custom login page
 	 */
 	@Override

@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.fradou.nutrition.mvc.entity.Food;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
@@ -64,7 +65,7 @@ public class HibernateConfig {
 		props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		
 		factoryBean.setHibernateProperties(props);
-		//   factoryBean.setAnnotatedClasses(User.class);
+		factoryBean.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));;
 		return factoryBean;
 	}
 
