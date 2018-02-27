@@ -1,6 +1,7 @@
 package com.fradou.nutrition.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.mchange.v2.c3p0.DataSources;
 
@@ -19,8 +21,12 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	//@Autowired
+	//private DataSource securityDataSource;
+	
 	@Autowired
-	private DataSource securityDataSource;
+	@Qualifier("customerUserService")
+	private UserDetailsService userDetailsService;
 	
 	/**
 	 * Setup in memory authentification
@@ -35,7 +41,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 		//	.withUser(users.username("test2").password("test2").roles("USER", "MANAGER"))
 		//	.withUser(users.username("test3").password("test3").roles("USER", "MANAGER", "ADMIN"));
 		
-		auth.jdbcAuthentication().dataSource(securityDataSource);
+		auth.userDetailsService(userDetailsService);
 	}
 	
 	/**
@@ -45,8 +51,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.antMatchers("/").hasRole("EMPLOYEE")
-			.antMatchers("/securePage/**").hasRole("MANAGER")
+			.antMatchers("/").authenticated()
 			.and()
 			.formLogin()
 				// URL to custom login form

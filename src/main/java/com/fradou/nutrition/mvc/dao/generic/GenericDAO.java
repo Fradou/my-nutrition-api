@@ -19,4 +19,6 @@ public interface GenericDAO<T> {
 	
 	public int count();
 	
+	public T findBy(String field, String value);
+	
 }

@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.dao;
+package com.fradou.nutrition.mvc.dao.interfaces;
 
 import org.springframework.stereotype.Component;
 

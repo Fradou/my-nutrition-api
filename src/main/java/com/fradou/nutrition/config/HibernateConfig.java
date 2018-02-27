@@ -15,7 +15,6 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.fradou.nutrition.mvc.entity.Food;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration

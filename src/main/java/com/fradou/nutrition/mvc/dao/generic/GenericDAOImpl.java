@@ -55,4 +55,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	protected Session getSession() {
 		return sf.getCurrentSession();
 	}
+
+	@Override
+	public T findBy(String field, String value) {
+		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE " + field + "='" + value + "'");
+		return query.getSingleResult();
+	}
 }
