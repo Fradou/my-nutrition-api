@@ -22,7 +22,9 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 		UserBuilder users = User.withDefaultPasswordEncoder();
 		
 		auth.inMemoryAuthentication()
-			.withUser(users.username("test").password("test").roles("USER"));
+			.withUser(users.username("test").password("test").roles("USER"))
+			.withUser(users.username("test2").password("test2").roles("USER", "MANAGER"))
+			.withUser(users.username("test3").password("test3").roles("USER", "MANAGER", "ADMIN"));;
 	}
 	
 		/**
