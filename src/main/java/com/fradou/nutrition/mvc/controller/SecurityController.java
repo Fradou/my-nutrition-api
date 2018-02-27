@@ -10,4 +10,14 @@ public class SecurityController {
 	public String login() {
 		return "customLogin";
 	}
+	
+	@GetMapping("/securePage")
+	public String securePage() {
+		return "securePage";
+	}
+	
+	@GetMapping("/access-denied")
+	public String accessDeniedPage() {
+		return "accessDenied";
+	}
 }

@@ -1,30 +1,37 @@
 package com.fradou.nutrition.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
+
 import java.lang.Exception;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private DataSource securityDataSource;
+	
 	/**
 	 * Setup in memory authentification
 	 */
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		UserBuilder users = User.withDefaultPasswordEncoder();
+		// UserBuilder users = User.withDefaultPasswordEncoder();
 		
-		auth.inMemoryAuthentication()
-			.withUser(users.username("test").password("test").roles("USER"))
-			.withUser(users.username("test2").password("test2").roles("USER", "MANAGER"))
-			.withUser(users.username("test3").password("test3").roles("USER", "MANAGER", "ADMIN"));;
+		// auth.inMemoryAuthentication()
+		//	.withUser(users.username("test").password("test").roles("USER"))
+		//	.withUser(users.username("test2").password("test2").roles("USER", "MANAGER"))
+		//	.withUser(users.username("test3").password("test3").roles("USER", "MANAGER", "ADMIN"));
+		
+		auth.jdbcAuthentication().dataSource(securityDataSource);
 	}
 	
 		/**
@@ -34,7 +41,8 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.anyRequest().authenticated()
+			.antMatchers("/").hasRole("EMPLOYEE")
+			.antMatchers("/securePage/**").hasRole("MANAGER")
 			.and()
 			.formLogin()
 				// URL to custom login form
@@ -46,6 +54,9 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				// Enable standard logout
 				.logout()
-				.permitAll();
+				.permitAll()
+			.and()
+				.exceptionHandling()
+				.accessDeniedPage("/access-denied");
 	}
 }

@@ -7,6 +7,9 @@ Salut
 User : <security:authentication property="principal.username"/>
 Roles : <security:authentication property="principal.authorities"/>
 
+<security:authorize access="hasRole('MANAGER')">
+	<a href="${pageContext.request.contextPath}/securePage">Secure page</a>
+</security:authorize>
 
 <form:form action="${pageContext.request.contextPath}/logout" method="POST">
 	<input type="submit" value="Logout"/>
