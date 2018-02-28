@@ -1,15 +1,16 @@
 package com.fradou.nutrition.mvc.entity;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -59,8 +60,13 @@ public class CustomUser implements UserDetails {
 	@Column
 	private Integer tdee;
 	
-    @OneToMany
-    private List<Role> roles;
+    @ManyToMany
+    @JoinTable(
+    		name="users_roles",
+    		joinColumns=@JoinColumn(name="user_id"),
+    		inverseJoinColumns=@JoinColumn(name="role_id")
+    )
+    private Set<Role> roles;
 	
 	public int getId() {
 		return id;
@@ -172,11 +178,11 @@ public class CustomUser implements UserDetails {
 		this.tdee = tdee;
 	}
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 }

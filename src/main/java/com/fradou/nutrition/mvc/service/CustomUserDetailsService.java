@@ -21,8 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Transactional
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		System.out.println("Dans custom service detail");
-		System.out.println("Username à recherche : " + username);
 		CustomUser user;
 		
 		try {
@@ -33,10 +31,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 			}
 		}
 		catch(Exception ex) {
-			ex.printStackTrace();
+			System.out.println("Foirage : " + ex.getMessage());
 			throw new UsernameNotFoundException("DB error");
 		}
-		System.out.println("User trouvé on va convertir");
+		System.out.println("user trouvé");
 		return convertToSpringUser(user);
 	}
 
