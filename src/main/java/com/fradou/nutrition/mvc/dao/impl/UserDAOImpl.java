@@ -9,4 +9,7 @@ import com.fradou.nutrition.mvc.entity.CustomUser;
 @Repository
 public class UserDAOImpl extends GenericDAOImpl<CustomUser> implements UserDAO {
 
+	public UserDAOImpl() {
+		setClazz(CustomUser.class);
+	}
 }

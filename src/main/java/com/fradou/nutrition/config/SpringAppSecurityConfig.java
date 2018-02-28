@@ -25,7 +25,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	//private DataSource securityDataSource;
 	
 	@Autowired
-	@Qualifier("customerUserService")
+	@Qualifier("customUserDetailsService")
 	private UserDetailsService userDetailsService;
 	
 	/**

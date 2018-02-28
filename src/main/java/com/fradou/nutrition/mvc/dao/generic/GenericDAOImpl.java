@@ -61,4 +61,21 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE " + field + "='" + value + "'");
 		return query.getSingleResult();
 	}
+
+	@Override
+	public List<T> find(Integer offset, Integer entries, String orderBy, String orderType) {
+		
+		//TODO A reprendre
+		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
+		if(offset != null) {
+			query.setFirstResult(offset);
+		}
+		if(entries != null) {
+			query.setMaxResults(entries);
+		}
+		if(orderBy != null) {
+		}
+		
+		return null;
+	}
 }

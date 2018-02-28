@@ -23,7 +23,16 @@ public class Food extends GenericEntity {
 	
 	@Column
 	private String name;
-
+	
+	@Column
+	private Double protein;
+	
+	@Column
+	private Double carbohydrate;
+	
+	@Column
+	private Double fat;
+	
 	public Food(String name) {
 		this.name = name;
 		setEntityPath("food/");
@@ -47,5 +56,29 @@ public class Food extends GenericEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Double getProtein() {
+		return protein;
+	}
+
+	public void setProtein(Double protein) {
+		this.protein = protein;
+	}
+
+	public Double getCarbohydrate() {
+		return carbohydrate;
+	}
+
+	public void setCarbohydrate(Double carbohydrate) {
+		this.carbohydrate = carbohydrate;
+	}
+
+	public Double getFat() {
+		return fat;
+	}
+
+	public void setFat(Double fat) {
+		this.fat = fat;
 	}
 }
