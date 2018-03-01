@@ -8,17 +8,16 @@ import com.fradou.nutrition.mvc.dao.interfaces.UserDAO;
 import com.fradou.nutrition.mvc.entity.CustomUser;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserService {
 
 	@Autowired
 	private UserDAO uDao;
 	
-	@Transactional
 	public CustomUser findBy(String field, String value) {
 		return uDao.findBy(field, value);
 	}
 	
-	@Transactional
 	public void update(CustomUser user) {
 		uDao.update(user);
 	}

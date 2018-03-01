@@ -185,4 +185,8 @@ public class CustomUser implements UserDetails {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+	
+	public String toString() {
+		return "CustomerUser : [id=" + id + ", username=" + username + ", height="+height+", age=" + age;
+	}
 }

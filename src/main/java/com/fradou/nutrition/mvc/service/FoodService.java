@@ -8,12 +8,12 @@ import com.fradou.nutrition.mvc.dao.interfaces.FoodDAO;
 import com.fradou.nutrition.mvc.entity.Food;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class FoodService {
 
 	@Autowired
 	private FoodDAO fDao;
 	
-	@Transactional
 	public Food get(int id) {
 		return fDao.find(id);
 	}

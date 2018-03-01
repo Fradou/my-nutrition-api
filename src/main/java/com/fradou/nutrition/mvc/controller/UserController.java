@@ -34,7 +34,7 @@ public class UserController {
 	@PostMapping("/profile")
 	public String editProfile(@ModelAttribute("currentUser") CustomUser user, Authentication authentication) {
 		System.out.println("in save");
-		if(authentication.getName() == user.getUsername()) {
+		if(authentication.getName().equals(user.getUsername())) {
 			System.out.println("va update");
 			uService.update(user);
 		}
