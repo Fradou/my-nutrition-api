@@ -33,13 +33,20 @@ public class Food extends GenericEntity {
 	@Column
 	private Double fat;
 	
-	public Food(String name) {
-		this.name = name;
-		setEntityPath("food/");
-	}
+	@Column
+	private Double calorie;
 	
 	public Food() {
-		setEntityPath("food/");
+		
+	}
+	
+	public Food(String name) {
+		this.name = name;
+	}
+	
+	@Override
+	protected String initializeEntityPath() {
+		return "/food";
 	}
 	
 	public int getId() {
@@ -80,5 +87,13 @@ public class Food extends GenericEntity {
 
 	public void setFat(Double fat) {
 		this.fat = fat;
+	}
+
+	public Double getCalorie() {
+		return calorie;
+	}
+
+	public void setCalorie(Double calorie) {
+		this.calorie = calorie;
 	}
 }

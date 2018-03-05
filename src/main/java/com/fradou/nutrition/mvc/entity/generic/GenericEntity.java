@@ -10,30 +10,31 @@ import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
 @Component
 @JsonIgnoreProperties(value = { "entityPath" })
-public class GenericEntity {
-	
+public abstract class GenericEntity {
 	
 	protected String entityPath;
 	
 	protected Map<RelationType,String> links;
 
 	public GenericEntity() {
+		entityPath = initializeEntityPath();
 		setLinks();
 	}
-
-	public Map<RelationType, String> getLinks() {
-		return links;
-	}
+	
+	/**
+	 * Abstract method to force subclass to declare entityPath
+	 * @return
+	 */
+	protected abstract String initializeEntityPath();
 
 	protected void setLinks() {
-		
 		Map<RelationType,String> linksList = new HashMap<>();
 		linksList.put(RelationType.LIST, entityPath);
 		linksList.put(RelationType.SELF, entityPath + "/");
 		this.links = linksList;
 	}
 	
-	protected void setEntityPath(String path) {
-		this.entityPath = path;
+	public Map<RelationType, String> getLinks() {
+		return links;
 	}
 }
