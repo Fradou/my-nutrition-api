@@ -57,7 +57,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	@Override
-	public T findBy(String field, String value) {
+	public T findUniqueBy(String field, String value) {
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE " + field + "='" + value + "'");
 		return query.getSingleResult();
 	}

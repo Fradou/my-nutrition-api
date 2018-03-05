@@ -14,5 +14,5 @@
     <meta name="author" content="Alexandre Fradet">
 	<meta name="robots" content="all" />
 	
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
+	<link rel="stylesheet" href="<c:url value="/resources/css/main.css"/>"/>
 </head>

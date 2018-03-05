@@ -14,11 +14,15 @@ public class UserService {
 	@Autowired
 	private UserDAO uDao;
 	
-	public CustomUser findBy(String field, String value) {
-		return uDao.findBy(field, value);
+	public CustomUser findUniqueBy(String field, String value) {
+		return uDao.findUniqueBy(field, value);
 	}
 	
 	public void update(CustomUser user) {
 		uDao.update(user);
+	}
+
+	public boolean usernameExists(String username) {
+		return uDao.findUniqueBy("username", username) != null;
 	}
 }

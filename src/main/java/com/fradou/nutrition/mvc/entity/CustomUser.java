@@ -12,12 +12,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Index;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="user")
+@Table(name="user",
+		indexes = {@Index(name= "ix_username", columnList="username", unique = true),
+				@Index(name= "ix_email", columnList="email", unique = true)
+		})
 public class CustomUser implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -34,18 +41,22 @@ public class CustomUser implements UserDetails {
 	private String password;
 	
 	@Column(nullable=false)
-	private boolean accountNonExpired;
-	
-	@Column(nullable=false)
-	private boolean accountNonLocked;
-	
-	@Column(nullable=false)
-	private boolean credentialsNonExpired;
-	
-	@Column(nullable=false)
 	private boolean enabled;
 	
+	@Column(nullable=false, unique=true)
+	@Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", message="Pas un format mail ça", flags=Pattern.Flag.CASE_INSENSITIVE)
+	private String email;
+	
 	@Column
+	private String firstName;
+	
+	@Column
+	private String lastName;
+
+	
+	@Column
+	@Min(value=1, message="C'est mieux d'être né, non ?")
+	@Max(value=150, message="Tu as battu tous les record de longévité, bravo !")
 	private Integer age;
 	
 	@Column
@@ -84,16 +95,12 @@ public class CustomUser implements UserDetails {
 		this.password = password;
 	}
 
-	public void setAccountNonExpired(boolean accountNonExpired) {
-		this.accountNonExpired = accountNonExpired;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
-	}
-
-	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-		this.credentialsNonExpired = credentialsNonExpired;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -120,17 +127,17 @@ public class CustomUser implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return accountNonExpired;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return accountNonLocked;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return credentialsNonExpired;
+		return true;
 	}
 
 	@Override
@@ -176,6 +183,22 @@ public class CustomUser implements UserDetails {
 
 	public void setTdee(Integer tdee) {
 		this.tdee = tdee;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public Set<Role> getRoles() {

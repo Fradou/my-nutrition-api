@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		CustomUser user;
 		
 		try {
-			user = userDao.findBy("username", username);
+			user = userDao.findUniqueBy("username", username);
 			
 			if(user == null) {
 				throw new UsernameNotFoundException("user not found");
@@ -44,9 +44,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 				user.getUsername(),
 				user.getPassword(),
 				user.isEnabled(),
-				user.isAccountNonExpired(),
-				user.isCredentialsNonExpired(),
-				user.isAccountNonLocked(),
+				true,
+				true,
+				true,
 				user.getAuthorities()
 		);
 		return sprUser;

@@ -19,7 +19,7 @@ public interface GenericDAO<T> {
 	
 	public int count();
 	
-	public T findBy(String field, String value);
+	public T findUniqueBy(String field, String value);
 	
 	public List<T> find(Integer offset, Integer entries, String orderBy, String orderType);
 	
