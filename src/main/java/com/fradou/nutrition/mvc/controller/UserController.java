@@ -1,6 +1,8 @@
 package com.fradou.nutrition.mvc.controller;
 
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fradou.nutrition.mvc.entity.CustomUser;
+import com.fradou.nutrition.mvc.entity.Role;
 import com.fradou.nutrition.mvc.service.UserService;
 
 @Controller
@@ -66,18 +69,28 @@ public class UserController {
 	@PostMapping(value="/register")
 	public String registerUserValidation(Model model,@Valid @ModelAttribute("newUser") CustomUser user, BindingResult validationResult) {
 		
+		boolean hasError = false;
+		
 		if(validationResult.hasErrors()) {
-			System.out.println("Error bro");
-			return "user/registration";
+			hasError = true;
 		}
 		
 		if(uService.usernameExists(user.getUsername())) {
 			validationResult.addError(new FieldError("newUser", "username", "Username déjà utilisé dommage!"));
-			System.out.println("Existe deja brah");
+			hasError = true;
+		}
+		
+		if(uService.emailExists(user.getEmail())) {
+			validationResult.addError(new FieldError("newUser", "email", "Email déjà utilisé dommage!"));
+			hasError = true;
+		}
+		
+		if(hasError) {
 			return "user/registration";
 		}
 		
-		return "user/welcome";
+		uService.create(user);
 		
+		return "user/welcome";
 	}
 }

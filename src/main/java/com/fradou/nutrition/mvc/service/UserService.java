@@ -1,5 +1,7 @@
 package com.fradou.nutrition.mvc.service;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,5 +26,13 @@ public class UserService {
 
 	public boolean usernameExists(String username) {
 		return uDao.findUniqueBy("username", username) != null;
+	}
+
+	public boolean emailExists(String email) {
+		return !email.isEmpty() && uDao.findUniqueBy("email", email) != null;
+	}
+
+	public void create(@Valid CustomUser user) {
+		uDao.create(user);
 	}
 }
