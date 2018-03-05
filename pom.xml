@@ -108,6 +108,13 @@
 		    <version>5.0.2.Final</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+		<dependency>
+		    <groupId>org.hibernate.validator</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>6.0.7.Final</version>
+		</dependency>
+		
 		<!-- JSON -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -153,6 +160,13 @@
 			<version>1.2</version>
 		</dependency>
 		
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency>		
 				
 		<!-- TESTS -->
 		
