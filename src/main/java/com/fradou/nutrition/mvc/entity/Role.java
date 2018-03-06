@@ -1,5 +1,6 @@
 package com.fradou.nutrition.mvc.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,7 +26,7 @@ public class Role implements GrantedAuthority {
 	private String authority;
 	
 	@ManyToMany(mappedBy="roles")
-    private Set<CustomUser> users;
+    private Set<CustomUser> users = new HashSet<CustomUser>();
 	
 	@Override
 	public String getAuthority() {
@@ -50,5 +51,15 @@ public class Role implements GrantedAuthority {
 
 	public void setUsers(Set<CustomUser> users) {
 		this.users = users;
+	}
+	
+	public void addUser(CustomUser user) {
+		this.users.add(user);
+		user.getRoles().remove(this);
+	}
+	
+	public void removeUser(CustomUser user) {
+		this.users.remove(user);
+		user.getRoles().remove(this);
 	}
 }

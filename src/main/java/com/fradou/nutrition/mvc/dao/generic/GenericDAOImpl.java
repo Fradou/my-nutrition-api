@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class GenericDAOImpl<T> implements GenericDAO<T> {
+public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	private Class<T> clazz;
 	
@@ -65,7 +65,6 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	@Override
 	public List<T> find(Integer offset, Integer entries, String orderBy, String orderType) {
 		
-		//TODO A reprendre
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
 		if(offset != null) {
 			query.setFirstResult(offset);

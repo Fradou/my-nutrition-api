@@ -27,7 +27,7 @@ public class FoodApiController {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Food findById(@PathVariable(value="id") String id) {
 		Integer myId = Integer.valueOf(id);
-		return fs.get(myId);
+		return fs.find(myId);
 	}
 	
 }

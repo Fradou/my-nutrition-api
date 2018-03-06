@@ -1,21 +1,22 @@
 package com.fradou.nutrition.mvc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.security.core.userdetails.User;
 
-import com.fradou.nutrition.mvc.dao.interfaces.UserDAO;
+import com.fradou.nutrition.mvc.dao.UserDAOImpl;
 import com.fradou.nutrition.mvc.entity.CustomUser;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserDAO userDao;
+	private UserDAOImpl userDao;
 	
 	@Override
 	@Transactional

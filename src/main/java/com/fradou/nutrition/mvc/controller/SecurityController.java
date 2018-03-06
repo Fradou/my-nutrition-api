@@ -1,8 +1,12 @@
 package com.fradou.nutrition.mvc.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fradou.nutrition.mvc.entity.CustomUser;
+import com.fradou.nutrition.mvc.entity.Role;
+import com.fradou.nutrition.mvc.service.RoleService;
 import com.fradou.nutrition.mvc.service.UserService;
 
 @Controller
@@ -19,6 +25,9 @@ public class SecurityController {
 	
 	@Autowired
 	private UserService uService;
+	
+	@Autowired
+	private RoleService rService;
 
 	@GetMapping("/login")
 	public String login() {
@@ -62,10 +71,26 @@ public class SecurityController {
 			return "user/registration";
 		}
 		
-		
-		user.setPassword("{noop}" + user.getPassword());
+		setupUser(user);
 		uService.create(user);
 		
 		return "user/welcome";
+	}
+	
+	/**
+	 * Method used to treat user data before persistance
+	 * @param user
+	 */
+	private void setupUser(CustomUser user) {
+		
+		// Password hash
+		String hash_pw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+		user.setPassword("{bcrypt}" + hash_pw);
+		
+		// Set basic user role
+		Role userRole = rService.findUniqueBy("role", "ROLE_USER");
+		user.addRole(userRole);
+		
+		user.setEnabled(true);
 	}
 }
