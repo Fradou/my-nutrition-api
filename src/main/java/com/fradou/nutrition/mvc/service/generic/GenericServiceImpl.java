@@ -56,5 +56,9 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 		}
 		return exists;
 	}
+	
+	public List<T> find(Integer offset, Integer entries) {
+		return dao.find(offset, entries);
+	}
 }
 

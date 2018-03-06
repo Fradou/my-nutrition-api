@@ -20,5 +20,7 @@ public interface GenericService<T> {
 	public T findUniqueBy(String field, String value);
 		
 	public boolean alreadyExists(String fieldName, String fieldValue);
+	
+	public List<T> find(Integer offset, Integer entries);
 
 }

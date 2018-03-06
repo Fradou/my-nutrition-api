@@ -21,6 +21,6 @@ public interface GenericDAO<T> {
 	
 	public T findUniqueBy(String field, String value);
 		
-	public List<T> find(Integer offset, Integer entries, String orderBy, String orderType);
+	public List<T> find(Integer offset, Integer entries);
 	
 }

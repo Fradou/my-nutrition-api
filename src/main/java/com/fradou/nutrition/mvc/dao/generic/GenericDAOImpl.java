@@ -63,7 +63,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	@Override
-	public List<T> find(Integer offset, Integer entries, String orderBy, String orderType) {
+	public List<T> find(Integer offset, Integer entries) {
 		
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
 		if(offset != null) {
@@ -72,9 +72,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 		if(entries != null) {
 			query.setMaxResults(entries);
 		}
-		if(orderBy != null) {
-		}
 		
-		return null;
+		return query.getResultList();
 	}
 }
