@@ -87,10 +87,11 @@ public class SecurityController {
 		String hash_pw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword("{bcrypt}" + hash_pw);
 		
-		// Set basic user role
-		Role userRole = rService.findUniqueBy("role", "ROLE_USER");
-		user.addRole(userRole);
+		// Enable user
+		user.setEnabled(false);
 		
-		user.setEnabled(true);
+		// Give basic use role
+		Role role = rService.findUniqueBy("authority", "ROLE_USER");
+		user.addRole(role);
 	}
 }
