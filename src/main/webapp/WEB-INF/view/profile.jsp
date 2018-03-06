@@ -10,3 +10,5 @@ Le profile GG
 	<form:input type="number" path="age"/>
 	<input type="submit" value="Sauvegarder"/>
 </form:form>
+
+<%@include file="include/_logout.jsp"%>

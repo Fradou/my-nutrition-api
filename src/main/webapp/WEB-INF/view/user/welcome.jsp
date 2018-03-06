@@ -1,3 +1,3 @@
-<%@include file="../_init.jsp" %>
+<%@include file="../include/_init.jsp" %>
 
 Enregistrement réussi, bienvenue !

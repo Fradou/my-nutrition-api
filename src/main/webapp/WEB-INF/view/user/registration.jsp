@@ -1,4 +1,4 @@
-<%@include file="../_init.jsp"%>
+<%@include file="../include/_init.jsp"%>
 
 <body>
 

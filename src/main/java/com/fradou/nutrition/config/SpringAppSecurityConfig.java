@@ -51,7 +51,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.antMatchers("/").authenticated()
+			.antMatchers("/**").authenticated()
 			.and()
 			.formLogin()
 				// URL to custom login form
