@@ -11,6 +11,10 @@
 			</label>
 			<form:errors path="username" cssClass="error" />
 
+			<label> Password <form:password path="password" />
+			</label>
+			<form:errors path="password" cssClass="error" />
+
 			<label> firstName <form:input path="firstName" />
 			</label>
 			<form:errors path="firstName" cssClass="error" />
@@ -41,9 +45,7 @@
 			</label>
 			<form:errors path="tdee" cssClass="error" />
 
-
 			<input type="submit" value="Gogogo" />
-
 		</form:form>
 
 

@@ -51,6 +51,8 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
+			.antMatchers("/resources/**").permitAll()
+			.antMatchers("/register").permitAll()
 			.antMatchers("/**").authenticated()
 			.and()
 			.formLogin()
@@ -58,6 +60,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 				.loginPage("/login")
 				// URL to check login
 				.loginProcessingUrl("/authenticateUser")
+			//	.defaultSuccessUrl(defaultSuccessUrl)
 				// Allow everyone to see login page
 				.permitAll()
 			.and()

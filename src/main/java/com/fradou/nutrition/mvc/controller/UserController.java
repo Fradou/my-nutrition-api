@@ -56,41 +56,4 @@ public class UserController {
 		
 		return "redirect:/user/profile";
 	}
-	
-	@GetMapping(value="/register")
-	public String registerUser(Model model) {
-		
-		CustomUser user = new CustomUser();
-		model.addAttribute("newUser", user);
-		
-		return "user/registration";
-	}
-	
-	@PostMapping(value="/register")
-	public String registerUserValidation(Model model,@Valid @ModelAttribute("newUser") CustomUser user, BindingResult validationResult) {
-		
-		boolean hasError = false;
-		
-		if(validationResult.hasErrors()) {
-			hasError = true;
-		}
-		
-		if(uService.usernameExists(user.getUsername())) {
-			validationResult.addError(new FieldError("newUser", "username", "Username déjà utilisé dommage!"));
-			hasError = true;
-		}
-		
-		if(uService.emailExists(user.getEmail())) {
-			validationResult.addError(new FieldError("newUser", "email", "Email déjà utilisé dommage!"));
-			hasError = true;
-		}
-		
-		if(hasError) {
-			return "user/registration";
-		}
-		
-		uService.create(user);
-		
-		return "user/welcome";
-	}
 }

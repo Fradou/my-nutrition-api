@@ -18,4 +18,6 @@ Hello
 		<input type="password" name="password"/>
 		<input type="submit" value="Connexion">
 	</p>
+	
+	Nouveau ? <a href="<c:url value="register"/>">S'inscrire</a>
 </form:form>

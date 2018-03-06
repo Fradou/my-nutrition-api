@@ -1,5 +1,6 @@
 package com.fradou.nutrition.mvc.service;
 
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,19 @@ public class UserService {
 		uDao.update(user);
 	}
 
-	public boolean usernameExists(String username) {
-		return uDao.findUniqueBy("username", username) != null;
-	}
-
-	public boolean emailExists(String email) {
-		return !email.isEmpty() && uDao.findUniqueBy("email", email) != null;
+	public boolean alreadyExists(String fieldName, String fieldValue) {
+		
+		boolean exists = false;
+		
+		if(!fieldValue.isEmpty()) {
+			try {
+				exists = uDao.findUniqueBy(fieldName, fieldValue) != null;
+			}
+			catch(NoResultException exception) {
+				System.out.println("Error : " + exception.getMessage());
+			}
+		}
+		return exists;
 	}
 
 	public void create(@Valid CustomUser user) {
