@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -21,19 +24,27 @@ public class Food extends GenericEntity {
 	@Column
 	private int id;
 	
-	@Column
+	@Column(nullable=false)
+	@NotNull
 	private String name;
 	
 	@Column
+	@Min(0)
+	@Max(100)
 	private Double protein;
 	
 	@Column
+	@Min(0)
+	@Max(100)
 	private Double carbohydrate;
 	
 	@Column
+	@Min(0)
+	@Max(100)
 	private Double fat;
 	
 	@Column
+	@Max(100)
 	private Double calorie;
 	
 	public Food() {

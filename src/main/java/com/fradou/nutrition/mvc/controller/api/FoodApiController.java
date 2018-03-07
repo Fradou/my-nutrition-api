@@ -2,9 +2,12 @@ package com.fradou.nutrition.mvc.controller.api;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fradou.nutrition.mvc.entity.Food;
 import com.fradou.nutrition.mvc.service.FoodService;
+import com.fradou.nutrition.mvc.utils.exception.CannotCreateEntityException;
 
 @RestController
 @RequestMapping("/api/food")
@@ -38,4 +42,15 @@ public class FoodApiController {
 		return fs.find(myId);
 	}
 	
+	@RequestMapping(method=RequestMethod.POST)
+	public Integer createFood(@Valid @RequestBody Food newFood,BindingResult validationResult) throws Exception {
+		
+		if(validationResult.hasErrors()) {
+			throw new CannotCreateEntityException(Food.class, validationResult.getFieldError().getField());
+		}
+		else {
+			int id = fs.create(newFood);
+			return id;
+		}
+	}
 }
