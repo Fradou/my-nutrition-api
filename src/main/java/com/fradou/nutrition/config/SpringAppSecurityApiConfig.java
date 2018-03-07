@@ -6,17 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.lang.Exception;
-
 @Configuration
-@EnableWebSecurity
 @Order(2)
-public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
-	
+public class SpringAppSecurityApiConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	@Qualifier("customUserDetailsService")
 	private UserDetailsService userDetailsService;
@@ -37,9 +33,7 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-			.antMatchers("/resources/**").permitAll()
-			.antMatchers("/register").permitAll()
-			.antMatchers("/**").authenticated()
+			.antMatchers("/api/**").permitAll()
 			.and()
 			.formLogin()
 				// URL to custom login form
@@ -52,9 +46,6 @@ public class SpringAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				// Enable standard logout
 				.logout()
-				.permitAll()
-			.and()
-				.exceptionHandling()
-				.accessDeniedPage("/access-denied");
+				.permitAll();
 	}
 }
