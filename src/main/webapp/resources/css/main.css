@@ -1,0 +1,14 @@
+label {
+	display:block;
+	width: 250px;
+	height: 25px;
+}
+
+label > input {
+	float: right;
+	width: 100px;
+}
+
+.error {
+	color:red;
+}
