@@ -2,6 +2,7 @@ package com.fradou.nutrition.mvc.entity;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Index;
 import javax.validation.constraints.Max;
@@ -71,6 +73,9 @@ public class CustomUser implements UserDetails {
 	
 	@Column
 	private Integer tdee;
+	
+	@OneToMany(mappedBy="user")
+	private List<Intake> intakes;
 	
     @ManyToMany
     @JoinTable(
