@@ -1,0 +1,26 @@
+package com.fradou.nutrition.mvc.dao.generic;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface GenericDAO<T> {
+	
+	public int create(T entity);
+	
+	public T find(int id) throws Exception;
+	
+	public void update(T entity);
+	
+	public void delete(T entity);
+	
+	public List<T> findAll();
+	
+	public int count();
+	
+	public T findUniqueBy(String field, String value);
+		
+	public List<T> find(Integer offset, Integer entries);
+	
+}
