@@ -3,3 +3,5 @@
 /target
 /.settings
 /src/main/webapp/WEB-INF/env.properties
+.idea/
+*.iml
