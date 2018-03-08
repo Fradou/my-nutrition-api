@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fradou.nutrition.mvc.entity.Food;
+import com.fradou.nutrition.mvc.entity.work.Food;
 import com.fradou.nutrition.mvc.service.FoodService;
-import com.fradou.nutrition.mvc.utils.exception.CannotCreateEntityException;
+import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 
 @RestController
 @RequestMapping("/api/food")
@@ -39,14 +39,23 @@ public class FoodApiController {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Food findById(@PathVariable(value="id") String id) {
 		Integer myId = Integer.valueOf(id);
-		return fs.find(myId);
+		Food food = new Food();
+		try {
+			food = fs.find(myId);
+		}
+		catch (Exception exception) {
+			System.out.println("Exception lalala");
+			System.out.println("C'est : " + exception.getMessage());
+			System.out.println(exception.getStackTrace());
+		}
+		return food;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public Integer createFood(@Valid @RequestBody Food newFood,BindingResult validationResult) throws Exception {
 		
 		if(validationResult.hasErrors()) {
-			throw new CannotCreateEntityException(Food.class, validationResult.getFieldError().getField());
+			throw new InvalidDataCreationException(Food.class, validationResult.getFieldError().getField());
 		}
 		else {
 			int id = fs.create(newFood);

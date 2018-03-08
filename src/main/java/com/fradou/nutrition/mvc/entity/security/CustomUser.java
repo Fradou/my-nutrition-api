@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.entity;
+package com.fradou.nutrition.mvc.entity.security;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,6 +20,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import com.fradou.nutrition.mvc.entity.work.Intake;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

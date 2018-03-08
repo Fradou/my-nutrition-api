@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fradou.nutrition.mvc.dao.RoleDAOImpl;
-import com.fradou.nutrition.mvc.entity.Role;
+import com.fradou.nutrition.mvc.entity.security.Role;
 import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 
 @Service

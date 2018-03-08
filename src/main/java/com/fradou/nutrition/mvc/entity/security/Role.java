@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.entity;
+package com.fradou.nutrition.mvc.entity.security;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity

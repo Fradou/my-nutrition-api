@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.entity;
+package com.fradou.nutrition.mvc.entity.work;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import org.springframework.stereotype.Component;
 
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;

@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.entity;
+package com.fradou.nutrition.mvc.entity.work;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

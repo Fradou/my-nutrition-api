@@ -1,8 +1,5 @@
 package com.fradou.nutrition.mvc.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.fradou.nutrition.mvc.entity.CustomUser;
-import com.fradou.nutrition.mvc.entity.Role;
+import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.entity.security.Role;
 import com.fradou.nutrition.mvc.service.RoleService;
 import com.fradou.nutrition.mvc.service.UserService;
 
@@ -87,7 +84,7 @@ public class SecurityController {
 		String hash_pw = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
 		user.setPassword("{bcrypt}" + hash_pw);
 		
-		// Enable user
+		// User disable by default user
 		user.setEnabled(false);
 		
 		// Give basic use role

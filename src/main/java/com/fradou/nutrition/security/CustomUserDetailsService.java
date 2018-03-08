@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fradou.nutrition.mvc.dao.UserDAOImpl;
-import com.fradou.nutrition.mvc.entity.CustomUser;
+import com.fradou.nutrition.mvc.entity.security.CustomUser;
 
 @Service
 @Transactional(rollbackFor = Exception.class)

@@ -22,7 +22,14 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 	}
 	
 	public T find(int id) {
-		return dao.find(id);
+		System.out.println("On est dans le find");
+		T var = null;
+		try {
+			var = dao.find(id);
+		} catch (Exception e) {
+			System.out.println("Erreur trololo");
+		}
+		return var;
 	}
 	
 	public void update(T entity) {

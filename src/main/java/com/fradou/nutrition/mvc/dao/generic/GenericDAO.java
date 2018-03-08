@@ -9,7 +9,7 @@ public interface GenericDAO<T> {
 	
 	public int create(T entity);
 	
-	public T find(int id);
+	public T find(int id) throws Exception;
 	
 	public void update(T entity);
 	

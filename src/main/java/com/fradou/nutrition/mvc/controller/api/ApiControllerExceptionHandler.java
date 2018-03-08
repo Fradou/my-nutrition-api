@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.fradou.nutrition.mvc.utils.exception.CannotCreateEntityException;
+import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 
 /**
  * Controller that will used to managed all generic exception on the API part of
@@ -17,8 +17,8 @@ import com.fradou.nutrition.mvc.utils.exception.CannotCreateEntityException;
 public class ApiControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(CannotCreateEntityException.class)
-	public String cannotCreateEntityException(CannotCreateEntityException ex) {
+	@ExceptionHandler(InvalidDataCreationException.class)
+	public String cannotCreateEntityException(InvalidDataCreationException ex) {
 		return ex.getMessage();
 	}
 }
