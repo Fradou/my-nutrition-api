@@ -2,9 +2,6 @@ package com.fradou.nutrition.mvc.entity.work;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -19,31 +16,22 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 @Table(name="food")
 public class Food extends GenericEntity {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
-	private int id;
-	
 	@Column(nullable=false)
 	@NotNull
 	private String name;
 	
-	@Column
 	@Min(0)
 	@Max(100)
 	private Double protein;
 	
-	@Column
 	@Min(0)
 	@Max(100)
 	private Double carbohydrate;
 	
-	@Column
 	@Min(0)
 	@Max(100)
 	private Double fat;
 	
-	@Column
 	@Max(100)
 	private Double calorie;
 	
@@ -58,14 +46,6 @@ public class Food extends GenericEntity {
 	@Override
 	protected String initializeEntityPath() {
 		return "/food";
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getName() {

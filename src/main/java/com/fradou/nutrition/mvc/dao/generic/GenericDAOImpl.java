@@ -26,7 +26,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	@Override
-	public T find(int id) throws Exception {
+	public T find(int id) {
 		return getSession().get(clazz, id);
 	}
 
