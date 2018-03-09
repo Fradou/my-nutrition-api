@@ -7,8 +7,14 @@ import com.fradou.nutrition.mvc.dao.UserDAOImpl;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 
+/**
+ * Service for CustomUser (Security)
+ * 
+ * @author AF
+ *
+ */
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class UserService extends GenericServiceImpl<CustomUser, UserDAOImpl> {
-	
+
 }

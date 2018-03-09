@@ -14,7 +14,7 @@ import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
  * Controller that will used to managed all generic exception on the API part of
  * the application.
  * 
- * @author AFT
+ * @author AF
  */
 @RestControllerAdvice("com.fradou.nutrition.mvc.controller.api")
 public class ApiControllerExceptionHandler {

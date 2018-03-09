@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 
+/**
+ * Entity for food
+ * 
+ * @author AF
+ */
 @Entity
 @Component
 @Table(name="food")

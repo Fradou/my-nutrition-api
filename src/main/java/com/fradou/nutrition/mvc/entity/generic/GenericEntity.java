@@ -15,6 +15,11 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
+/**
+ * Generic abstract entity that willbe exntended by all work/nutrition entities.
+ * 
+ * @author AF
+ */
 @Component
 @JsonIgnoreProperties(value = { "entityPath" })
 @MappedSuperclass

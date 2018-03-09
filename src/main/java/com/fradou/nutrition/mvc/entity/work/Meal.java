@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.utils.work.MealType;
 
+/**
+ * Entity for meals (include food, included in intake)
+ * 
+ * @author AF
+ */
 @Entity
 @Component
 @Table(name="meal")

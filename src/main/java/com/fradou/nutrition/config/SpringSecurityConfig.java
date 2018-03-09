@@ -13,6 +13,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.fradou.nutrition.security.api.AuthenticationApiEntryPoint;
 
+/**
+ * Spring security setup. Configuration for user provider and url security
+ * mapping.
+ * 
+ * @author AF
+ */
 @EnableWebSecurity
 public class SpringSecurityConfig {
 

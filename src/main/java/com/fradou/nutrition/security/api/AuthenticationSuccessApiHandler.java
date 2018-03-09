@@ -14,7 +14,9 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.util.StringUtils;
 
 /**
- * Custom handler to avoid redirection on authentication success 
+ * Custom handler to avoid redirection on authentication success
+ * 
+ * @author AF
  */
 public class AuthenticationSuccessApiHandler extends SimpleUrlAuthenticationSuccessHandler {
 

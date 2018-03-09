@@ -13,6 +13,11 @@ import org.springframework.stereotype.Component;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 
+/**
+ * Entity for daily intake.
+ * 
+ * @author AF
+ */
 @Entity
 @Component
 @Table(name="intake")

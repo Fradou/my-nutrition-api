@@ -18,6 +18,12 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * Main Spring configuration. Setup view, resources, cookies and locale
+ * interceptor.
+ * 
+ * @author AF
+ */
 @Configuration
 @EnableWebMvc
 @EnableAspectJAutoProxy(proxyTargetClass = true)

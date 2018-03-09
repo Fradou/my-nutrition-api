@@ -8,6 +8,12 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+/**
+ * Generic abstract DAO that will be extended by all DAO
+ * 
+ * @author AF
+ * @param <T>
+ */
 @Repository
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 

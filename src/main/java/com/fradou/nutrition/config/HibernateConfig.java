@@ -16,6 +16,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+/**
+ * Database configuration and hibernate sessionFactory initialization.
+ * 
+ * @author AF
+ */
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement

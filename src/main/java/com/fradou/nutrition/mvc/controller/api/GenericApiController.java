@@ -19,6 +19,13 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.service.generic.GenericService;
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 
+/**
+ * Generic controller that will be extend by all Controller managing
+ * work/nutrition entities. Include standard Rest calls.
+ * 
+ * @author AF
+ * @param <T>
+ */
 @RestController
 public abstract class GenericApiController<T extends GenericEntity> {
 
@@ -29,6 +36,12 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		this.service = entityService;
 	}
 
+	/**
+	 * Get method to retrieve all entry of an entity.
+	 * @param page
+	 * @param delta
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public List<T> findAll(
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
@@ -38,12 +51,23 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		return service.find(offest, delta);
 	}
 	
+	/**
+	 * Get method to retrieve a specific entry
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public T findById(@PathVariable(value="id") String id) {
 		Integer myId = Integer.valueOf(id);
 		return service.find(myId);
 	}
 	
+	/**
+	 * Post method to create new entry
+	 * @param newEntity
+	 * @param validationResult
+	 * @return id new entry's id
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
 	public Integer create(@Valid @RequestBody T newEntity,BindingResult validationResult) {
@@ -57,12 +81,22 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		}
 	}
 	
+	/**
+	 * Delete method for a specific entry
+	 * @param id
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable("id") int id) {
 		service.deleteById(id);
 	}
 	
+	/**
+	 * Put method to update an existing entity
+	 * @param id
+	 * @param entityUpdated
+	 * @param validationResult
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable("id") int id, @Valid @RequestBody T entityUpdated, BindingResult validationResult) {

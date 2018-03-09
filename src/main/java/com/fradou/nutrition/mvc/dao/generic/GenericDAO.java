@@ -4,6 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Generic DAO interface that will be implemented by all DAO
+ * 
+ * @author AF
+ * @param <T>
+ */
 @Component
 public interface GenericDAO<T> {
 	

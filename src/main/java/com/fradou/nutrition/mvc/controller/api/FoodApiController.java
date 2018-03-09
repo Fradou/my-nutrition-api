@@ -17,6 +17,11 @@ import com.fradou.nutrition.mvc.entity.work.Food;
 import com.fradou.nutrition.mvc.service.FoodService;
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 
+/**
+ * Controller in charge of Food calls (nutrition entity)
+ * 
+ * @author AF
+ */
 @RestController
 @RequestMapping("/api/food")
 public class FoodApiController {

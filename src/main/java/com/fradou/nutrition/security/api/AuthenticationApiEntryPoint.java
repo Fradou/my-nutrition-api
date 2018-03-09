@@ -10,6 +10,11 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+/**
+ * Custom entryPoint for api calls
+ * 
+ * @author AF
+ */
 @Component
 public class AuthenticationApiEntryPoint implements AuthenticationEntryPoint {
 

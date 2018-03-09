@@ -11,6 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fradou.nutrition.mvc.dao.UserDAOImpl;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 
+/**
+ * Custom User provider for Spring security.
+ * 
+ * @author AF
+ */
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class CustomUserDetailsService implements UserDetailsService {

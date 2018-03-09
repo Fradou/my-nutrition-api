@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fradou.nutrition.mvc.entity.work.Intake;
 
+/**
+ * Controller in charge of Intake calls (nutrition entity)
+ * @author AF
+ */
 @RequestMapping("/intake")
 @RestController
 public class IntakeApiController extends GenericApiController<Intake> {
