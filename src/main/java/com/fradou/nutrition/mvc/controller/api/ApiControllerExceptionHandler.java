@@ -14,7 +14,7 @@ import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
  * 
  * @author AFT
  */
-@RestControllerAdvice("com.fradou.controller.api")
+@RestControllerAdvice("com.fradou.nutrition.mvc.controller.api")
 public class ApiControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -32,7 +32,7 @@ public class ApiControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public String catchAllException(Exception ex) {
-		return "An unknown error has occured. Check sent data and retry.";
+		return "An unknown error has occured. Check sent datas and retry.";
 	}
 	
 }

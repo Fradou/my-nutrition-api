@@ -21,6 +21,8 @@
 		<springsecurity.version>5.0.1.RELEASE</springsecurity.version>
 		<jackson.version>2.4.0</jackson.version>
 		<jaxb-api.version>2.2.11</jaxb-api.version>
+		<jcl.slf4j.version>1.7.25</jcl.slf4j.version>
+		<logback.version>1.2.3</logback.version>
 	</properties>
 	  
 	<dependencies>
@@ -32,6 +34,12 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-orm -->
@@ -142,7 +150,21 @@
 			<artifactId>javax.servlet-api</artifactId>
 			<version>4.0.0</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
+		
+		<!-- LOGGING -->
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${jcl.slf4j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
 				
 		<!-- TESTS -->
 		
