@@ -15,6 +15,8 @@ public interface GenericService<T> {
 	
 	public void delete(T entity);
 	
+	public void deleteById(int id);
+	
 	public List<T> findAll();
 	
 	public T findUniqueBy(String field, String value);

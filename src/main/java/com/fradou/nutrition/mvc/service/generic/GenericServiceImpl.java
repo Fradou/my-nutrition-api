@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fradou.nutrition.mvc.dao.generic.GenericDAOImpl;
+import com.fradou.nutrition.mvc.utils.exception.ResourceNotFoundException;
 
 @Component
 @Transactional
@@ -22,14 +23,7 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 	}
 	
 	public T find(int id) {
-		System.out.println("On est dans le find");
-		T var = null;
-		try {
-			var = dao.find(id);
-		} catch (Exception e) {
-			System.out.println("Erreur trololo");
-		}
-		return var;
+		return dao.find(id);
 	}
 	
 	public void update(T entity) {
@@ -37,6 +31,14 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 	}
 	
 	public void delete(T entity) {
+		dao.delete(entity);
+	}
+	
+	public void deleteById(int id) {
+		T entity = dao.find(id);
+		if(entity == null) {
+			throw new ResourceNotFoundException(id);
+		}
 		dao.delete(entity);
 	}
 	
