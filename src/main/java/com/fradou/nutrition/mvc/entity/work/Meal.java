@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,7 @@ public class Meal extends GenericEntity {
 	private int id;
 	
 	@Enumerated(EnumType.ORDINAL)
+	@NotNull
 	private MealType mealType;
 	
 	@Override
