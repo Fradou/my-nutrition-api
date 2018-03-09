@@ -1,6 +1,7 @@
 package com.fradou.nutrition.mvc.controller.api;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -13,7 +14,7 @@ import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
  * 
  * @author AFT
  */
-@RestControllerAdvice
+@RestControllerAdvice("com.fradou.controller.api")
 public class ApiControllerExceptionHandler {
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -21,4 +22,17 @@ public class ApiControllerExceptionHandler {
 	public String cannotCreateEntityException(InvalidDataCreationException ex) {
 		return ex.getMessage();
 	}
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public String cannotReadHttpMessageException(HttpMessageNotReadableException ex) {
+		return "Data error";
+	}
+	
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(Exception.class)
+	public String catchAllException(Exception ex) {
+		return "An unknown error has occured. Check sent data and retry.";
+	}
+	
 }
