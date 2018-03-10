@@ -32,7 +32,7 @@ public class Intake extends GenericEntity {
 	@JoinColumn(name="user_id")
 	private CustomUser user;
 	
-	@OneToMany(mappedBy="intake_id")
+	@OneToMany(mappedBy="intake")
 	private Set<Meal> meals;
 	
 	@Override

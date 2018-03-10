@@ -20,6 +20,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.work.Intake;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,50 +31,42 @@ import org.springframework.security.core.userdetails.UserDetails;
 		indexes = {@Index(name= "ix_username", columnList="username", unique = true),
 				@Index(name= "ix_email", columnList="email", unique = true)
 		})
-public class CustomUser implements UserDetails {
+public class CustomUser extends GenericEntity implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
-	private int id;
 	
 	@Column(nullable=false, unique=true, length=50)
 	private String username;
 	
 	@Column(nullable=false)
+	@JsonIgnore
 	private String password;
 	
 	@Column(nullable=false)
+	@JsonIgnore
 	private boolean enabled;
 	
 	@Column(nullable=false, unique=true)
 	@Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", message="Pas un format mail ça", flags=Pattern.Flag.CASE_INSENSITIVE)
 	private String email;
 	
-	@Column
 	private String firstName;
 	
-	@Column
 	private String lastName;
-
 	
-	@Column
 	@Min(value=1, message="C'est mieux d'être né, non ?")
 	@Max(value=150, message="Tu as battu tous les record de longévité, bravo !")
 	private Integer age;
 	
-	@Column
+	@Min(value=2, message="Are you just born ?")
 	private Double weight;
 	
-	@Column
+	@Min(value=0)
+	@Max(value=250)
 	private Integer height;
 	
-	@Column
 	private Integer bmr;
 	
-	@Column
 	private Integer tdee;
 	
 	@OneToMany(mappedBy="user")
@@ -85,14 +79,6 @@ public class CustomUser implements UserDetails {
     		inverseJoinColumns=@JoinColumn(name="role_id")
     )
     private Set<Role> roles = new HashSet<Role>();
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public void setUsername(String username) {
 		this.username = username;
@@ -227,5 +213,10 @@ public class CustomUser implements UserDetails {
 	
 	public String toString() {
 		return "CustomerUser : [id=" + id + ", username=" + username + ", height="+height+", age=" + age;
+	}
+
+	@Override
+	protected String initializeEntityPath() {
+		return "/user";
 	}
 }
