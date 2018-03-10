@@ -3,6 +3,8 @@ package com.fradou.nutrition.mvc.entity.work;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -25,6 +27,11 @@ public class Meal extends GenericEntity {
 	@NotNull
 	private MealType mealType;
 	
+	@ManyToOne
+	@JoinColumn(name="intake_id")
+	private Intake intake;
+	
+	
 	@Override
 	protected String initializeEntityPath() {
 		return "/meal";
@@ -36,5 +43,13 @@ public class Meal extends GenericEntity {
 
 	public void setMealType(MealType mealType) {
 		this.mealType = mealType;
+	}
+
+	public Intake getIntake() {
+		return intake;
+	}
+
+	public void setIntake(Intake intake) {
+		this.intake = intake;
 	}
 }
