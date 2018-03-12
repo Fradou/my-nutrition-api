@@ -1,11 +1,11 @@
 # MySQL properties
-db.driver=
+db.driver=com.mysql.jdbc.Driver
 db.url=
 db.username=
 db.password=
 
 # Hibernates properties
-hibernate.dialect=
+hibernate.dialect=org.hibernate.dialect.MySQL57Dialect
 hibernate.hbm2ddl.auto=
 hibernate.show_sql=
 hibernate.packagesToScan=com.fradou.nutrition.mvc.entity
