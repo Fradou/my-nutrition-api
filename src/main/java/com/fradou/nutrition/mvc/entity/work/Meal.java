@@ -1,10 +1,14 @@
 package com.fradou.nutrition.mvc.entity.work;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -31,6 +35,8 @@ public class Meal extends GenericEntity {
 	@JoinColumn(name="intake_id")
 	private Intake intake;
 	
+	@OneToMany(mappedBy="meal")
+	private Set<MealDetail> mealFoods = new HashSet<MealDetail>();
 	
 	@Override
 	protected String initializeEntityPath() {
@@ -51,5 +57,13 @@ public class Meal extends GenericEntity {
 
 	public void setIntake(Intake intake) {
 		this.intake = intake;
+	}
+
+	public Set<MealDetail> getMealFoods() {
+		return mealFoods;
+	}
+
+	public void setMealFoods(Set<MealDetail> mealFoods) {
+		this.mealFoods = mealFoods;
 	}
 }

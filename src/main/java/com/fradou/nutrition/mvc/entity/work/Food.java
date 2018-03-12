@@ -1,7 +1,11 @@
 package com.fradou.nutrition.mvc.entity.work;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -40,14 +44,9 @@ public class Food extends GenericEntity {
 	@Max(100)
 	private Double calorie;
 	
-	public Food() {
+	@OneToMany(mappedBy="food")
+	private Set<MealDetail> mealDetails = new HashSet<MealDetail>();
 		
-	}
-	
-	public Food(String name) {
-		this.name = name;
-	}
-	
 	@Override
 	protected String initializeEntityPath() {
 		return "/food";
@@ -92,4 +91,5 @@ public class Food extends GenericEntity {
 	public void setCalorie(Double calorie) {
 		this.calorie = calorie;
 	}
+
 }

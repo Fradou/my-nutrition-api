@@ -13,19 +13,7 @@ import com.fradou.nutrition.mvc.entity.security.CustomUser;
 
 @Entity
 @Table(name="pantry_item")
-public class PantryItem extends GenericEntity {	
-	
-	@ManyToOne
-	@JoinColumn(name="food_id")
-	private Food food;	
-	
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private CustomUser user;
-	
-	private LocalDate expirationDate;
-	
-	private LocalDate purchaseDate;
+public class PantryItem extends GenericEntity {		
 	
 	@Min(0)
 	private int weight;
@@ -33,17 +21,21 @@ public class PantryItem extends GenericEntity {
 	@Min(0)
 	private int share;
 	
+	private LocalDate expirationDate;
+	
+	private LocalDate purchaseDate;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private CustomUser user;
+	
+	@ManyToOne
+	@JoinColumn(name="food_id")
+	private Food food;
+	
 	@Override
 	protected String initializeEntityPath() {
 		return "/pantryItem";
-	}
-
-	public Food getFood() {
-		return food;
-	}
-
-	public void setFood(Food food) {
-		this.food = food;
 	}
 
 	public CustomUser getUser() {
@@ -84,5 +76,13 @@ public class PantryItem extends GenericEntity {
 
 	public void setShare(int share) {
 		this.share = share;
-	}	
+	}
+
+	public Food getFood() {
+		return food;
+	}
+
+	public void setFood(Food food) {
+		this.food = food;
+	}
 }

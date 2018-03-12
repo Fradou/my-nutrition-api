@@ -5,26 +5,26 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Index;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.work.Intake;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.fradou.nutrition.mvc.entity.work.PantryItem;
 
 @Entity
 @Table(name="user",
@@ -69,8 +69,11 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	
 	private Integer tdee;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
 	private List<Intake> intakes;
+	
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	private List<PantryItem> pantryItems;
 	
     @ManyToMany
     @JoinTable(
@@ -218,5 +221,21 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	@Override
 	protected String initializeEntityPath() {
 		return "/user";
+	}
+
+	public List<Intake> getIntakes() {
+		return intakes;
+	}
+
+	public void setIntakes(List<Intake> intakes) {
+		this.intakes = intakes;
+	}
+
+	public List<PantryItem> getPantryItems() {
+		return pantryItems;
+	}
+
+	public void setPantryItems(List<PantryItem> pantryItems) {
+		this.pantryItems = pantryItems;
 	}
 }
