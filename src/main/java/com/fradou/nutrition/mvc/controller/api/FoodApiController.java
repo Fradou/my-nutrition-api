@@ -45,14 +45,8 @@ public class FoodApiController {
 	public Food findById(@PathVariable(value="id") String id) {
 		Integer myId = Integer.valueOf(id);
 		Food food = new Food();
-		try {
-			food = fs.find(myId);
-		}
-		catch (Exception exception) {
-			System.out.println("Exception lalala");
-			System.out.println("C'est : " + exception.getMessage());
-			System.out.println(exception.getStackTrace());
-		}
+		food = fs.find(myId);
+
 		return food;
 	}
 	

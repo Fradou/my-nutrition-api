@@ -15,7 +15,9 @@ public interface GenericDAO<T> {
 	
 	public int create(T entity);
 	
-	public T find(int id) throws Exception;
+	public T find(int id);
+	
+	public T find(int id, Integer user_id);
 	
 	public void update(T entity);
 	

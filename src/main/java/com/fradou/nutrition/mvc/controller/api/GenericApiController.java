@@ -6,6 +6,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.service.UserService;
 import com.fradou.nutrition.mvc.service.generic.GenericService;
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 
@@ -31,6 +36,9 @@ public abstract class GenericApiController<T extends GenericEntity> {
 
 	@Autowired
 	protected GenericService<T> service;
+	
+	@Autowired
+	protected UserService uService;
 
 	protected void setService(GenericService<T> entityService) {
 		this.service = entityService;
@@ -103,4 +111,17 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		
 		service.find(entityUpdated.getId());
 	}
+	
+	protected CustomUser getCurrentUser(Authentication authenticate) {
+		UserDetails userDetails = (CustomUser) authenticate.getPrincipal();		
+		CustomUser user = uService.findUniqueBy("username", userDetails.getUsername());
+		return user;
+	}
+	
+	
+	@RequestMapping("/test/")
+	public CustomUser test(Authentication authenticate) {
+		return getCurrentUser(authenticate);
+	}
+	
 }

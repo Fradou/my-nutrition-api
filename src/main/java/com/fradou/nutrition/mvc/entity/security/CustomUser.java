@@ -70,9 +70,11 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	private Integer tdee;
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<Intake> intakes;
 	
 	@OneToMany(mappedBy="user", cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<PantryItem> pantryItems;
 	
     @ManyToMany
@@ -81,6 +83,7 @@ public class CustomUser extends GenericEntity implements UserDetails {
     		joinColumns=@JoinColumn(name="user_id"),
     		inverseJoinColumns=@JoinColumn(name="role_id")
     )
+    @JsonIgnore
     private Set<Role> roles = new HashSet<Role>();
 
 	public void setUsername(String username) {
@@ -107,6 +110,7 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	// Methods imposed by Spring Security
 	
 	@Override
+	@JsonIgnore
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles;
 	}

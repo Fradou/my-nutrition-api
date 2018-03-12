@@ -13,4 +13,5 @@ import com.fradou.nutrition.mvc.entity.work.Meal;
 @RequestMapping("/api/meal")
 @RestController
 public class MealApiController extends GenericApiController<Meal>{
+	
 }

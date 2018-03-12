@@ -49,7 +49,9 @@ public class SpringSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 
 			http
-				.antMatcher("/api/**").authorizeRequests().anyRequest().authenticated()
+				.antMatcher("/api/user/**").authorizeRequests().anyRequest().hasRole("Admin")
+				
+				.and().antMatcher("/api/**").authorizeRequests().anyRequest().authenticated()
 				
 				.and().csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationApiEntryPoint)
 				

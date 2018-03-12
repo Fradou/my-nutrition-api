@@ -25,6 +25,5 @@ public class DaoAspect {
 	
 	@After(value="daoPacketPointcut()")
 	public void onDaoReturn() {
-		System.out.println("On est revenu");
 	}
 }

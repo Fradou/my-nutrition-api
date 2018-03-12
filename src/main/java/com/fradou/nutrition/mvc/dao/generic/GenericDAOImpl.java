@@ -35,6 +35,26 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	public T find(int id) {
 		return getSession().get(clazz, id);
 	}
+	
+	@Override
+	public T find(int id, Integer user_id) {
+		
+		boolean userNotNull = user_id != null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("FROM " + clazz.getName() + " WHERE id=:entityId");
+		if(userNotNull) {
+			sb.append(" AND user_id=:userId");
+		}
+		
+		Query<T> query = getSession().createQuery(sb.toString());
+		query.setParameter("entityId", id);
+		if(userNotNull) {
+			query.setParameter("userId", user_id);
+		}
+		
+		return query.getSingleResult();
+	}
 
 	@Override
 	public void update(T o) {
