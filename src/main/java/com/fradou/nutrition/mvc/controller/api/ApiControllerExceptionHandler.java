@@ -36,7 +36,7 @@ public class ApiControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public String catchAllException(Exception ex) {
-		LOGGER.error("Exception not catched : " + ex.getMessage());
+		LOGGER.error("Exception not catched : " + ex.getMessage(), ex);
 		return "An unknown error has occured. Check sent datas and retry.";
 	}
 	

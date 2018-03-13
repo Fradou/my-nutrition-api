@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.utils.filter.IntakeSerializer;
 import com.fradou.nutrition.mvc.utils.work.MealType;
 
 /**
@@ -29,6 +29,7 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
 @Entity
 @Component
 @Table(name="intake")
+@JsonSerialize(using = IntakeSerializer.class)
 public class Intake extends GenericEntity {
 	
 	@NotNull
@@ -40,7 +41,6 @@ public class Intake extends GenericEntity {
 	
 	@OneToMany(mappedBy="intake")
 	@MapKeyEnumerated(EnumType.ORDINAL)
-	@JsonManagedReference
 	private Map<MealType, Meal> meals = new HashMap<>();
 	
 	@Override
@@ -56,7 +56,6 @@ public class Intake extends GenericEntity {
 		this.user = user;
 	}
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	public LocalDate getIntakeDate() {
 		return intakeDate;
 	}

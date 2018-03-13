@@ -52,10 +52,14 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<T> findAll(
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "delta", defaultValue = "20", required = false) int delta) {
+			@RequestParam(value = "delta", defaultValue = "20", required = false) int delta,
+			Authentication authenticate) {
 		Integer offest = (page - 1) * delta;
 
-		return service.find(offest, delta, null);
+		CustomUser user = getCurrentUser(authenticate);
+		
+		return service.findAll(user.getId());
+		// return service.find(offest, delta, null);
 	}
 	
 	/**
@@ -64,9 +68,10 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public T findById(@PathVariable(value="id") String id) {
-		Integer myId = Integer.valueOf(id);
-		return service.find(myId);
+	public T findById(@PathVariable(value="id") int id, Authentication authenticate) {
+		
+		CustomUser user = getCurrentUser(authenticate);			
+		return service.find(id, user.getId());
 	}
 	
 	/**
@@ -112,7 +117,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	}
 	
 	protected CustomUser getCurrentUser(Authentication authenticate) {
-		UserDetails userDetails = (CustomUser) authenticate.getPrincipal();		
+		UserDetails userDetails = (UserDetails) authenticate.getPrincipal();		
 		CustomUser user = uService.findUniqueBy("username", userDetails.getUsername());
 		return user;
 	}
