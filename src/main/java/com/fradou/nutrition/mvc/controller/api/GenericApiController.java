@@ -55,7 +55,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 			@RequestParam(value = "delta", defaultValue = "20", required = false) int delta) {
 		Integer offest = (page - 1) * delta;
 
-		return service.find(offest, delta);
+		return service.find(offest, delta, null);
 	}
 	
 	/**

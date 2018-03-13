@@ -11,6 +11,8 @@ public interface GenericService<T> {
 	
 	public T find(int id);
 	
+	public T find(int id, int user_id);
+	
 	public void update(T entity);
 	
 	public void delete(T entity);
@@ -19,10 +21,12 @@ public interface GenericService<T> {
 	
 	public List<T> findAll();
 	
+	public List<T> findAll(int user_id);
+	
 	public T findUniqueBy(String field, String value);
 		
 	public boolean alreadyExists(String fieldName, String fieldValue);
 	
-	public List<T> find(Integer offset, Integer entries);
+	public List<T> find(Integer offset, Integer entries, String orderBy);
 
 }

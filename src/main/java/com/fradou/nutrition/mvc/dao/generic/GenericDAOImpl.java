@@ -37,21 +37,11 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 	
 	@Override
-	public T find(int id, Integer user_id) {
-		
-		boolean userNotNull = user_id != null;
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("FROM " + clazz.getName() + " WHERE id=:entityId");
-		if(userNotNull) {
-			sb.append(" AND user_id=:userId");
-		}
-		
-		Query<T> query = getSession().createQuery(sb.toString());
+	public T find(int id,int user_id) {
+				
+		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE id=:entityId AND user_id=:userId");
 		query.setParameter("entityId", id);
-		if(userNotNull) {
-			query.setParameter("userId", user_id);
-		}
+		query.setParameter("userId", user_id);
 		
 		return query.getSingleResult();
 	}
@@ -60,7 +50,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	public void update(T o) {
 		getSession().update(o);
 	}
-
+	
 	@Override
 	public void delete(T o) {
 		getSession().delete(o);
@@ -71,15 +61,19 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
 		return query.getResultList();
 	}
+	
+	@Override
+	public List<T> findAll(int user_id) {
+		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE user_id=:userId");
+		query.setParameter("userId", user_id);
+		
+		return query.getResultList();
+	}
 
 	@Override
 	public int count() {
 		Query<T> query = getSession().createQuery("SELECT COUNT(*) FROM " + clazz.getName());
 		return (int) query.getSingleResult();
-	}
-	
-	protected Session getSession() {
-		return sf.getCurrentSession();
 	}
 
 	@Override
@@ -100,5 +94,9 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 		}
 		
 		return query.getResultList();
+	}
+	
+	protected Session getSession() {
+		return sf.getCurrentSession();
 	}
 }

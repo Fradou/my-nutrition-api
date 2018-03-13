@@ -17,13 +17,15 @@ public interface GenericDAO<T> {
 	
 	public T find(int id);
 	
-	public T find(int id, Integer user_id);
+	public T find(int id, int user_id);
 	
 	public void update(T entity);
-	
+		
 	public void delete(T entity);
-	
+		
 	public List<T> findAll();
+	
+	public List<T> findAll(int user_id);
 	
 	public int count();
 	
