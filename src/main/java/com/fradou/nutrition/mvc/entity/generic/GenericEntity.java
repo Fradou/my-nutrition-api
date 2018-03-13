@@ -25,6 +25,7 @@ import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 @MappedSuperclass
 public abstract class GenericEntity {
 	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column

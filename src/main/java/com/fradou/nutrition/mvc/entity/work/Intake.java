@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
-import com.fradou.nutrition.mvc.utils.filter.IntakeSerializer;
+import com.fradou.nutrition.mvc.utils.serializer.IntakeSerializer;
 import com.fradou.nutrition.mvc.utils.work.MealType;
 
 /**

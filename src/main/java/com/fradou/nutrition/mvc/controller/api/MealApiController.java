@@ -10,7 +10,7 @@ import com.fradou.nutrition.mvc.entity.work.Meal;
  * 
  * @author AF
  */
-@RequestMapping("/api/intake/{intakeId}/meal")
+@RequestMapping("/api/meal")
 @RestController
 public class MealApiController extends GenericApiController<Meal>{
 	
