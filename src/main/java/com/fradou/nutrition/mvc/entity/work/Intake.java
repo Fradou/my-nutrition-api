@@ -1,6 +1,7 @@
 package com.fradou.nutrition.mvc.entity.work;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.Entity;
@@ -14,6 +15,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.utils.work.MealType;
@@ -37,7 +40,8 @@ public class Intake extends GenericEntity {
 	
 	@OneToMany(mappedBy="intake")
 	@MapKeyEnumerated(EnumType.ORDINAL)
-	private Map<MealType, Meal> meals;
+	@JsonManagedReference
+	private Map<MealType, Meal> meals = new HashMap<>();
 	
 	@Override
 	protected String initializeEntityPath() {
@@ -52,6 +56,7 @@ public class Intake extends GenericEntity {
 		this.user = user;
 	}
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	public LocalDate getIntakeDate() {
 		return intakeDate;
 	}
