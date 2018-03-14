@@ -41,6 +41,7 @@ public class MealDetail extends GenericEntity {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
 	@Override
 	protected String initializeEntityPath() {
 		return "/mealDetail";

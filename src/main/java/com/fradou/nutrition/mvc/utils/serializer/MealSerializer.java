@@ -24,7 +24,7 @@ public class MealSerializer extends StdSerializer<Meal> {
 		gen.writeNumberField("id", value.getId());
 		gen.writeStringField("mealType", value.getMealType().toString());
 		gen.writeArrayFieldStart("mealFoods");
-		for(MealDetail meal : value.getMealFoods()) {
+		for(MealDetail meal : value.getMealDetails()) {
 			gen.writeStartObject();
 			gen.writeNumberField("id", meal.getId());
 			gen.writeArrayFieldStart("links");

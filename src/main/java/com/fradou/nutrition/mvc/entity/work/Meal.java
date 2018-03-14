@@ -39,7 +39,7 @@ public class Meal extends GenericEntity {
 	private Intake intake;
 	
 	@OneToMany(mappedBy="meal")
-	private Set<MealDetail> mealFoods = new HashSet<MealDetail>();
+	private Set<MealDetail> mealDetails = new HashSet<MealDetail>();
 	
 	@Override
 	protected String initializeEntityPath() {
@@ -62,11 +62,11 @@ public class Meal extends GenericEntity {
 		this.intake = intake;
 	}
 
-	public Set<MealDetail> getMealFoods() {
-		return mealFoods;
+	public Set<MealDetail> getMealDetails() {
+		return mealDetails;
 	}
 
-	public void setMealFoods(Set<MealDetail> mealFoods) {
-		this.mealFoods = mealFoods;
+	public void setMealDetails(Set<MealDetail> mealDetails) {
+		this.mealDetails = mealDetails;
 	}
 }
