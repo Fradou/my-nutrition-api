@@ -2,11 +2,21 @@ package com.fradou.nutrition.mvc.dao.generic;
 
 import java.util.List;
 
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.fradou.nutrition.config.Constant;
 
 /**
  * Generic abstract DAO that will be extended by all DAO
@@ -83,20 +93,55 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	@Override
-	public List<T> find(Integer offset, Integer entries) {
+	public List<T> find(int user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph) {
 		
-		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
-		if(offset != null) {
-			query.setFirstResult(offset);
-		}
-		if(entries != null) {
-			query.setMaxResults(entries);
-		}
+		TypedQuery<T> query = getCriteria(user_id, orderBy, sortBy, offset, entries, entityGraph);
 		
 		return query.getResultList();
 	}
 	
+	protected TypedQuery<T> getCriteria(int user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph ) {
+		
+		Session sess = getSession();
+		
+		CriteriaBuilder cb = sess.getCriteriaBuilder();
+		CriteriaQuery<T> q = cb.createQuery(clazz);
+		Root<T> c = q.from(clazz);
+		q.select(c);
+		if(orderBy != null && !orderBy.isEmpty()) {
+			if("desc".equalsIgnoreCase(sortBy)) {
+				q.orderBy(cb.desc(c.get(orderBy)));
+			}
+			else {
+				q.orderBy(cb.asc(c.get(orderBy)));
+			}
+		}
+		
+		TypedQuery<T> typedQuery = sess.createQuery(q);
+		
+		if(offset == null || offset < 1) {
+			offset = Constant.DEFAULT_PAGE;
+		}
+		typedQuery.setFirstResult(offset-1);
+		
+		if(entries == null || entries < 1) {
+			entries = Constant.DEFAULT_RESULTS;
+		}
+		typedQuery.setMaxResults(entries);
+		
+		if(entityGraph != null && ! entityGraph.isEmpty()) {
+			EntityGraph<T> graph = (EntityGraph<T>) sess.getEntityGraph(entityGraph);
+			typedQuery.setHint("javax.persistence.loadgraph", graph);
+		}
+		
+		return typedQuery;
+	}
+	
 	protected Session getSession() {
 		return sf.getCurrentSession();
+	}
+	
+	protected EntityManager getEntityManager() {
+		return getSession().getEntityManagerFactory().createEntityManager();
 	}
 }

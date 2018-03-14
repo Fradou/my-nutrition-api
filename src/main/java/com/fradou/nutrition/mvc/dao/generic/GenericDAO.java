@@ -31,6 +31,6 @@ public interface GenericDAO<T> {
 	
 	public T findUniqueBy(String field, String value);
 		
-	public List<T> find(Integer offset, Integer entries);
+	public List<T> find(int user_id, String orderBy, String sortBy, Integer offset, Integer entries,String entityGraph);
 	
 }
