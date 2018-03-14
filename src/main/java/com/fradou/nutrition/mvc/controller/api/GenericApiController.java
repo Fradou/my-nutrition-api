@@ -60,16 +60,12 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<T> findAll(
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "delta", defaultValue = "20", required = false) int delta,
+			@RequestParam(value = "results", defaultValue = "20", required = false) int results,
 			Authentication authenticate) {
 		
-		Integer offest = (page - 1) * delta;
-
 		CustomUser user = getCurrentUser(authenticate);
 		
-		return service.find(user.getId(), null, null, offest, delta, defaultNamedQuery);
-		// return service.findAll(user.getId());
-		// return service.find(offest, delta, null);
+		return service.find(user.getId(), null, null, page, results, defaultNamedQuery);
 	}
 	
 	/**
