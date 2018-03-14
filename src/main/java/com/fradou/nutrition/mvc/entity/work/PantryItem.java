@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
@@ -13,6 +15,10 @@ import com.fradou.nutrition.mvc.entity.security.CustomUser;
 
 @Entity
 @Table(name="pantry_item")
+@NamedEntityGraph(
+		name="graph.PantryItemFood",
+		attributeNodes = @NamedAttributeNode(value="food")
+)
 public class PantryItem extends GenericEntity {		
 	
 	@Min(0)

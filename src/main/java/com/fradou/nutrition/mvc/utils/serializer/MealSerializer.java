@@ -13,8 +13,8 @@ public class MealSerializer extends StdSerializer<Meal> {
 
 	private static final long serialVersionUID = 1L;
 
-	protected MealSerializer(Class<Meal> t) {
-		super(t);
+	protected MealSerializer() {
+		super(Meal.class);
 	}
 
 	@Override

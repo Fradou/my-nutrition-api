@@ -15,6 +15,6 @@ import com.fradou.nutrition.mvc.entity.work.Meal;
 public class MealApiController extends GenericApiController<Meal>{
 	
 	protected String setDefaultNamedQuery() {
-		return null;
+		return "graph.MealMealDetail";
 	}
 }

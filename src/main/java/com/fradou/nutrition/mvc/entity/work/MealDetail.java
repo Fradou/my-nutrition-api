@@ -3,6 +3,8 @@ package com.fradou.nutrition.mvc.entity.work;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
@@ -10,6 +12,10 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 
 @Entity
 @Table(name="meal_detail")
+@NamedEntityGraph(
+		name="graph.MealDetailFood",
+		attributeNodes = @NamedAttributeNode(value="food")
+)
 public class MealDetail extends GenericEntity {
 
 	@ManyToOne

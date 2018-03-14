@@ -10,6 +10,6 @@ import com.fradou.nutrition.mvc.entity.work.PantryItem;
 public class PantryItemApiController extends GenericApiController<PantryItem> {
 
 	protected String setDefaultNamedQuery() {
-		return null;
+		return "graph.PantryItemFood";
 	}
 }
