@@ -3,6 +3,7 @@ package com.fradou.nutrition.mvc.entity.work;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
@@ -31,11 +32,11 @@ public class PantryItem extends GenericEntity {
 	
 	private LocalDate purchaseDate;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private CustomUser user;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="food_id")
 	private Food food;
 	

@@ -26,6 +26,11 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.work.Intake;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
 
+/**
+ * Custom user entity, include all Spring seucirity requirement and custom attributes.
+ * @author AF
+ *
+ */
 @Entity
 @Table(name="user",
 		indexes = {@Index(name= "ix_username", columnList="username", unique = true),

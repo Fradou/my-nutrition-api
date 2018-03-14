@@ -1,6 +1,7 @@
 package com.fradou.nutrition.mvc.entity.work;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
@@ -18,11 +19,11 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 )
 public class MealDetail extends GenericEntity {
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="meal_id")
 	private Meal meal;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="food_id")
 	private Food food;
 	

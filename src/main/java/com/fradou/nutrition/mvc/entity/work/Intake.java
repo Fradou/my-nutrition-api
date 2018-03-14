@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyEnumerated;
@@ -41,7 +42,7 @@ public class Intake extends GenericEntity {
 	@NotNull
 	private LocalDate intakeDate; 
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private CustomUser user;
 	

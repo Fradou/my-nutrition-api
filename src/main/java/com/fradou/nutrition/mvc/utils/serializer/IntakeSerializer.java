@@ -2,8 +2,6 @@ package com.fradou.nutrition.mvc.utils.serializer;
 
 import java.io.IOException;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
@@ -11,7 +9,11 @@ import com.fradou.nutrition.mvc.entity.work.Intake;
 import com.fradou.nutrition.mvc.entity.work.Meal;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
-@Component
+/**
+ * Custom jackson serializer for Intake entity
+ * @author AF
+ *
+ */
 public class IntakeSerializer extends StdSerializer<Intake> {
 
 	private static final long serialVersionUID = 1L;

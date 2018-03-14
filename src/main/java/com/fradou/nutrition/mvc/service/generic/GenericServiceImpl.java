@@ -11,6 +11,13 @@ import org.springframework.stereotype.Component;
 import com.fradou.nutrition.mvc.dao.generic.GenericDAOImpl;
 import com.fradou.nutrition.mvc.utils.exception.ResourceNotFoundException;
 
+/**
+ * Generic implementation for all app's services
+ * @author AF
+ *
+ * @param <T>
+ * @param <D>
+ */
 @Component
 @Transactional
 public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> implements GenericService<T> {

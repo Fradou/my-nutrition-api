@@ -13,6 +13,11 @@ import javax.persistence.ManyToMany;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * Roles / Authorities for Spring Security and user control.
+ * @author AF
+ *
+ */
 @Entity
 public class Role implements GrantedAuthority {
 

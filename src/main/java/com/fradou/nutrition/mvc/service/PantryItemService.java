@@ -7,6 +7,11 @@ import com.fradou.nutrition.mvc.dao.PantryItemDAOImpl;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
 import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 
+/**
+ * Service for PantryItem (Nutrition)
+ * @author AF
+ *
+ */
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PantryItemService extends GenericServiceImpl<PantryItem, PantryItemDAOImpl> {

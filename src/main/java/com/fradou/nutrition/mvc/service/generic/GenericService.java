@@ -4,6 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Generic interface for all app's services
+ * @author AF
+ *
+ * @param <T>
+ */
 @Component
 public interface GenericService<T> {
 

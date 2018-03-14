@@ -9,6 +9,11 @@ import com.fradou.nutrition.mvc.entity.work.Meal;
 import com.fradou.nutrition.mvc.entity.work.MealDetail;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
+/**
+ * Custom jackson serializer for meal entity
+ * @author AF
+ *
+ */
 public class MealSerializer extends StdSerializer<Meal> {
 
 	private static final long serialVersionUID = 1L;
