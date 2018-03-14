@@ -1,5 +1,6 @@
 package com.fradou.nutrition.mvc.controller.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -38,7 +39,7 @@ public class FoodApiController {
 		
 		Integer offest = (page-1) * delta;
 		
-		return fs.find(offest, delta, null);
+		return new ArrayList<Food>(); //fs.find(offest, delta, null);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

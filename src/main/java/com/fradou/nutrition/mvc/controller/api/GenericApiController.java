@@ -39,6 +39,14 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@Autowired
 	protected UserService uService;
 
+	protected String defaultNamedQuery;
+	
+	protected abstract String setDefaultNamedQuery();
+	
+	public GenericApiController() {
+		defaultNamedQuery = setDefaultNamedQuery();
+	}
+
 	protected void setService(GenericService<T> entityService) {
 		this.service = entityService;
 	}
@@ -54,11 +62,13 @@ public abstract class GenericApiController<T extends GenericEntity> {
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value = "delta", defaultValue = "20", required = false) int delta,
 			Authentication authenticate) {
+		
 		Integer offest = (page - 1) * delta;
 
 		CustomUser user = getCurrentUser(authenticate);
 		
-		return service.findAll(user.getId());
+		return service.find(user.getId(), null, null, offest, delta, defaultNamedQuery);
+		// return service.findAll(user.getId());
 		// return service.find(offest, delta, null);
 	}
 	
@@ -99,7 +109,12 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable("id") int id) {
+	public void delete(@PathVariable("id") int id, Authentication authenticate) {
+		
+		
+		CustomUser user = getCurrentUser(authenticate);
+		service.find(id, user.getId());
+		
 		service.deleteById(id);
 	}
 	

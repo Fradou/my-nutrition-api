@@ -66,6 +66,7 @@ public class HibernateConfig {
 		Properties props=new Properties();
 		props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		props.put("hibernate.generate_statistics", true);
 		
 		factoryBean.setHibernateProperties(props);
 		factoryBean.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));;

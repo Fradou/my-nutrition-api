@@ -9,4 +9,7 @@ import com.fradou.nutrition.mvc.entity.security.CustomUser;
 @RequestMapping("/api/user")
 public class UserApiController extends GenericApiController<CustomUser> {
 
+	protected String setDefaultNamedQuery() {
+		return null;
+	}
 }

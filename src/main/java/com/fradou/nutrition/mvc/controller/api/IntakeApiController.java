@@ -13,4 +13,7 @@ import com.fradou.nutrition.mvc.entity.work.Intake;
 @RestController
 public class IntakeApiController extends GenericApiController<Intake> {
 
+	protected String setDefaultNamedQuery() {
+		return "graph.IntakeMeal";
+	}
 }

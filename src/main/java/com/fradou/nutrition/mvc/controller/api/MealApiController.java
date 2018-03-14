@@ -14,4 +14,7 @@ import com.fradou.nutrition.mvc.entity.work.Meal;
 @RestController
 public class MealApiController extends GenericApiController<Meal>{
 	
+	protected String setDefaultNamedQuery() {
+		return null;
+	}
 }

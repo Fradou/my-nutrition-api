@@ -9,6 +9,8 @@ import javax.persistence.EnumType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKeyEnumerated;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -30,6 +32,10 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
 @Component
 @Table(name="intake")
 @JsonSerialize(using = IntakeSerializer.class)
+@NamedEntityGraph(
+		name="graph.IntakeMeal",
+		attributeNodes = @NamedAttributeNode(value="meals")
+)
 public class Intake extends GenericEntity {
 	
 	@NotNull

@@ -9,4 +9,7 @@ import com.fradou.nutrition.mvc.entity.work.PantryItem;
 @RestController
 public class PantryItemApiController extends GenericApiController<PantryItem> {
 
+	protected String setDefaultNamedQuery() {
+		return null;
+	}
 }
