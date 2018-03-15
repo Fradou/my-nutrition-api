@@ -26,19 +26,8 @@ public class PantryItemSerializer extends ApiGenericSerializer<PantryItem> {
 
 		gen.writeStartObject();
 		gen.writeNumberField("id", value.getId());
-		if(value.getWeight() != null) {
-			gen.writeNumberField("weight", value.getWeight());
-		}
-		else {
-			gen.writeNullField("weight");
-		}
-		if(value.getShare() != null) {
-			gen.writeNumberField("share", value.getShare());
-		}
-		else {
-			gen.writeNullField("share");
-		}
-		
+		writeIntegerField(gen, "weight", value.getWeight());
+		writeIntegerField(gen, "share", value.getShare());		
 		Food food = value.getFood();
 		gen.writeFieldName("food");
 		gen.writeStartObject();

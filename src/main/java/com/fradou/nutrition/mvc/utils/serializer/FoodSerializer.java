@@ -11,8 +11,8 @@ public class FoodSerializer extends ApiGenericSerializer<Food> {
 
 	private static final long serialVersionUID = 1L;
 
-	protected FoodSerializer(Class<Food> t) {
-		super(t);
+	protected FoodSerializer() {
+		super(Food.class);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class FoodSerializer extends ApiGenericSerializer<Food> {
 		gen.writeNumberField("protein", value.getProtein());
 		gen.writeNumberField("carbohydrate", value.getCarbohydrate());
 		gen.writeNumberField("fat", value.getFat());
-		gen.writeNumberField("calorie", value.getCarbohydrate());
+		gen.writeNumberField("calorie", value.getCalorie());
 		
 		gen.writeEndObject();
 	}

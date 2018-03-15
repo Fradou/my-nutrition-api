@@ -12,4 +12,9 @@ public class UserApiController extends GenericApiController<CustomUser> {
 	protected String setDefaultEntityGraph() {
 		return null;
 	}
+	
+	@Override
+	protected boolean setUserDependant() {
+		return false;
+	}
 }

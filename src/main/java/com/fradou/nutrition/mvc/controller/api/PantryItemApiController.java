@@ -12,4 +12,9 @@ public class PantryItemApiController extends GenericApiController<PantryItem> {
 	protected String setDefaultEntityGraph() {
 		return "graph.PantryItemFood";
 	}
+	
+	@Override
+	protected boolean setUserDependant() {
+		return true;
+	}
 }

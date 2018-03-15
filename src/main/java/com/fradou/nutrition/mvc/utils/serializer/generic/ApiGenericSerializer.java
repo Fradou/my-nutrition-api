@@ -32,4 +32,22 @@ public abstract class ApiGenericSerializer<T extends GenericEntity> extends StdS
 		gen.writeEndObject();
 		gen.writeEndArray();
 	}
+	
+	protected void writeIntegerField(JsonGenerator gen, String fieldName, Integer fieldValue) throws IOException {
+		if(fieldValue == null) {
+			gen.writeNullField(fieldName);
+		}
+		else {
+			gen.writeNumberField(fieldName, fieldValue);
+		}
+	}
+	
+	protected void writeDoubleField(JsonGenerator gen, String fieldName, Double fieldValue) throws IOException {
+		if(fieldValue == null) {
+			gen.writeNullField(fieldName);
+		}
+		else {
+			gen.writeNumberField(fieldName, fieldValue);
+		}
+	}
 }

@@ -23,6 +23,11 @@ public class FoodApiController extends GenericApiController<Food> {
 		return null;
 	}
 	
+	@Override
+	protected boolean setUserDependant() {
+		return false;
+	}
+	
 	/**
 	 * For now, disable Food deletion.
 	 * @param id

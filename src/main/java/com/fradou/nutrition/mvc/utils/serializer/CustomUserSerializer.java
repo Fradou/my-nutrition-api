@@ -11,8 +11,8 @@ public class CustomUserSerializer extends ApiGenericSerializer<CustomUser> {
 
 	private static final long serialVersionUID = 1L;
 
-	protected CustomUserSerializer(Class<CustomUser> t) {
-		super(t);
+	protected CustomUserSerializer() {
+		super(CustomUser.class);
 	}
 
 	@Override
@@ -24,8 +24,11 @@ public class CustomUserSerializer extends ApiGenericSerializer<CustomUser> {
 		gen.writeStringField("username", value.getUsername());
 		gen.writeStringField("email", value.getEmail());
 		gen.writeStringField("firstName", value.getFirstName());
-		gen.writeStringField("lastName", value.getLastName());
-		
+		writeIntegerField(gen,"age", value.getAge());
+		writeDoubleField(gen,"weight", value.getWeight());
+		writeIntegerField(gen,"height", value.getHeight());
+		writeIntegerField(gen,"bmr", value.getBmr());
+		writeIntegerField(gen,"tdee", value.getTdee());		
 		
 		gen.writeEndObject();
 		

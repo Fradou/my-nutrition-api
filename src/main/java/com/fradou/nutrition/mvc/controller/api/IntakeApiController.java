@@ -16,4 +16,9 @@ public class IntakeApiController extends GenericApiController<Intake> {
 	protected String setDefaultEntityGraph() {
 		return "graph.IntakeMeal";
 	}
+	
+	@Override
+	protected boolean setUserDependant() {
+		return true;
+	}
 }

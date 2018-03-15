@@ -17,4 +17,9 @@ public class MealApiController extends GenericApiController<Meal>{
 	protected String setDefaultEntityGraph() {
 		return "graph.MealMealDetail";
 	}
+	
+	@Override
+	protected boolean setUserDependant() {
+		return true;
+	}
 }

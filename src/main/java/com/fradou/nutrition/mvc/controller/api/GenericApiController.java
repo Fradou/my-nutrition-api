@@ -41,17 +41,22 @@ public abstract class GenericApiController<T extends GenericEntity> {
 
 	protected String defaultEntityGraph;
 	
+	protected boolean userDependant;
+	
 	/**
 	 * Abstract method to set the default entityGraph to retrieve entities.
 	 * @return
 	 */
 	protected abstract String setDefaultEntityGraph();
 	
+	protected abstract boolean setUserDependant();
+	
 	/**
 	 * No-arg construct using the default graph setter.
 	 */
 	public GenericApiController() {
 		defaultEntityGraph = setDefaultEntityGraph();
+		userDependant = setUserDependant();
 	}
 
 	/**
@@ -66,9 +71,14 @@ public abstract class GenericApiController<T extends GenericEntity> {
 			@RequestParam(value = "results", defaultValue = "20", required = false) int results,
 			Authentication authenticate) {
 		
-		CustomUser user = getCurrentUser(authenticate);
+		Integer userId = null;
 		
-		return service.find(user.getId(), null, null, page, results, defaultEntityGraph);
+		if(userDependant) {
+			CustomUser user = getCurrentUser(authenticate);
+			userId= user.getId();
+		}
+		
+		return service.find(userId, null, null, page, results, defaultEntityGraph);
 	}
 	
 	/**
