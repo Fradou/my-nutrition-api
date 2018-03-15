@@ -1,8 +1,5 @@
 package com.fradou.nutrition.mvc.entity.generic;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
 /**
- * Generic abstract entity that willbe exntended by all work/nutrition entities.
+ * Generic abstract entity that will be extended by all work/nutrition entities.
  * 
  * @author AF
  */

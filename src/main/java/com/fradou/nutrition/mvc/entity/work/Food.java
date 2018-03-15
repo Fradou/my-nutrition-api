@@ -13,7 +13,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+import com.fradou.nutrition.mvc.utils.serializer.FoodSerializer;
 
 /**
  * Entity for food
@@ -23,6 +25,7 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 @Entity
 @Component
 @Table(name="food")
+@JsonSerialize(using = FoodSerializer.class)
 public class Food extends GenericEntity {
 	
 	@Column(nullable=false)

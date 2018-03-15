@@ -41,14 +41,17 @@ public abstract class GenericApiController<T extends GenericEntity> {
 
 	protected String defaultEntityGraph;
 	
+	/**
+	 * Abstract method to set the default entityGraph to retrieve entities.
+	 * @return
+	 */
 	protected abstract String setDefaultEntityGraph();
 	
+	/**
+	 * No-arg construct using the default graph setter.
+	 */
 	public GenericApiController() {
 		defaultEntityGraph = setDefaultEntityGraph();
-	}
-
-	protected void setService(GenericService<T> entityService) {
-		this.service = entityService;
 	}
 
 	/**
@@ -131,12 +134,5 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		UserDetails userDetails = (UserDetails) authenticate.getPrincipal();		
 		CustomUser user = uService.findUniqueBy("username", userDetails.getUsername());
 		return user;
-	}
-	
-	
-	@RequestMapping("/test/")
-	public CustomUser test(Authentication authenticate) {
-		return getCurrentUser(authenticate);
-	}
-	
+	}	
 }

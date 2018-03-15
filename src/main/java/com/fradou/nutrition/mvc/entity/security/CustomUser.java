@@ -22,9 +22,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.work.Intake;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
+import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 
 /**
  * Custom user entity, include all Spring seucirity requirement and custom attributes.
@@ -37,6 +39,7 @@ import com.fradou.nutrition.mvc.entity.work.PantryItem;
 				@Index(name= "ix_email", columnList="email", unique = true)
 		}
 )
+@JsonSerialize(using = CustomUserSerializer.class)
 public class CustomUser extends GenericEntity implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

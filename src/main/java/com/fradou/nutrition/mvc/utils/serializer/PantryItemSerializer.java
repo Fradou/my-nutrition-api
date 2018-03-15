@@ -4,17 +4,16 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.fradou.nutrition.mvc.entity.work.Food;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
-import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
+import com.fradou.nutrition.mvc.utils.serializer.generic.ApiGenericSerializer;
 
 /**
  * Custom jackson serializer for PantryItem entity
  * @author AF
  *
  */
-public class PantryItemSerializer extends StdSerializer<PantryItem> {
+public class PantryItemSerializer extends ApiGenericSerializer<PantryItem> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -45,16 +44,7 @@ public class PantryItemSerializer extends StdSerializer<PantryItem> {
 		gen.writeStartObject();
 		gen.writeNumberField("id", food.getId());
 		gen.writeStringField("name", food.getName());
-		gen.writeArrayFieldStart("links");
-			gen.writeStartObject();
-					gen.writeStringField("rel", RelationType.LIST.toString());
-					gen.writeStringField("href", food.getLinks(RelationType.LIST));
-				gen.writeEndObject();
-			gen.writeStartObject();
-				gen.writeStringField("rel", RelationType.SELF.toString());
-				gen.writeStringField("href", food.getLinks(RelationType.SELF));
-			gen.writeEndObject();
-		gen.writeEndArray();
+		setLinks(food, gen);
 		
 		gen.writeEndObject();
 		gen.writeEndObject();
