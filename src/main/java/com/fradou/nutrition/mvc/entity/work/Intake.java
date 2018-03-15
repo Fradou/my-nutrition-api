@@ -52,7 +52,7 @@ public class Intake extends GenericEntity {
 	
 	@Override
 	protected String initializeEntityPath() {
-		return "/intake";
+		return "/api/intake";
 	}
 
 	public CustomUser getUser() {

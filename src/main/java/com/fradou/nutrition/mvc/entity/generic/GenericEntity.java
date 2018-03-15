@@ -11,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
@@ -25,7 +26,6 @@ import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 @MappedSuperclass
 public abstract class GenericEntity {
 	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
@@ -33,13 +33,9 @@ public abstract class GenericEntity {
 	
 	@Transient
 	protected String entityPath;
-	
-	@Transient
-	protected Map<RelationType,String> links;
 
 	public GenericEntity() {
 		entityPath = initializeEntityPath();
-		setLinks();
 	}
 	
 	/**
@@ -47,16 +43,18 @@ public abstract class GenericEntity {
 	 * @return
 	 */
 	protected abstract String initializeEntityPath();
-
-	protected void setLinks() {
-		Map<RelationType,String> linksList = new HashMap<>();
-		linksList.put(RelationType.LIST, entityPath);
-		linksList.put(RelationType.SELF, entityPath + "/");
-		this.links = linksList;
-	}
 	
-	public Map<RelationType, String> getLinks() {
-		return links;
+	public String getLinks(RelationType linkType) {
+		String url = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + entityPath;
+
+		switch(linkType) {
+			case LIST:
+				return url;
+			case SELF:
+				return url + "/" + id;
+			default:
+				throw new RuntimeException("Unknown linkType");
+		}
 	}
 
 	public int getId() {

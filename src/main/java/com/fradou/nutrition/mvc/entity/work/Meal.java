@@ -49,7 +49,7 @@ public class Meal extends GenericEntity {
 	
 	@Override
 	protected String initializeEntityPath() {
-		return "/meal";
+		return "/api/meal";
 	}
 
 	public MealType getMealType() {

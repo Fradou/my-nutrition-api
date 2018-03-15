@@ -48,11 +48,11 @@ public class PantryItemSerializer extends StdSerializer<PantryItem> {
 		gen.writeArrayFieldStart("links");
 			gen.writeStartObject();
 					gen.writeStringField("rel", RelationType.LIST.toString());
-					gen.writeStringField("href", food.getLinks().get(RelationType.LIST).toString());
+					gen.writeStringField("href", food.getLinks(RelationType.LIST));
 				gen.writeEndObject();
 			gen.writeStartObject();
 				gen.writeStringField("rel", RelationType.SELF.toString());
-				gen.writeStringField("href", food.getLinks().get(RelationType.SELF).toString());
+				gen.writeStringField("href", food.getLinks(RelationType.SELF));
 			gen.writeEndObject();
 		gen.writeEndArray();
 		

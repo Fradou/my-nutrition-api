@@ -35,11 +35,11 @@ public class MealSerializer extends StdSerializer<Meal> {
 			gen.writeArrayFieldStart("links");
 				gen.writeStartObject();
 					gen.writeStringField("rel", RelationType.LIST.toString());
-					gen.writeStringField("href", meal.getLinks().get(RelationType.LIST).toString());
+					gen.writeStringField("href", meal.getLinks(RelationType.LIST));
 				gen.writeEndObject();
 				gen.writeStartObject();
 					gen.writeStringField("rel", RelationType.SELF.toString());
-					gen.writeStringField("href", meal.getLinks().get(RelationType.SELF).toString());
+					gen.writeStringField("href", meal.getLinks(RelationType.SELF));
 				gen.writeEndObject();
 			gen.writeEndArray();
 			gen.writeEndObject();

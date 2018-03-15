@@ -45,7 +45,7 @@ public class PantryItem extends GenericEntity {
 	
 	@Override
 	protected String initializeEntityPath() {
-		return "/pantryItem";
+		return "/api/pantryItem";
 	}
 
 	public CustomUser getUser() {
