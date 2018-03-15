@@ -11,11 +11,14 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.utils.serializer.PantryItemSerializer;
 
 @Entity
 @Table(name="pantry_item")
+@JsonSerialize(using = PantryItemSerializer.class)
 @NamedEntityGraph(
 		name="graph.PantryItemFood",
 		attributeNodes = @NamedAttributeNode(value="food")
@@ -23,10 +26,10 @@ import com.fradou.nutrition.mvc.entity.security.CustomUser;
 public class PantryItem extends GenericEntity {		
 	
 	@Min(0)
-	private int weight;
+	private Integer weight;
 	
 	@Min(0)
-	private int share;
+	private Integer share;
 	
 	private LocalDate expirationDate;
 	
@@ -69,7 +72,7 @@ public class PantryItem extends GenericEntity {
 		this.purchaseDate = purchaseDate;
 	}
 
-	public int getWeight() {
+	public Integer getWeight() {
 		return weight;
 	}
 
@@ -77,7 +80,7 @@ public class PantryItem extends GenericEntity {
 		this.weight = weight;
 	}
 
-	public int getShare() {
+	public Integer getShare() {
 		return share;
 	}
 

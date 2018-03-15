@@ -14,7 +14,7 @@ import com.fradou.nutrition.mvc.entity.work.Food;
 @RequestMapping("/api/food")
 public class FoodApiController extends GenericApiController<Food> {
 	
-	protected String setDefaultNamedQuery() {
+	protected String setDefaultEntityGraph() {
 		return null;
 	}
 }

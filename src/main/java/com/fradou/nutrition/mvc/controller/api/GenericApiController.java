@@ -39,12 +39,12 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@Autowired
 	protected UserService uService;
 
-	protected String defaultNamedQuery;
+	protected String defaultEntityGraph;
 	
-	protected abstract String setDefaultNamedQuery();
+	protected abstract String setDefaultEntityGraph();
 	
 	public GenericApiController() {
-		defaultNamedQuery = setDefaultNamedQuery();
+		defaultEntityGraph = setDefaultEntityGraph();
 	}
 
 	protected void setService(GenericService<T> entityService) {
@@ -65,7 +65,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		
 		CustomUser user = getCurrentUser(authenticate);
 		
-		return service.find(user.getId(), null, null, page, results, defaultNamedQuery);
+		return service.find(user.getId(), null, null, page, results, defaultEntityGraph);
 	}
 	
 	/**

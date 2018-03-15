@@ -35,7 +35,8 @@ import com.fradou.nutrition.mvc.entity.work.PantryItem;
 @Table(name="user",
 		indexes = {@Index(name= "ix_username", columnList="username", unique = true),
 				@Index(name= "ix_email", columnList="email", unique = true)
-		})
+		}
+)
 public class CustomUser extends GenericEntity implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
