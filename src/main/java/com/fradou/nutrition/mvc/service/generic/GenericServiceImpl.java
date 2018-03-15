@@ -79,12 +79,7 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 
 	@Override
 	public T find(int id, int user_id) {
-		return dao.find(id, user_id);
-	}
-
-	@Override
-	public List<T> findAll(int user_id) {
-		return dao.findAll(user_id);
+		return dao.find(id);
 	}
 }
 

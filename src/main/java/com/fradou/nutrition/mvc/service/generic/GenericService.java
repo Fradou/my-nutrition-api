@@ -27,8 +27,6 @@ public interface GenericService<T> {
 	
 	public List<T> findAll();
 	
-	public List<T> findAll(int user_id);
-	
 	public T findUniqueBy(String field, String value);
 		
 	public boolean alreadyExists(String fieldName, String fieldValue);

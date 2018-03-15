@@ -44,16 +44,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	public T find(int id) {
 		return getSession().get(clazz, id);
 	}
-	
-	@Override
-	public T find(int id,int user_id) {
-				
-		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE id=:entityId AND user_id=:userId");
-		query.setParameter("entityId", id);
-		query.setParameter("userId", user_id);
-		
-		return query.getSingleResult();
-	}
 
 	@Override
 	public void update(T o) {
@@ -70,14 +60,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
 		return query.getResultList();
 	}
-	
-	@Override
-	public List<T> findAll(int user_id) {
-		Query<T> query = getSession().createQuery("FROM " + clazz.getName() + " WHERE user_id=:userId");
-		query.setParameter("userId", user_id);
-		
-		return query.getResultList();
-	}
 
 	@Override
 	public int count() {
@@ -92,14 +74,14 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	}
 
 	@Override
-	public List<T> find(int user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph) {
+	public List<T> find(Integer user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph) {
 		
 		TypedQuery<T> query = getCriteria(user_id, orderBy, sortBy, offset, entries, entityGraph);
 		
 		return query.getResultList();
 	}
 	
-	protected TypedQuery<T> getCriteria(int user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph ) {
+	protected TypedQuery<T> getCriteria(Integer user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph ) {
 		
 		Session sess = getSession();
 		
@@ -107,6 +89,11 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 		CriteriaQuery<T> q = cb.createQuery(clazz);
 		Root<T> c = q.from(clazz);
 		q.select(c);
+		
+		if(user_id != null) {
+			q.where(cb.equal(c.get("user"), user_id));
+		}
+		
 		if(orderBy != null && !orderBy.isEmpty()) {
 			if("desc".equalsIgnoreCase(sortBy)) {
 				q.orderBy(cb.desc(c.get(orderBy)));
