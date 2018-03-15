@@ -14,6 +14,7 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
@@ -42,6 +43,18 @@ public class Intake extends GenericEntity {
 	@NotNull
 	private LocalDate intakeDate; 
 	
+	@Min(0)
+	private double protein;
+	
+	@Min(0)
+	private double carbohydrate;
+	
+	@Min(0)
+	private double fat;
+	
+	@Min(0)
+	private double calorie;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	private CustomUser user;
@@ -69,6 +82,38 @@ public class Intake extends GenericEntity {
 
 	public void setIntakeDate(LocalDate intakeDate) {
 		this.intakeDate = intakeDate;
+	}
+	
+	public double getProtein() {
+		return protein;
+	}
+
+	public void setProtein(double protein) {
+		this.protein = protein;
+	}
+
+	public double getCarbohydrate() {
+		return carbohydrate;
+	}
+
+	public void setCarbohydrate(double carbohydrate) {
+		this.carbohydrate = carbohydrate;
+	}
+
+	public double getFat() {
+		return fat;
+	}
+
+	public void setFat(double fat) {
+		this.fat = fat;
+	}
+
+	public double getCalorie() {
+		return calorie;
+	}
+
+	public void setCalorie(double calorie) {
+		this.calorie = calorie;
 	}
 
 	public Map<MealType, Meal> getMeals() {

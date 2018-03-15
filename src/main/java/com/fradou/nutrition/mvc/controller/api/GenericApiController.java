@@ -130,6 +130,11 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		service.find(entityUpdated.getId());
 	}
 	
+	/**
+	 * Utils to get authenticate CustomUser.
+	 * @param authenticate
+	 * @return
+	 */
 	protected CustomUser getCurrentUser(Authentication authenticate) {
 		UserDetails userDetails = (UserDetails) authenticate.getPrincipal();		
 		CustomUser user = uService.findUniqueBy("username", userDetails.getUsername());

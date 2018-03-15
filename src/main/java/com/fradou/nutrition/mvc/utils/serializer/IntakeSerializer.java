@@ -25,8 +25,13 @@ public class IntakeSerializer extends ApiGenericSerializer<Intake> {
 	public void serialize(Intake value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 
 		gen.writeStartObject();
+		
 		gen.writeNumberField("id", value.getId());
 		gen.writeStringField("intakeDate", value.getIntakeDate().toString());
+		gen.writeNumberField("protein", value.getProtein());
+		gen.writeNumberField("carbohydrate", value.getCarbohydrate());
+		gen.writeNumberField("fat", value.getFat());
+		gen.writeNumberField("calorie", value.getCalorie());
 		gen.writeArrayFieldStart("meals");
 		for(Meal meal : value.getMeals().values()) {
 			gen.writeStartObject();
@@ -36,6 +41,7 @@ public class IntakeSerializer extends ApiGenericSerializer<Intake> {
 			gen.writeEndObject();
 		}
 		gen.writeEndArray();
+		
 		gen.writeEndObject();
 	}
 }

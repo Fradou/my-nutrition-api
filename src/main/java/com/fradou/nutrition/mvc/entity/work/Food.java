@@ -34,18 +34,19 @@ public class Food extends GenericEntity {
 	
 	@Min(0)
 	@Max(100)
-	private Double protein;
+	private double protein;
 	
 	@Min(0)
 	@Max(100)
-	private Double carbohydrate;
+	private double carbohydrate;
 	
 	@Min(0)
 	@Max(100)
-	private Double fat;
+	private double fat;
 	
-	@Max(100)
-	private Double calorie;
+	@Min(0)
+	@Max(1000)
+	private double calorie;
 	
 	@OneToMany(mappedBy="food")
 	private Set<MealDetail> mealDetails = new HashSet<MealDetail>();
@@ -63,35 +64,35 @@ public class Food extends GenericEntity {
 		this.name = name;
 	}
 
-	public Double getProtein() {
+	public double getProtein() {
 		return protein;
 	}
 
-	public void setProtein(Double protein) {
+	public void setProtein(double protein) {
 		this.protein = protein;
 	}
 
-	public Double getCarbohydrate() {
+	public double getCarbohydrate() {
 		return carbohydrate;
 	}
 
-	public void setCarbohydrate(Double carbohydrate) {
+	public void setCarbohydrate(double carbohydrate) {
 		this.carbohydrate = carbohydrate;
 	}
 
-	public Double getFat() {
+	public double getFat() {
 		return fat;
 	}
 
-	public void setFat(Double fat) {
+	public void setFat(double fat) {
 		this.fat = fat;
 	}
 
-	public Double getCalorie() {
+	public double getCalorie() {
 		return calorie;
 	}
 
-	public void setCalorie(Double calorie) {
+	public void setCalorie(double calorie) {
 		this.calorie = calorie;
 	}
 
