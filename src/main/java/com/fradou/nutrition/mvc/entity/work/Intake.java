@@ -44,15 +44,19 @@ public class Intake extends GenericEntity {
 	private LocalDate intakeDate; 
 	
 	@Min(0)
+	@NotNull
 	private double protein;
 	
 	@Min(0)
+	@NotNull
 	private double carbohydrate;
 	
 	@Min(0)
+	@NotNull
 	private double fat;
 	
 	@Min(0)
+	@NotNull
 	private double calorie;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

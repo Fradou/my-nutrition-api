@@ -1,5 +1,7 @@
 package com.fradou.nutrition.mvc.entity.generic;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,8 +23,10 @@ import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 @Component
 @JsonIgnoreProperties(value = { "entityPath" })
 @MappedSuperclass
-public abstract class GenericEntity {
+public abstract class GenericEntity implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column
@@ -30,9 +34,12 @@ public abstract class GenericEntity {
 	
 	@Transient
 	protected String entityPath;
+	
+	public static boolean IS_USER_RELATED;
 
 	public GenericEntity() {
 		entityPath = initializeEntityPath();
+		IS_USER_RELATED = isUserRelated();
 	}
 	
 	public abstract boolean isUserRelated();

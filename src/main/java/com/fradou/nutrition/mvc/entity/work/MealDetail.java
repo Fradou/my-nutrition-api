@@ -8,6 +8,7 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 
@@ -28,6 +29,7 @@ public class MealDetail extends GenericEntity {
 	private Food food;
 	
 	@Min(0)
+	@NotNull
 	private int quantity;
 	
 	public Meal getMeal() {

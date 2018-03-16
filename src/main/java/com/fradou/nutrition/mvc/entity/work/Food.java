@@ -34,18 +34,22 @@ public class Food extends GenericEntity {
 	
 	@Min(0)
 	@Max(100)
+	@NotNull
 	private double protein;
 	
 	@Min(0)
 	@Max(100)
+	@NotNull
 	private double carbohydrate;
 	
 	@Min(0)
 	@Max(100)
+	@NotNull
 	private double fat;
 	
 	@Min(0)
 	@Max(1000)
+	@NotNull
 	private double calorie;
 	
 	@OneToMany(mappedBy="food")

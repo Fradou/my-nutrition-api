@@ -31,7 +31,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	@Autowired
 	protected SessionFactory sf;
 	
-	public final void setClazz( Class< T > clazzToSet ){
+	public final void setClazz( Class<T> clazzToSet ){
 		this.clazz = clazzToSet;
 	}
 	
