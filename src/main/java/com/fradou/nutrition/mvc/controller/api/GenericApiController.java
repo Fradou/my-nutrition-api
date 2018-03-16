@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.service.UserService;
 import com.fradou.nutrition.mvc.service.generic.GenericService;
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
+import com.fradou.nutrition.mvc.utils.exception.NotBelongingToUserException;
 
 /**
  * Generic controller that will be extend by all Controller managing
@@ -89,8 +91,15 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public T findById(@PathVariable(value="id") int id, Authentication authenticate) {
 		
-		CustomUser user = getCurrentUser(authenticate);			
-		return service.find(id, user.getId());
+		T entity = service.find(id, defaultEntityGraph);
+		
+		if(userDependant) {
+			CustomUser user = getCurrentUser(authenticate);
+			if(!service.belongToUser(entity, user.getId())){
+				throw new NotBelongingToUserException(entity.getClass(), HttpMethod.GET);
+			}
+		}
+		return entity;
 	}
 	
 	/**

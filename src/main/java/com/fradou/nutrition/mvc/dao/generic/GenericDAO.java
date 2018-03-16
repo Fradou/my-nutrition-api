@@ -16,6 +16,8 @@ public interface GenericDAO<T> {
 	public int create(T entity);
 	
 	public T find(int id);
+	
+	public T find(int id, String entityGraph);
 		
 	public void update(T entity);
 		

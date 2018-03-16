@@ -19,6 +19,8 @@ public interface GenericService<T> {
 	
 	public T find(int id, int user_id);
 	
+	public T find(int id, String entityGraph);
+	
 	public void update(T entity);
 	
 	public void delete(T entity);

@@ -10,6 +10,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
+
 /**
  * Custom entryPoint for api calls
  * 
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationApiEntryPoint implements AuthenticationEntryPoint {
 
+
+	
 	@Override
 	public void commence(
 			HttpServletRequest request,
@@ -25,5 +29,12 @@ public class AuthenticationApiEntryPoint implements AuthenticationEntryPoint {
 			AuthenticationException exception) throws IOException, ServletException {
 		
 		response.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+		
+		ApiErrorMessage errorMessage = new ApiErrorMessage(401, "Please authenticate.");
+		
+	/**	try {
+			ObjectMapper json = jackson2JsonObjectMapper.build();
+			json.writeV
+		}**/
 	}
 }

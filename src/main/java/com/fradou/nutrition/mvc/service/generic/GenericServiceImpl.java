@@ -67,6 +67,7 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 				exists = findUniqueBy(fieldName, fieldValue) != null;
 			}
 			catch(NoResultException exception) {
+				//TODO a reprendre
 				System.out.println("Error : " + exception.getMessage());
 			}
 		}
@@ -79,6 +80,11 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 
 	public T find(int id, int user_id) {
 		return dao.find(id);
+	}
+	
+	@Override
+	public T find(int id, String entityGraph) {
+		return dao.find(id, entityGraph);
 	}
 }
 

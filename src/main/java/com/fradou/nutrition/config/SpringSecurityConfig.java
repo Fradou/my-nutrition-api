@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.fradou.nutrition.security.api.AuthenticationApiEntryPoint;
+import com.fradou.nutrition.security.api.AuthenticationSuccessApiHandler;
 
 /**
  * Spring security setup. Configuration for user provider and url security
@@ -32,6 +33,14 @@ public class SpringSecurityConfig {
 
 		@Autowired
 		private AuthenticationApiEntryPoint authenticationApiEntryPoint;
+		
+		@Autowired
+		private AuthenticationSuccessApiHandler authenticationSuccessApiHandler;
+		
+		/**
+		@Autowired
+		private LogoutSuccessApiHandler logoutSuccessApiHandler;
+		**/
 
 		/**
 		 * Use custom userProvider
@@ -49,15 +58,33 @@ public class SpringSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 
 			http
-				.antMatcher("/api/user/**").authorizeRequests().anyRequest().hasRole("Admin")
-				
-				.and().antMatcher("/api/**").authorizeRequests().anyRequest().authenticated()
-				
-				.and().csrf().disable().exceptionHandling().authenticationEntryPoint(authenticationApiEntryPoint)
-				
-				.and().formLogin().loginPage("/api/login").permitAll()
-				
-				.and().logout().logoutUrl("/api/logout").permitAll();
+					.antMatcher("/api/user/**")
+						.authorizeRequests()
+						.anyRequest()
+						.hasRole("Admin")
+						.and()
+						
+					.antMatcher("/api/**")
+						.authorizeRequests()
+						.anyRequest()
+						.authenticated()
+						.and()
+					
+					.csrf()
+						.disable()
+						.exceptionHandling()
+						.authenticationEntryPoint(authenticationApiEntryPoint)
+						.and()
+						
+					.formLogin()
+						.loginPage("/api/login")
+						.successHandler(authenticationSuccessApiHandler)
+						.permitAll()
+						.and()
+						
+					.logout()
+						.logoutUrl("/api/logout")
+						.permitAll(); // .logoutSuccessHandler(logoutSuccessApiHandler)
 		}
 	}
 

@@ -49,7 +49,7 @@ public class ApiControllerExceptionHandler {
 	
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	@ExceptionHandler(NotBelongingToUserException.class)
-	public ApiErrorMessage notBelongingException(NotBelongingToUserException ex) {
+	public ApiErrorMessage notBelongingToUserException(NotBelongingToUserException ex) {
 		return new ApiErrorMessage(HttpStatus.FORBIDDEN.value(), ex.getMessage());
 	}	
 }

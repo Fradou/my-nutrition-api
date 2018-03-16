@@ -1,6 +1,8 @@
 package com.fradou.nutrition.mvc.dao.generic;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
@@ -39,10 +41,23 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	public int create(T o) {
 		return (int) getSession().save(o);
 	}
-
+	
 	@Override
 	public T find(int id) {
 		return getSession().get(clazz, id);
+	}
+
+	@Override
+	public T find(int id, String entityGraph) {
+		
+		Session sess = getSession();
+		EntityGraph<T> graph = (EntityGraph<T>) sess.getEntityGraph(entityGraph);
+		
+		Map<String, Object> properties = new HashMap<String, Object>();
+		properties.put("javax.persistence.loadgraph", graph);
+		
+		return sess.find(clazz, id, properties);
+		/**return getSession().get(clazz, id);**/
 	}
 
 	@Override

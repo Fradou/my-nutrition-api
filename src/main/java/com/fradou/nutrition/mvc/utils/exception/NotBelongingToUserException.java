@@ -20,7 +20,7 @@ public class NotBelongingToUserException extends RuntimeException {
 	private static String getErrorMessage(Class<? extends GenericEntity> clazz, HttpMethod method) {
 		
 		if(method == HttpMethod.GET) {
-			return "You don't have authorization to access to this resource (" + clazz.getSimpleName() + ")";
+			return "You don't have authorization to access this resource (" + clazz.getSimpleName() + ")";
 		}
 		else {
 			return "You're not allowed to do any operation on this resource (" + clazz.getSimpleName() + ")";
