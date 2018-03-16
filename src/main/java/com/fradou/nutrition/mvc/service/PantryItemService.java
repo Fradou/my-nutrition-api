@@ -16,4 +16,13 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 @Transactional(rollbackFor = Exception.class)
 public class PantryItemService extends GenericServiceImpl<PantryItem, PantryItemDAOImpl> {
 
+	@Override
+	public boolean belongToUser(PantryItem item, int user_id) {
+		
+		if(item.getUser().getId() == user_id) {
+			return true;
+		}
+		
+		return false;
+	}
 }

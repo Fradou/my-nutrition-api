@@ -17,4 +17,13 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 @Transactional(rollbackFor = Exception.class)
 public class UserService extends GenericServiceImpl<CustomUser, UserDAOImpl> {
 
+	@Override
+	public boolean belongToUser(CustomUser user, int user_id) {
+		
+		if(user.getId() == user_id) {
+			return true;
+		};
+		
+		return false;
+	}
 }

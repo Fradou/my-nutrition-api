@@ -123,4 +123,9 @@ public class Intake extends GenericEntity {
 	public void setMeals(Map<MealType, Meal> meals) {
 		this.meals = meals;
 	}
+
+	@Override
+	public boolean isUserRelated() {
+		return true;
+	}
 }

@@ -35,6 +35,8 @@ public abstract class GenericEntity {
 		entityPath = initializeEntityPath();
 	}
 	
+	public abstract boolean isUserRelated();
+	
 	/**
 	 * Abstract method to force subclass to declare entityPath
 	 * @return

@@ -254,4 +254,9 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	public void setPantryItems(List<PantryItem> pantryItems) {
 		this.pantryItems = pantryItems;
 	}
+	
+	@Override
+	public boolean isUserRelated() {
+		return true;
+	}
 }

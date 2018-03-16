@@ -96,4 +96,8 @@ public class Food extends GenericEntity {
 		this.calorie = calorie;
 	}
 
+	@Override
+	public boolean isUserRelated() {
+		return false;
+	}
 }

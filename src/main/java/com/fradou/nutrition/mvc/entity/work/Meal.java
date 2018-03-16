@@ -75,4 +75,9 @@ public class Meal extends GenericEntity {
 	public void setMealDetails(Set<MealDetail> mealDetails) {
 		this.mealDetails = mealDetails;
 	}
+
+	@Override
+	public boolean isUserRelated() {
+		return true;
+	}
 }

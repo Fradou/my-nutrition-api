@@ -17,4 +17,8 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 @Transactional(rollbackFor = Exception.class)
 public class RoleService extends GenericServiceImpl<Role, RoleDAOImpl> {
 
+	@Override
+	public boolean belongToUser(Role entity, int user_id) {
+		return false;
+	}
 }

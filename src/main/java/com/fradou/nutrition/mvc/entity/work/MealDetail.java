@@ -53,4 +53,9 @@ public class MealDetail extends GenericEntity {
 	protected String initializeEntityPath() {
 		return "/mealDetail";
 	}
+	
+	@Override
+	public boolean isUserRelated() {
+		return true;
+	}
 }

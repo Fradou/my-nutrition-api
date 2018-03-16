@@ -95,4 +95,9 @@ public class PantryItem extends GenericEntity {
 	public void setFood(Food food) {
 		this.food = food;
 	}
+	
+	@Override
+	public boolean isUserRelated() {
+		return true;
+	}
 }
