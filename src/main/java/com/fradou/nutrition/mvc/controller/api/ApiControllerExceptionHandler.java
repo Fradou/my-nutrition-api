@@ -4,9 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 import com.fradou.nutrition.mvc.utils.exception.NotBelongingToUserException;
@@ -18,7 +20,7 @@ import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
  * 
  * @author AF
  */
-@RestControllerAdvice("com.fradou.nutrition.mvc.controller.api")
+@RestControllerAdvice
 public class ApiControllerExceptionHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ApiControllerExceptionHandler.class);
@@ -36,7 +38,7 @@ public class ApiControllerExceptionHandler {
 	}
 	
 	/**
-	 * "Bad" catch all for all missed exception. Will avoid uncatched 500 and allow better debugging 
+	 * Ugly catch all for all missed exception. Will avoid uncatched 500 and allow better debugging 
 	 * @param ex
 	 * @return
 	 */
@@ -51,5 +53,17 @@ public class ApiControllerExceptionHandler {
 	@ExceptionHandler(NotBelongingToUserException.class)
 	public ApiErrorMessage notBelongingToUserException(NotBelongingToUserException ex) {
 		return new ApiErrorMessage(HttpStatus.FORBIDDEN.value(), ex.getMessage());
-	}	
+	}
+	
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	@ExceptionHandler(AccessDeniedException.class)
+	public ApiErrorMessage accessDeniedException(AccessDeniedException ex) {
+		return new ApiErrorMessage(HttpStatus.UNAUTHORIZED.value(), "Nope");
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ApiErrorMessage noHandlerFoundException(NoHandlerFoundException ex) {
+		return new ApiErrorMessage(HttpStatus.NOT_FOUND.value(), "Not found, check url and try again.");
+	}
 }

@@ -1,5 +1,6 @@
 package com.fradou.nutrition.config;
 
+import java.util.List;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -30,6 +32,26 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages="com.fradou.nutrition")
 public class SpringAppConfig implements WebMvcConfigurer {
 
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+	
+	public void addInterceptors(InterceptorRegistry registry) {
+	    LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+	    interceptor.setParamName("locale");
+	    registry.addInterceptor(interceptor);
+	}
+	
+	
+	
+	@Override
+	public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+		
+		
+		
+		WebMvcConfigurer.super.extendHandlerExceptionResolvers(resolvers);
+	}
+
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -38,10 +60,6 @@ public class SpringAppConfig implements WebMvcConfigurer {
 		viewResolver.setSuffix(".jsp");
 		
 		return viewResolver;
-	}
-	
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
 	@Bean
@@ -59,11 +77,5 @@ public class SpringAppConfig implements WebMvcConfigurer {
 	    resolver.setCookieName("localeCookie");
 	    resolver.setCookieMaxAge(4800);
 	    return resolver;
-	}
-	
-	public void addInterceptors(InterceptorRegistry registry) {
-	    LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-	    interceptor.setParamName("locale");
-	    registry.addInterceptor(interceptor);
-	}
+	}	
 }
