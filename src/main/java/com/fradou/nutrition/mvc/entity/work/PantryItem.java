@@ -25,6 +25,8 @@ import com.fradou.nutrition.mvc.utils.serializer.PantryItemSerializer;
 )
 public class PantryItem extends GenericEntity {		
 	
+	private static final long serialVersionUID = 1L;
+
 	@Min(0)
 	private Integer weight;
 	

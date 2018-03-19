@@ -40,6 +40,8 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
 )
 public class Intake extends GenericEntity {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@NotNull
 	private LocalDate intakeDate; 
 	

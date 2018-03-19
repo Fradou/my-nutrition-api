@@ -26,6 +26,10 @@ public class SpringMvcDispatcherServletInitializer extends AbstractAnnotationCon
 		return new String [] { "/" };
 	}
 	
+	/**
+	 * Custom config to have an exception thrown if no corresponding handler
+	 * /mapping. Allow custom 404 management to return json for the API part.
+	 */
     @Override
     protected DispatcherServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
         final DispatcherServlet servlet = (DispatcherServlet) super.createDispatcherServlet(servletAppContext);

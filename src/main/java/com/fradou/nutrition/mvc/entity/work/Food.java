@@ -28,6 +28,8 @@ import com.fradou.nutrition.mvc.utils.serializer.FoodSerializer;
 @JsonSerialize(using = FoodSerializer.class)
 public class Food extends GenericEntity {
 	
+	private static final long serialVersionUID = 1L;
+	
 	@Column(nullable=false)
 	@NotNull
 	private String name;

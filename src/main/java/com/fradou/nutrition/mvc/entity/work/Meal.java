@@ -35,6 +35,8 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
 		attributeNodes = @NamedAttributeNode(value="mealDetails")
 )
 public class Meal extends GenericEntity {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Enumerated(EnumType.ORDINAL)
 	@NotNull

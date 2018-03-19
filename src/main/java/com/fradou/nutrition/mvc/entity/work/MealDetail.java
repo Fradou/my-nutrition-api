@@ -20,6 +20,8 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 )
 public class MealDetail extends GenericEntity {
 
+	private static final long serialVersionUID = 1L;
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="meal_id")
 	private Meal meal;

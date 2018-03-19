@@ -8,7 +8,6 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 import com.fradou.nutrition.mvc.utils.exception.NotBelongingToUserException;
@@ -20,17 +19,27 @@ import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
  * 
  * @author AF
  */
-@RestControllerAdvice
+@RestControllerAdvice("com.fradou.nutrition.mvc.controller")
 public class ApiControllerExceptionHandler {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ApiControllerExceptionHandler.class);
 	
+	/**
+	 * When sent data for an entity creation aren't correct
+	 * @param ex
+	 * @return
+	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(InvalidDataCreationException.class)
 	public ApiErrorMessage cannotCreateEntityException(InvalidDataCreationException ex) {
 		return new ApiErrorMessage(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}
 	
+	/**
+	 * 
+	 * @param ex
+	 * @return
+	 */
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ApiErrorMessage cannotReadHttpMessageException(HttpMessageNotReadableException ex) {
@@ -45,25 +54,29 @@ public class ApiControllerExceptionHandler {
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public ApiErrorMessage catchAllException(Exception ex) {
-		LOGGER.error("Exception not catched : " + ex.getMessage(), ex);
+		LOGGER.error("Exception not managed : " + ex.getMessage(), ex);
 		return new ApiErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unknown error has occured. Check sent datas and retry.");
 	}
 	
+	/**
+	 * User attempt operation on an entity that doesn't belong to him
+	 * @param ex
+	 * @return
+	 */
 	@ResponseStatus(HttpStatus.FORBIDDEN)
 	@ExceptionHandler(NotBelongingToUserException.class)
 	public ApiErrorMessage notBelongingToUserException(NotBelongingToUserException ex) {
 		return new ApiErrorMessage(HttpStatus.FORBIDDEN.value(), ex.getMessage());
 	}
 	
+	/**
+	 * 
+	 * @param ex
+	 * @return
+	 */
 	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	@ExceptionHandler(AccessDeniedException.class)
 	public ApiErrorMessage accessDeniedException(AccessDeniedException ex) {
 		return new ApiErrorMessage(HttpStatus.UNAUTHORIZED.value(), "Nope");
-	}
-	
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler(NoHandlerFoundException.class)
-	public ApiErrorMessage noHandlerFoundException(NoHandlerFoundException ex) {
-		return new ApiErrorMessage(HttpStatus.NOT_FOUND.value(), "Not found, check url and try again.");
 	}
 }

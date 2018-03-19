@@ -57,7 +57,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 		properties.put("javax.persistence.loadgraph", graph);
 		
 		return sess.find(clazz, id, properties);
-		/**return getSession().get(clazz, id);**/
 	}
 
 	@Override
