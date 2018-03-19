@@ -20,6 +20,10 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Main Spring configuration. Setup view, resources, cookies and locale
  * interceptor.
@@ -77,5 +81,13 @@ public class SpringAppConfig implements WebMvcConfigurer {
 	    resolver.setCookieName("localeCookie");
 	    resolver.setCookieMaxAge(4800);
 	    return resolver;
-	}	
+	}
+	
+	@Bean
+	public ObjectMapper objectMapper() {
+	    ObjectMapper mapper = new ObjectMapper();
+
+	    return mapper;
+	}
+
 }

@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.fradou.nutrition.security.api.AuthenticationApiEntryPoint;
 import com.fradou.nutrition.security.api.AuthenticationSuccessApiHandler;
+import com.fradou.nutrition.security.api.CustomAccessDeniedHandler;
 
 /**
  * Spring security setup. Configuration for user provider and url security
@@ -36,6 +37,9 @@ public class SpringSecurityConfig {
 		
 		@Autowired
 		private AuthenticationSuccessApiHandler authenticationSuccessApiHandler;
+		
+		@Autowired
+		private CustomAccessDeniedHandler accessDeniedApiHandler;
 		
 		/**
 		@Autowired
@@ -71,6 +75,7 @@ public class SpringSecurityConfig {
 						
 				.exceptionHandling()
 					.authenticationEntryPoint(authenticationApiEntryPoint)
+					.accessDeniedHandler(accessDeniedApiHandler)
 					.and()
 						
 				.formLogin()
@@ -112,6 +117,9 @@ public class SpringSecurityConfig {
 				
 				.antMatchers("/register")
 					.permitAll()
+					
+				.antMatchers("/user/**")
+					.hasRole("ADMIN")
 				
 				.antMatchers("/**")
 					.authenticated()
