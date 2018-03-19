@@ -74,7 +74,7 @@ public class SpringSecurityConfig {
 						.disable()
 						.exceptionHandling()
 						.authenticationEntryPoint(authenticationApiEntryPoint)
-						.and()
+							.and()
 						
 					.formLogin()
 						.loginPage("/api/login")

@@ -30,7 +30,6 @@ public class ExceptionHandlerGlobalController {
 			mav.setView(new MappingJackson2JsonView());
 			mav.addObject("message", "Unable to find anything at : " + ex.getRequestURL());
 			mav.addObject("code", HttpStatus.NOT_FOUND.value());
-			System.out.println("on est in");
 		}
 		else {
 			mav.setViewName("404");
