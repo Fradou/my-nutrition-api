@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
+
 @ControllerAdvice
 public class ExceptionHandlerGlobalController {
 
@@ -27,9 +29,10 @@ public class ExceptionHandlerGlobalController {
 		
 		ModelAndView mav = new ModelAndView();
 		if(matcher.find()) {
-			mav.setView(new MappingJackson2JsonView());
-			mav.addObject("message", "Unable to find anything at : " + ex.getRequestURL());
-			mav.addObject("code", HttpStatus.NOT_FOUND.value());
+			MappingJackson2JsonView mappingJackson2JsonView = new MappingJackson2JsonView();
+			mappingJackson2JsonView.setExtractValueFromSingleKeyModel(true);
+			mav.setView(mappingJackson2JsonView);
+			mav.addObject(new ApiErrorMessage(HttpStatus.NOT_FOUND.value(), "Unable to find anything at : " + ex.getRequestURL()));
 		}
 		else {
 			mav.setViewName("404");
