@@ -1,6 +1,7 @@
 package com.fradou.nutrition.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fradou.nutrition.mvc.dao.UserDAOImpl;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.entity.security.Role;
 
 /**
  * Custom User provider for Spring security.
@@ -37,10 +39,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 			}
 		}
 		catch(Exception ex) {
-			System.out.println("Foirage : " + ex.getMessage());
 			throw new UsernameNotFoundException("DB error");
 		}
-		System.out.println("user trouvé");
 		return convertToSpringUser(user);
 	}
 

@@ -58,33 +58,30 @@ public class SpringSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 
 			http
-					.antMatcher("/api/user/**")
-						.authorizeRequests()
-						.anyRequest()
-						.hasRole("Admin")
-						.and()
-						
-					.antMatcher("/api/**")
-						.authorizeRequests()
-						.anyRequest()
-						.authenticated()
-						.and()
+				.antMatcher("/api/**").authorizeRequests()
+
+				.antMatchers("/api/user/**")
+					.hasRole("ADMIN")
 					
-					.csrf()
-						.disable()
-						.exceptionHandling()
-						.authenticationEntryPoint(authenticationApiEntryPoint)
-							.and()
+				.antMatchers("/api/**")
+					.authenticated()
+					.and()
+
+				.csrf().disable()
 						
-					.formLogin()
-						.loginPage("/api/login")
-						.successHandler(authenticationSuccessApiHandler)
-						.permitAll()
-						.and()
+				.exceptionHandling()
+					.authenticationEntryPoint(authenticationApiEntryPoint)
+					.and()
 						
-					.logout()
-						.logoutUrl("/api/logout")
-						.permitAll(); // .logoutSuccessHandler(logoutSuccessApiHandler)
+				.formLogin()
+					.loginPage("/api/login")
+					.successHandler(authenticationSuccessApiHandler)
+					.permitAll()
+					.and()
+				
+				.logout()
+					.logoutUrl("/api/logout")
+					.permitAll(); // .logoutSuccessHandler(logoutSuccessApiHandler)
 		}
 	}
 
@@ -110,7 +107,14 @@ public class SpringSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 
-			http.authorizeRequests().antMatchers("/register").permitAll().antMatchers("/**").authenticated()
+			http
+				.authorizeRequests()
+				
+				.antMatchers("/register")
+					.permitAll()
+				
+				.antMatchers("/**")
+					.authenticated()
 
 					.and().formLogin()
 					// URL to custom login form
@@ -128,6 +132,9 @@ public class SpringSecurityConfig {
 					.and().exceptionHandling().accessDeniedPage("/access-denied");
 		}
 
+		/**
+		 * Ignore Spring security for resources folder. for all resources
+		 */
 		@Override
 		public void configure(WebSecurity web) throws Exception {
 			web.ignoring().antMatchers("/resources/**");
