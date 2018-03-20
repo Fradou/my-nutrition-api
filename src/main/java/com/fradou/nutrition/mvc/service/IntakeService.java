@@ -23,7 +23,8 @@ public class IntakeService extends GenericServiceImpl<Intake, IntakeDAOImpl> {
 		if(intake.getUser().getId() == user_id) {
 			return true;
 		}
-		
-		return false;
+		else {
+			return false;
+		}
 	}
 }

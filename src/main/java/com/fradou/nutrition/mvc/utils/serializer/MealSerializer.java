@@ -27,7 +27,7 @@ public class MealSerializer extends ApiGenericSerializer<Meal> {
 		gen.writeStartObject();
 		gen.writeNumberField("id", value.getId());
 		gen.writeStringField("mealType", value.getMealType().toString());
-		gen.writeArrayFieldStart("mealFoods");
+		gen.writeArrayFieldStart("mealDetails");
 		for(MealDetail mealDetail : value.getMealDetails()) {
 			gen.writeStartObject();
 			gen.writeNumberField("id", mealDetail.getId());

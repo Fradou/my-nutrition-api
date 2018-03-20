@@ -129,7 +129,6 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable("id") int id, Authentication authenticate) {
 		
-		
 		CustomUser user = getCurrentUser(authenticate);
 		service.find(id, user.getId());
 		
