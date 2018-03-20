@@ -20,7 +20,7 @@ public class MealApiController extends GenericApiController<Meal> {
 	}
 	
 	@Override
-	protected boolean setUserDependant() {
+	protected boolean setUserDependance() {
 		return true;
 	}
 }

@@ -15,7 +15,7 @@ public class UserApiController extends GenericApiController<CustomUser> {
 	}
 	
 	@Override
-	protected boolean setUserDependant() {
+	protected boolean setUserDependance() {
 		return false;
 	}
 }

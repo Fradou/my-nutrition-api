@@ -19,7 +19,7 @@ public class IntakeApiController extends GenericApiController<Intake> {
 	}
 	
 	@Override
-	protected boolean setUserDependant() {
+	protected boolean setUserDependance() {
 		return true;
 	}
 }

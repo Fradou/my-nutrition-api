@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fradou.nutrition.mvc.controller.api.ExceptionHandlerApiController;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.service.UserService;
@@ -50,7 +49,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 
 	protected String defaultEntityGraph;
 	
-	protected boolean userDependant;
+	protected boolean isUserDependant;
 	
 	/**
 	 * Abstract method to set the default entityGraph to retrieve entities.
@@ -58,14 +57,14 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 */
 	protected abstract String setDefaultEntityGraph();
 	
-	protected abstract boolean setUserDependant();
+	protected abstract boolean setUserDependance();
 	
 	/**
 	 * No-arg construct using the default graph setter.
 	 */
 	public GenericApiController() {
 		defaultEntityGraph = setDefaultEntityGraph();
-		userDependant = setUserDependant();
+		isUserDependant = setUserDependance();
 	}
 
 	/**
@@ -82,7 +81,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		
 		Integer userId = null;
 		
-		if(userDependant) {
+		if(isUserDependant) {
 			CustomUser user = getCurrentUser(authenticate);
 			userId= user.getId();
 		}
@@ -100,7 +99,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		
 		T entity = service.find(id, defaultEntityGraph);
 		
-		if(userDependant) {
+		if(isUserDependant) {
 			CustomUser user = getCurrentUser(authenticate);
 			if(!service.belongToUser(entity, user.getId())){
 				throw new NotBelongingToUserException(entity.getClass(), HttpMethod.GET);
@@ -117,14 +116,31 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	public Integer create(@Valid @RequestBody T newEntity,BindingResult validationResult) {
+	public Integer create(@Valid @RequestBody T newEntity,BindingResult validationResult, Authentication authenticate, HttpServletRequest request) {
 		
 		if(validationResult.hasErrors()) {
 			throw new InvalidDataCreationException(newEntity.getClass(), validationResult.getFieldError().getField());
 		}
+		
+		if(isUserDependant) {
+			int user_id = getCurrentUser(authenticate).getId();
+			if(! service.belongToUser(newEntity, user_id)){
+				// TODO custom exception
+				throw new NotBelongingToUserException(newEntity.getClass(), HttpMethod.POST);
+			}
+			else {
+				int id = service.create(newEntity);
+				return id;
+			}
+		}
 		else {
-			int id = service.create(newEntity);
-			return id;
+			if(request.isUserInRole(PrimaryRole.ROLE_ADMIN.toString())) {
+				int id = service.create(newEntity);
+				return id;
+			}
+			else {
+				throw new NotBelongingToUserException(newEntity.getClass(), HttpMethod.POST);
+			}
 		}
 	}
 	
@@ -138,7 +154,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	public void delete(@PathVariable("id") int id, Authentication authenticate, HttpServletRequest request) throws Exception {
 		
 		
-		if(userDependant) {
+		if(isUserDependant) {
 			int user_id = getCurrentUser(authenticate).getId();
 			T entity = service.find(id);
 			if(service.belongToUser(entity, user_id)) {

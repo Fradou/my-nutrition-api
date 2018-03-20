@@ -15,7 +15,7 @@ public class PantryItemApiController extends GenericApiController<PantryItem> {
 	}
 	
 	@Override
-	protected boolean setUserDependant() {
+	protected boolean setUserDependance() {
 		return true;
 	}
 }

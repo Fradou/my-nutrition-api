@@ -24,6 +24,11 @@ import com.fradou.nutrition.security.api.CustomAccessDeniedHandler;
 @EnableWebSecurity
 public class SpringSecurityConfig {
 
+	/**
+	 * Security config and mangement for api part
+	 * @author AF
+	 *
+	 */
 	@Configuration
 	@Order(1)
 	public static class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -90,6 +95,11 @@ public class SpringSecurityConfig {
 		}
 	}
 
+	/**
+	 * Security config and management for website part
+	 * @author AF
+	 *
+	 */
 	@Configuration
 	@Order(2)
 	public static class AppSecurityConfig extends WebSecurityConfigurerAdapter {
