@@ -1,5 +1,7 @@
 package com.fradou.nutrition.mvc.controller.api;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ public class ExceptionHandlerApiController {
 	
 	/**
 	 * When sent data for an entity creation aren't correct
+	 * 
 	 * @param ex
 	 * @return
 	 */
@@ -36,6 +39,7 @@ public class ExceptionHandlerApiController {
 	}
 	
 	/**
+	 * Data format error, typical case will be malformed json
 	 * 
 	 * @param ex
 	 * @return
@@ -43,23 +47,27 @@ public class ExceptionHandlerApiController {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	public ApiErrorMessage cannotReadHttpMessageException(HttpMessageNotReadableException ex) {
-		return new ApiErrorMessage(HttpStatus.BAD_REQUEST.value(), "Data error");
+		return new ApiErrorMessage(HttpStatus.BAD_REQUEST.value(), "Data format error");
 	}
 	
 	/**
-	 * Ugly catch all for all missed exception. Will avoid uncatched 500 and allow better debugging 
+	 * Ugly catch all for all missed exception. Will avoid uncatched 500 and allow
+	 * better debugging
+	 * 
 	 * @param ex
 	 * @return
 	 */
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public ApiErrorMessage catchAllException(Exception ex) {
-		LOGGER.error("Exception not managed : " + ex.getMessage(), ex);
-		return new ApiErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unknown error has occured. Check sent datas and retry.");
+		UUID errorRef = UUID.randomUUID();
+		LOGGER.error("Exception not managed - ref : " + errorRef + " - error : " + ex.getMessage(), ex);
+		return new ApiErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An error has occured. Check sent datas and retry. - ref: " + errorRef);
 	}
 	
 	/**
 	 * User attempt operation on an entity that doesn't belong to him
+	 * 
 	 * @param ex
 	 * @return
 	 */
@@ -70,7 +78,7 @@ public class ExceptionHandlerApiController {
 	}
 	
 	/**
-	 * 
+	 * Display json response for Spring Security AccessDenied
 	 * @param ex
 	 * @return
 	 */
