@@ -17,13 +17,27 @@ public class NotBelongingToUserException extends RuntimeException {
 		super(getErrorMessage(clazz, method));
 	}
 	
+	public NotBelongingToUserException() {
+		super(getErrorMessage(null, null));
+	}
+	
 	private static String getErrorMessage(Class<? extends GenericEntity> clazz, HttpMethod method) {
 		
 		if(method == HttpMethod.GET) {
-			return "You don't have authorization to access this resource (" + clazz.getSimpleName() + ")";
+			if(clazz != null) {
+				return "You don't have authorization to access this resource (" + clazz.getSimpleName() + ")";
+			}
+			else {
+				return "You don't have authorization to access this resource.";
+			}
 		}
 		else {
-			return "You're not allowed to do any operation on this resource (" + clazz.getSimpleName() + ")";
+			if(method != null && clazz != null) {
+				return "You're not allowed to do this operation (" + method.toString() + ") on this resource (" + clazz.getSimpleName() + ")";
+			}
+			else {
+				return "You don't have the required authorization for this operation.";
+			}
 		}
 	}
 }

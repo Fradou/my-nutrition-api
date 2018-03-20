@@ -2,8 +2,11 @@ package com.fradou.nutrition.mvc.controller.api.generic;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -18,12 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fradou.nutrition.mvc.controller.api.ExceptionHandlerApiController;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.service.UserService;
 import com.fradou.nutrition.mvc.service.generic.GenericService;
 import com.fradou.nutrition.mvc.utils.exception.InvalidDataCreationException;
 import com.fradou.nutrition.mvc.utils.exception.NotBelongingToUserException;
+import com.fradou.nutrition.mvc.utils.user.PrimaryRole;
 
 /**
  * Generic controller that will be extend by all Controller managing
@@ -35,6 +40,8 @@ import com.fradou.nutrition.mvc.utils.exception.NotBelongingToUserException;
 @RestController
 public abstract class GenericApiController<T extends GenericEntity> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(GenericApiController.class);
+	
 	@Autowired
 	protected GenericService<T> service;
 	
@@ -124,15 +131,31 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	/**
 	 * Delete method for a specific entry
 	 * @param id
+	 * @throws Exception 
 	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable("id") int id, Authentication authenticate) {
+	public void delete(@PathVariable("id") int id, Authentication authenticate, HttpServletRequest request) throws Exception {
 		
-		CustomUser user = getCurrentUser(authenticate);
-		service.find(id, user.getId());
 		
-		service.deleteById(id);
+		if(userDependant) {
+			int user_id = getCurrentUser(authenticate).getId();
+			T entity = service.find(id);
+			if(service.belongToUser(entity, user_id)) {
+				service.delete(entity);
+			}
+			else {
+				throw new NotBelongingToUserException(entity.getClass(), HttpMethod.DELETE);
+			}
+		}
+		else {
+			if(request.isUserInRole(PrimaryRole.ROLE_ADMIN.toString())) {
+				service.deleteById(id);
+			}
+			else { 
+				throw new NotBelongingToUserException();
+			}
+		}
 	}
 	
 	/**

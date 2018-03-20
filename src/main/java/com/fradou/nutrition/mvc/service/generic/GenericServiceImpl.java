@@ -77,10 +77,6 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 	public List<T> find(Integer user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph) {
 		return dao.find(user_id, orderBy, sortBy, offset, entries, entityGraph);
 	}
-
-	public T find(int id, int user_id) {
-		return dao.find(id);
-	}
 	
 	@Override
 	public T find(int id, String entityGraph) {
