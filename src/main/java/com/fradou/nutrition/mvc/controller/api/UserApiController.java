@@ -1,5 +1,6 @@
 package com.fradou.nutrition.mvc.controller.api;
 
+import com.fradou.nutrition.mvc.controller.api.generic.GenericApiController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

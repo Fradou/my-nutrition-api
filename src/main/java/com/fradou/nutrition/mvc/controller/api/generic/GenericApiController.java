@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.controller.api;
+package com.fradou.nutrition.mvc.controller.api.generic;
 
 import java.util.List;
 

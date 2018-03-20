@@ -1,5 +1,6 @@
 package com.fradou.nutrition.mvc.controller.api;
 
+import com.fradou.nutrition.mvc.controller.api.generic.GenericApiController;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PathVariable;

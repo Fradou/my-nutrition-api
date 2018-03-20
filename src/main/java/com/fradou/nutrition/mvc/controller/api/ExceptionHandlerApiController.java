@@ -20,9 +20,9 @@ import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
  * @author AF
  */
 @RestControllerAdvice("com.fradou.nutrition.mvc.controller")
-public class ApiControllerExceptionHandler {
+public class ExceptionHandlerApiController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ApiControllerExceptionHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerApiController.class);
 	
 	/**
 	 * When sent data for an entity creation aren't correct
