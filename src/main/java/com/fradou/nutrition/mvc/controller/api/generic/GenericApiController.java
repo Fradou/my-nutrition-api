@@ -53,10 +53,17 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	
 	/**
 	 * Abstract method to set the default entityGraph to retrieve entities.
+	 * 
 	 * @return
 	 */
 	protected abstract String setDefaultEntityGraph();
 	
+	/**
+	 * Abstract method to set dependency between controller's entity and users
+	 * (change much of the verification logic)
+	 * 
+	 * @return
+	 */
 	protected abstract boolean setUserDependance();
 	
 	/**

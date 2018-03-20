@@ -19,6 +19,11 @@ import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.PantryItemSerializer;
 
+/**
+ * Nutrition entity that will be used for PantryManagement
+ * @author AF
+ *
+ */
 @Entity
 @Table(name="pantry_item")
 @JsonSerialize(using = PantryItemSerializer.class)

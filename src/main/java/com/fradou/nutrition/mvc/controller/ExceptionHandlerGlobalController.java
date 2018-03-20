@@ -14,6 +14,13 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
 
+/**
+ * Controller to manage global exception or specific exception that can't be
+ * handle by "local" controller advice (ie : 404 for api part)
+ * 
+ * @author AF
+ *
+ */
 @ControllerAdvice
 public class ExceptionHandlerGlobalController {
 
@@ -21,6 +28,16 @@ public class ExceptionHandlerGlobalController {
 	
 	private static Matcher matcher;
 	
+	/**
+	 * Method for 404 management. Return 404 as json when it is encountered for an
+	 * api url, else "standard website" 404.
+	 * 
+	 * @param ex
+	 *            Specific Spring exception for 404
+	 * @param model
+	 *            Spring data model
+	 * @return ModelAndView for view or json generation
+	 */
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(NoHandlerFoundException.class)
 	public ModelAndView noHandlerFoundException(NoHandlerFoundException ex, Model model) {

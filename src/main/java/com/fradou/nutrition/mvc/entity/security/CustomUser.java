@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -32,7 +33,9 @@ import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 
 /**
- * Custom user entity, include all Spring security requirement and custom attributes.
+ * Custom user entity, include all Spring security requirement and custom
+ * attributes.
+ * 
  * @author AF
  *
  */
@@ -54,6 +57,7 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(nullable=false, unique=true, length=50)
+	@NotNull
 	private String username;
 	
 	@Column(nullable=false)
@@ -66,6 +70,7 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	
 	@Column(nullable=false, unique=true)
 	@Pattern(regexp="^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", message="Pas un format mail ça", flags=Pattern.Flag.CASE_INSENSITIVE)
+	@NotNull
 	private String email;
 	
 	private String firstName;

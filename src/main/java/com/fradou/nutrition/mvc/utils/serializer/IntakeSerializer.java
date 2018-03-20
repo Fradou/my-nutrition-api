@@ -10,6 +10,7 @@ import com.fradou.nutrition.mvc.utils.serializer.generic.ApiGenericSerializer;
 
 /**
  * Custom jackson serializer for Intake entity
+ * 
  * @author AF
  *
  */

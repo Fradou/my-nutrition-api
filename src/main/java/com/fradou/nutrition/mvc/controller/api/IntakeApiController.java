@@ -8,6 +8,7 @@ import com.fradou.nutrition.mvc.entity.work.Intake;
 
 /**
  * Controller in charge of Intake calls (nutrition entity)
+ * 
  * @author AF
  */
 @RequestMapping("/api/intake")

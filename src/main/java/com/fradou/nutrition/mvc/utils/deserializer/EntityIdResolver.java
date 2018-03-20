@@ -8,6 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fasterxml.jackson.annotation.ObjectIdGenerator.IdKey;
 import com.fasterxml.jackson.annotation.ObjectIdResolver;
 
+/**
+ * Utils used to deserialize entity's relation with id as referential.
+ * 
+ * @author AF
+ *
+ */
 @Component
 @Transactional
 public class EntityIdResolver implements ObjectIdResolver {

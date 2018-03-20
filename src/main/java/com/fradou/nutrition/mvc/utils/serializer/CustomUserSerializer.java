@@ -7,6 +7,12 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.utils.serializer.generic.ApiGenericSerializer;
 
+/**
+ * Custom jackson serializer for User entity
+ * 
+ * @author AF
+ *
+ */
 public class CustomUserSerializer extends ApiGenericSerializer<CustomUser> {
 
 	private static final long serialVersionUID = 1L;

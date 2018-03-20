@@ -2,6 +2,7 @@ package com.fradou.nutrition.mvc.utils.user;
 
 /**
  * Primary role for users.
+ * 
  * @author AF
  *
  */

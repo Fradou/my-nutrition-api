@@ -13,10 +13,13 @@ import com.fradou.nutrition.mvc.utils.exception.ResourceNotFoundException;
 
 /**
  * Generic implementation for all app's services
+ * 
  * @author AF
  *
  * @param <T>
+ *            Entity managed by service
  * @param <D>
+ *            Entity's DAO
  */
 @Component
 @Transactional

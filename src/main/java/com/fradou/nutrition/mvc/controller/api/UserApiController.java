@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 
+/**
+ * 
+ * @author AF
+ *
+ */
 @RestController
 @RequestMapping("/api/user")
 public class UserApiController extends GenericApiController<CustomUser> {

@@ -5,7 +5,9 @@ import org.springframework.http.HttpMethod;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 
 /**
- * Custom exception for all calls on an entity that doesn't "belong" to calling user.
+ * Custom exception for all calls on an entity that doesn't "belong" to calling
+ * user.
+ * 
  * @author AF
  *
  */

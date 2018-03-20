@@ -9,6 +9,7 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
 
 /**
  * Service for PantryItem (Nutrition)
+ * 
  * @author AF
  *
  */

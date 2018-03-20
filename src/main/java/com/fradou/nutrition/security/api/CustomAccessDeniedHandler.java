@@ -18,6 +18,12 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fradou.nutrition.mvc.utils.work.ApiErrorMessage;
 
+/**
+ * Custom access denied handlter to return json response for api's url
+ * 
+ * @author AF
+ *
+ */
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 

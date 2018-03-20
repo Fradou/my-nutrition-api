@@ -1,7 +1,8 @@
 package com.fradou.nutrition.mvc.utils.work;
 
 /**
- * Utils class used to generate error message content.
+ * Utils class used to generate api error message.
+ * 
  * @author AF
  *
  */

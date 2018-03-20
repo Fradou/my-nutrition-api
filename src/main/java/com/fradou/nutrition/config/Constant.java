@@ -1,5 +1,11 @@
 package com.fradou.nutrition.config;
 
+/**
+ * App and domain constants.
+ * 
+ * @author AF
+ *
+ */
 public class Constant {
 
 	// App constants

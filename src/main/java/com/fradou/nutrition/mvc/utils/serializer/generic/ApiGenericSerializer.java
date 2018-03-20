@@ -7,6 +7,13 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.utils.hateoas.RelationType;
 
+/**
+ * Generic for entities' serialiers
+ * 
+ * @author AF
+ *
+ * @param <T>
+ */
 public abstract class ApiGenericSerializer<T extends GenericEntity> extends StdSerializer<T> {
 
 	private static final long serialVersionUID = 1L;
