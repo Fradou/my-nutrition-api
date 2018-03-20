@@ -10,13 +10,22 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 
 @Entity
 @Table(name="meal_detail")
 @NamedEntityGraph(
 		name="graph.MealDetailFood",
 		attributeNodes = @NamedAttributeNode(value="food")
+)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        resolver = EntityIdResolver.class,
+        scope=MealDetail.class
 )
 public class MealDetail extends GenericEntity {
 

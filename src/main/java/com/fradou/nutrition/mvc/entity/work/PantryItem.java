@@ -11,9 +11,12 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.PantryItemSerializer;
 
 @Entity
@@ -22,6 +25,12 @@ import com.fradou.nutrition.mvc.utils.serializer.PantryItemSerializer;
 @NamedEntityGraph(
 		name="graph.PantryItemFood",
 		attributeNodes = @NamedAttributeNode(value="food")
+)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        resolver = EntityIdResolver.class,
+        scope=PantryItem.class
 )
 public class PantryItem extends GenericEntity {		
 	

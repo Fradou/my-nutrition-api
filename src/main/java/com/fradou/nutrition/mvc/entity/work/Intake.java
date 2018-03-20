@@ -19,9 +19,12 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
+import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.IntakeSerializer;
 import com.fradou.nutrition.mvc.utils.work.MealType;
 
@@ -37,6 +40,12 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
 @NamedEntityGraph(
 		name="graph.IntakeMeal",
 		attributeNodes = @NamedAttributeNode(value="meals")
+)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        resolver = EntityIdResolver.class,
+        scope=Intake.class
 )
 public class Intake extends GenericEntity {
 	

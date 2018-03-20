@@ -21,15 +21,18 @@ import javax.validation.constraints.Pattern;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.work.Intake;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
+import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 
 /**
- * Custom user entity, include all Spring seucirity requirement and custom attributes.
+ * Custom user entity, include all Spring security requirement and custom attributes.
  * @author AF
  *
  */
@@ -40,6 +43,12 @@ import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 		}
 )
 @JsonSerialize(using = CustomUserSerializer.class)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        resolver = EntityIdResolver.class,
+        scope=CustomUser.class
+)
 public class CustomUser extends GenericEntity implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

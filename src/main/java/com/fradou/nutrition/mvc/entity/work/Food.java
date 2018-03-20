@@ -13,8 +13,11 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.FoodSerializer;
 
 /**
@@ -26,6 +29,12 @@ import com.fradou.nutrition.mvc.utils.serializer.FoodSerializer;
 @Component
 @Table(name="food")
 @JsonSerialize(using = FoodSerializer.class)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        resolver = EntityIdResolver.class,
+        scope=Food.class
+)
 public class Food extends GenericEntity {
 	
 	private static final long serialVersionUID = 1L;
