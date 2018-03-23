@@ -13,10 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,10 +82,10 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @param delta
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public List<T> findAll(
-			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value = "results", defaultValue = "20", required = false) int results,
+			@RequestParam(defaultValue = "1", required = false) int page,
+			@RequestParam(defaultValue = "20", required = false) int results,
 			Authentication authenticate) {
 		
 		Integer userId = null;
@@ -101,8 +103,8 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public T findById(@PathVariable(value="id") int id, Authentication authenticate) {
+	@GetMapping("{id}")
+	public T findById(@PathVariable int id, Authentication authenticate) {
 		
 		T entity = service.find(id, defaultEntityGraph);
 		
@@ -121,7 +123,7 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @param validationResult
 	 * @return id new entry's id
 	 */
-	@RequestMapping(method=RequestMethod.POST)
+	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Integer create(@Valid @RequestBody T newEntity,BindingResult validationResult, Authentication authenticate, HttpServletRequest request) {
 		
@@ -156,9 +158,9 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @param id
 	 * @throws Exception 
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable("id") int id, Authentication authenticate, HttpServletRequest request) throws Exception {
+	public void delete(@PathVariable int id, Authentication authenticate, HttpServletRequest request) throws Exception {
 		
 		
 		if(isUserDependant) {
@@ -187,9 +189,9 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @param entityUpdated
 	 * @param validationResult
 	 */
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable("id") int id, @Valid @RequestBody T entityUpdated, BindingResult validationResult) {
+	public void update(@PathVariable int id, @Valid @RequestBody T entityUpdated, BindingResult validationResult) {
 		
 		service.find(entityUpdated.getId());
 	}
