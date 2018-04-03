@@ -32,6 +32,9 @@ import com.fradou.nutrition.mvc.entity.work.PantryItem;
 import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Custom user entity, include all Spring security requirement and custom
  * attributes.
@@ -45,6 +48,7 @@ import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 				@Index(name= "ix_email", columnList="email", unique = true)
 		}
 )
+@Setter @Getter
 @JsonSerialize(using = CustomUserSerializer.class)
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -109,27 +113,6 @@ public class CustomUser extends GenericEntity implements UserDetails {
     
     @JsonIgnore
     private Set<Role> roles = new HashSet<Role>();
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 	
 	// Methods imposed by Spring Security
 	
@@ -171,70 +154,6 @@ public class CustomUser extends GenericEntity implements UserDetails {
 	public boolean isEnabled() {
 		return enabled;
 	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public Double getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Double weight) {
-		this.weight = weight;
-	}
-
-	public Integer getHeight() {
-		return height;
-	}
-
-	public void setHeight(Integer height) {
-		this.height = height;
-	}
-
-	public Integer getBmr() {
-		return bmr;
-	}
-
-	public void setBmr(Integer bmr) {
-		this.bmr = bmr;
-	}
-
-	public Integer getTdee() {
-		return tdee;
-	}
-
-	public void setTdee(Integer tdee) {
-		this.tdee = tdee;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
 	
 	public void addRole(Role role) {
 		this.roles.add(role);
@@ -244,34 +163,18 @@ public class CustomUser extends GenericEntity implements UserDetails {
 		this.roles.remove(role);
 		role.getUsers().remove(this);
 	}
-	
-	public String toString() {
-		return "CustomerUser : [id=" + id + ", username=" + username + ", height="+height+", age=" + age;
-	}
 
 	@Override
 	protected String initializeEntityPath() {
 		return "/user";
 	}
-
-	public List<Intake> getIntakes() {
-		return intakes;
-	}
-
-	public void setIntakes(List<Intake> intakes) {
-		this.intakes = intakes;
-	}
-
-	public List<PantryItem> getPantryItems() {
-		return pantryItems;
-	}
-
-	public void setPantryItems(List<PantryItem> pantryItems) {
-		this.pantryItems = pantryItems;
-	}
 	
 	@Override
 	public boolean isUserRelated() {
 		return true;
+	}
+	
+	public String toString() {
+		return "CustomerUser : [id=" + id + ", username=" + username + ", height="+height+", age=" + age;
 	}
 }

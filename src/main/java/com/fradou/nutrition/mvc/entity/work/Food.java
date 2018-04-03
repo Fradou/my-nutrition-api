@@ -6,7 +6,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -20,6 +19,9 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.FoodSerializer;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Entity for food
  * 
@@ -27,7 +29,7 @@ import com.fradou.nutrition.mvc.utils.serializer.FoodSerializer;
  */
 @Entity
 @Component
-@Table(name="food")
+@Setter @Getter
 @JsonSerialize(using = FoodSerializer.class)
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -69,46 +71,6 @@ public class Food extends GenericEntity {
 	@Override
 	protected String initializeEntityPath() {
 		return "/api/food";
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public double getProtein() {
-		return protein;
-	}
-
-	public void setProtein(double protein) {
-		this.protein = protein;
-	}
-
-	public double getCarbohydrate() {
-		return carbohydrate;
-	}
-
-	public void setCarbohydrate(double carbohydrate) {
-		this.carbohydrate = carbohydrate;
-	}
-
-	public double getFat() {
-		return fat;
-	}
-
-	public void setFat(double fat) {
-		this.fat = fat;
-	}
-
-	public double getCalorie() {
-		return calorie;
-	}
-
-	public void setCalorie(double calorie) {
-		this.calorie = calorie;
 	}
 
 	@Override

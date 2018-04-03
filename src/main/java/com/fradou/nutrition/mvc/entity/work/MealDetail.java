@@ -15,8 +15,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name="meal_detail")
+@Setter @Getter
 @NamedEntityGraph(
 		name="graph.MealDetailFood",
 		attributeNodes = @NamedAttributeNode(value="food")
@@ -42,25 +46,6 @@ public class MealDetail extends GenericEntity {
 	@Min(0)
 	@NotNull
 	private int quantity;
-	
-	public Meal getMeal() {
-		return meal;
-	}
-	public void setMeal(Meal meal) {
-		this.meal = meal;
-	}
-	public Food getFood() {
-		return food;
-	}
-	public void setFood(Food food) {
-		this.food = food;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
 	
 	@Override
 	protected String initializeEntityPath() {

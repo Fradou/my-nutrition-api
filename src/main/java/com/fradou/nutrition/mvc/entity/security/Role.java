@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import org.springframework.security.core.GrantedAuthority;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Roles / Authorities for Spring Security and user control.
@@ -19,6 +21,7 @@ import org.springframework.security.core.GrantedAuthority;
  *
  */
 @Entity
+@Setter @Getter
 public class Role implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
@@ -37,26 +40,6 @@ public class Role implements GrantedAuthority {
 	@Override
 	public String getAuthority() {
 		return authority;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
-
-	public Set<CustomUser> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<CustomUser> users) {
-		this.users = users;
 	}
 	
 	public void addUser(CustomUser user) {

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
@@ -24,6 +23,9 @@ import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.MealSerializer;
 import com.fradou.nutrition.mvc.utils.work.MealType;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Entity for meals (include food, included in intake)
  * 
@@ -31,7 +33,7 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
  */
 @Entity
 @Component
-@Table(name="meal")
+@Setter @Getter
 @JsonSerialize(using = MealSerializer.class)
 @NamedEntityGraph(
 		name="graph.MealMealDetail",
@@ -61,30 +63,6 @@ public class Meal extends GenericEntity {
 	@Override
 	protected String initializeEntityPath() {
 		return "/api/meal";
-	}
-
-	public MealType getMealType() {
-		return mealType;
-	}
-
-	public void setMealType(MealType mealType) {
-		this.mealType = mealType;
-	}
-
-	public Intake getIntake() {
-		return intake;
-	}
-
-	public void setIntake(Intake intake) {
-		this.intake = intake;
-	}
-
-	public Set<MealDetail> getMealDetails() {
-		return mealDetails;
-	}
-
-	public void setMealDetails(Set<MealDetail> mealDetails) {
-		this.mealDetails = mealDetails;
 	}
 
 	@Override

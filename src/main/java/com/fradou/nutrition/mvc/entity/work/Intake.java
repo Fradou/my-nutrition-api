@@ -13,7 +13,6 @@ import javax.persistence.MapKeyEnumerated;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +27,9 @@ import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.IntakeSerializer;
 import com.fradou.nutrition.mvc.utils.work.MealType;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Entity for daily intake.
  * 
@@ -35,7 +37,7 @@ import com.fradou.nutrition.mvc.utils.work.MealType;
  */
 @Entity
 @Component
-@Table(name="intake")
+@Setter @Getter
 @JsonSerialize(using = IntakeSerializer.class)
 @NamedEntityGraph(
 		name="graph.IntakeMeal",
@@ -81,62 +83,6 @@ public class Intake extends GenericEntity {
 	@Override
 	protected String initializeEntityPath() {
 		return "/api/intake";
-	}
-
-	public CustomUser getUser() {
-		return user;
-	}
-
-	public void setUser(CustomUser user) {
-		this.user = user;
-	}
-
-	public LocalDate getIntakeDate() {
-		return intakeDate;
-	}
-
-	public void setIntakeDate(LocalDate intakeDate) {
-		this.intakeDate = intakeDate;
-	}
-	
-	public double getProtein() {
-		return protein;
-	}
-
-	public void setProtein(double protein) {
-		this.protein = protein;
-	}
-
-	public double getCarbohydrate() {
-		return carbohydrate;
-	}
-
-	public void setCarbohydrate(double carbohydrate) {
-		this.carbohydrate = carbohydrate;
-	}
-
-	public double getFat() {
-		return fat;
-	}
-
-	public void setFat(double fat) {
-		this.fat = fat;
-	}
-
-	public double getCalorie() {
-		return calorie;
-	}
-
-	public void setCalorie(double calorie) {
-		this.calorie = calorie;
-	}
-
-	public Map<MealType, Meal> getMeals() {
-		return meals;
-	}
-
-	public void setMeals(Map<MealType, Meal> meals) {
-		this.meals = meals;
 	}
 
 	@Override
