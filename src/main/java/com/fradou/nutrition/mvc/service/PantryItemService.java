@@ -1,5 +1,8 @@
 package com.fradou.nutrition.mvc.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,4 +29,8 @@ public class PantryItemService extends GenericServiceImpl<PantryItem, PantryItem
 		
 		return false;
 	}
+/**
+	public List<PantryItem> getNearlyExpiredItem(int userId, LocalDate referenceDate){
+		
+	}**/
 }

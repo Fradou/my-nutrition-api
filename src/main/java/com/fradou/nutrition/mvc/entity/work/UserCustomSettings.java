@@ -13,6 +13,9 @@ import lombok.Setter;
 public class UserCustomSettings {
 
 	public boolean remindersAllowed;
+	
+	public boolean autoDeleteAfterExpiration;
+	
 	public Integer pantryDelayReminder;
 	
 }
