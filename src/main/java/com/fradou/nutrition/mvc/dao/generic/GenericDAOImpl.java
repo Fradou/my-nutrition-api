@@ -98,9 +98,7 @@ public abstract class GenericDAOImpl<T extends GenericEntity> implements Generic
 	
 	@Override
 	public List<T> findAllBy(String fieldName, Object value) {
-		
-		System.out.println("typage : " + clazz.getSimpleName());
-		
+				
 		CriteriaBuilder cb = getSession().getCriteriaBuilder();
 		CriteriaQuery<T> q = cb.createQuery(clazz);
 		Root<T> root = q.from(clazz);
