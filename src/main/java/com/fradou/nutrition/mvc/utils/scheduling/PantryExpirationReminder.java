@@ -10,9 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.fradou.nutrition.config.Constant;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
-import com.fradou.nutrition.mvc.service.EmailService;
+import com.fradou.nutrition.mvc.service.EmailServiceImpl;
 import com.fradou.nutrition.mvc.service.PantryItemService;
 import com.fradou.nutrition.mvc.service.UserService;
 
@@ -28,17 +29,17 @@ public class PantryExpirationReminder {
 	UserService uService;
 	
 	@Autowired
-	EmailService mService;
+    EmailServiceImpl mService;
 	
 	@Scheduled(cron = "1 * * * * *")
 	public void pantryExpirationCheck() {
 		
-		LOGGER.error("========== Cron =>> Start ==========");		
+		LOGGER.info("========== Cron =>> Start ==========");		
 		// Get user list allowing reminder and get their settings
 		
 		List<CustomUser> users = uService.findAllBy("reminders", true);
 		LocalDate today = LocalDate.now();
-		System.out.println("Ai trouvé " + users.size() + " utilisateurs qui veulent des reminders.");
+		LOGGER.info("Ai trouvé " + users.size() + " utilisateurs qui veulent des reminders.");
 		
 		for(CustomUser user : users) {
 			
@@ -46,18 +47,18 @@ public class PantryExpirationReminder {
 			int userDelayReminder = user.getPantryDelayReminder();
 			LocalDate reminderDate = today.plusDays(userDelayReminder);
 			
-			System.out.println("Search userId:" + userId + " - peremption :" + reminderDate);
+			LOGGER.info("Search userId:" + userId + " - peremption :" + reminderDate);
 			List<PantryItem> pantryItems = pService.getNearlyExpiredItem(reminderDate, userId);
-			System.out.println(pantryItems.size() + " résults found.");
+			LOGGER.info(pantryItems.size() + " résults found.");
 			if(pantryItems.size() > 0) {
 				String concatItems = pantryItems.stream().map(
 						pi -> pi.getFood().getName() + " : " + pi.getExpirationDate().toString()).collect(Collectors.joining(", ")
 				);
-				System.out.println(concatItems);
-				mService.sendSimpleMessage(user.getEmail(), "Attention ca perime", concatItems);
+				LOGGER.info(concatItems);
+				mService.sendSimpleMessage(user.getEmail(), Constant.EMAIL_PANTRY_PEREMPTION_REMINDER, concatItems);
 			}
 		}
 		
-		LOGGER.error("========== Cron =>> Finish ==========");
+		LOGGER.info("========== Cron =>> Finish ==========");
 	}
 }

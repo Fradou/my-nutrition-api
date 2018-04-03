@@ -18,4 +18,7 @@ public class Constant {
 	public static int CALORIES_PROTEINE = 4;
 	public static int CALORIES_CARB = 4;
 	public static int CALORIES_ALCOHOL = 7;
+	
+	// Email subjects
+	public static String EMAIL_PANTRY_PEREMPTION_REMINDER = "Attention, nourriture à risque !";
 }
