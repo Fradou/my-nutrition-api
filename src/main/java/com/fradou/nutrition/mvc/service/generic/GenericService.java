@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+
 /**
  * Generic interface for all app's services
  * @author AF
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @param <T>
  */
 @Component
-public interface GenericService<T> {
+public interface GenericService<T extends GenericEntity> {
 
 	public int create(T entity);
 	
@@ -34,5 +36,7 @@ public interface GenericService<T> {
 	public List<T> find(Integer user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph);
 	
 	public boolean belongToUser(T entity, int user_id);
+	
+	public List<T> findAllBy(String fieldName, Object value);
 
 }

@@ -29,8 +29,8 @@ public class PantryItemService extends GenericServiceImpl<PantryItem, PantryItem
 		
 		return false;
 	}
-/**
-	public List<PantryItem> getNearlyExpiredItem(int userId, LocalDate referenceDate){
-		
-	}**/
+
+	public List<PantryItem> getNearlyExpiredItem(LocalDate referenceDate, Integer userId){
+		return dao.getByExpiration(referenceDate, userId);
+	}
 }

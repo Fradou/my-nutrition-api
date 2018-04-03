@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +24,7 @@ import lombok.Setter;
  */
 @Entity
 @Setter @Getter
-public class Role implements GrantedAuthority {
+public class Role extends GenericEntity implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,5 +52,15 @@ public class Role implements GrantedAuthority {
 	public void removeUser(CustomUser user) {
 		this.users.remove(user);
 		user.getRoles().remove(this);
+	}
+
+	@Override
+	public boolean isUserRelated() {
+		return true;
+	}
+
+	@Override
+	protected String initializeEntityPath() {
+		return "/api/role";
 	}
 }

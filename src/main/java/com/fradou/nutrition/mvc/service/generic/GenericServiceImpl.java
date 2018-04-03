@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fradou.nutrition.mvc.dao.generic.GenericDAOImpl;
+import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.utils.exception.ResourceNotFoundException;
 
 /**
@@ -23,7 +24,7 @@ import com.fradou.nutrition.mvc.utils.exception.ResourceNotFoundException;
  */
 @Component
 @Transactional
-public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> implements GenericService<T> {
+public abstract class GenericServiceImpl<T extends GenericEntity, D extends GenericDAOImpl<T>> implements GenericService<T> {
 
 	@Autowired
 	protected D dao;
@@ -84,6 +85,10 @@ public abstract class GenericServiceImpl<T, D extends GenericDAOImpl<T>> impleme
 	@Override
 	public T find(int id, String entityGraph) {
 		return dao.find(id, entityGraph);
+	}
+	
+	public List<T> findAllBy(String fieldName, Object value){
+		return dao.findAllBy(fieldName, value);
 	}
 }
 

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fradou.nutrition.config.Constant;
+import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 
 /**
  * Generic abstract DAO that will be extended by all DAO
@@ -26,7 +27,7 @@ import com.fradou.nutrition.config.Constant;
  * @param <T>
  */
 @Repository
-public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
+public abstract class GenericDAOImpl<T extends GenericEntity> implements GenericDAO<T> {
 
 	private Class<T> clazz;
 	
@@ -77,7 +78,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	@Override
 	public int count() {
-		Query<T> query = getSession().createQuery("SELECT COUNT(*) FROM " + clazz.getName());
+		Query query = getSession().createQuery("SELECT COUNT(*) FROM " + clazz.getName());
 		return (int) query.getSingleResult();
 	}
 
@@ -91,6 +92,22 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 	public List<T> find(Integer user_id, String orderBy, String sortBy, Integer offset, Integer entries, String entityGraph) {
 		
 		TypedQuery<T> query = getCriteria(user_id, orderBy, sortBy, offset, entries, entityGraph);
+		
+		return query.getResultList();
+	}
+	
+	@Override
+	public List<T> findAllBy(String fieldName, Object value) {
+		
+		System.out.println("typage : " + clazz.getSimpleName());
+		
+		CriteriaBuilder cb = getSession().getCriteriaBuilder();
+		CriteriaQuery<T> q = cb.createQuery(clazz);
+		Root<T> root = q.from(clazz);
+		q.select(root);
+		q.where(cb.equal(root.get(fieldName), value));
+		
+		TypedQuery<T> query = getSession().createQuery(q);
 		
 		return query.getResultList();
 	}

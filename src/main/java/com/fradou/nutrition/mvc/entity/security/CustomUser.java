@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
@@ -30,7 +29,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.work.Intake;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
-import com.fradou.nutrition.mvc.entity.work.UserCustomSettings;
 import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.CustomUserSerializer;
 
@@ -116,8 +114,11 @@ public class CustomUser extends GenericEntity implements UserDetails {
     @JsonIgnore
     private Set<Role> roles = new HashSet<Role>();
     
-    @Embedded
-    private UserCustomSettings customSettings;
+	public boolean reminders;
+	
+	public boolean autoDeleteAfterExpiration;
+	
+	public Integer pantryDelayReminder;
 	
 	// Methods imposed by Spring Security
 	

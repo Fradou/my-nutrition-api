@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
+
 /**
  * Generic DAO interface that will be implemented by all DAO
  * 
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @param <T>
  */
 @Component
-public interface GenericDAO<T> {
+public interface GenericDAO<T extends GenericEntity> {
 	
 	public int create(T entity);
 	
@@ -31,4 +33,5 @@ public interface GenericDAO<T> {
 		
 	public List<T> find(Integer user_id, String orderBy, String sortBy, Integer offset, Integer entries,String entityGraph);
 	
+	public List<T> findAllBy(String fieldName, Object value);
 }
