@@ -134,7 +134,6 @@ public abstract class GenericApiController<T extends GenericEntity> {
 		if(isUserDependant) {
 			int user_id = getCurrentUser(authenticate).getId();
 			if(! service.belongToUser(newEntity, user_id)){
-				// TODO custom exception
 				throw new NotBelongingToUserException(newEntity.getClass(), HttpMethod.POST);
 			}
 			else {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
+import com.fradou.nutrition.mvc.service.EmailService;
 import com.fradou.nutrition.mvc.service.PantryItemService;
 import com.fradou.nutrition.mvc.service.UserService;
 
@@ -25,6 +26,9 @@ public class PantryExpirationReminder {
 	
 	@Autowired
 	UserService uService;
+	
+	@Autowired
+	EmailService mService;
 	
 	@Scheduled(cron = "1 * * * * *")
 	public void pantryExpirationCheck() {
@@ -42,20 +46,18 @@ public class PantryExpirationReminder {
 			int userDelayReminder = user.getPantryDelayReminder();
 			LocalDate reminderDate = today.plusDays(userDelayReminder);
 			
-			System.out.println("Search pour userId:" + userId + " des elements se périssant le " + reminderDate);
+			System.out.println("Search userId:" + userId + " - peremption :" + reminderDate);
 			List<PantryItem> pantryItems = pService.getNearlyExpiredItem(reminderDate, userId);
-			System.out.println("Ai trouvé " + pantryItems.size() + " résultats.");
+			System.out.println(pantryItems.size() + " résults found.");
 			if(pantryItems.size() > 0) {
 				String concatItems = pantryItems.stream().map(
-						pi -> pi.getFood().getName() + " : " + pi.getExpirationDate().toString()).collect(Collectors.joining(",")
+						pi -> pi.getFood().getName() + " : " + pi.getExpirationDate().toString()).collect(Collectors.joining(", ")
 				);
 				System.out.println(concatItems);
+				mService.sendSimpleMessage(user.getEmail(), "Attention ca perime", concatItems);
 			}
 		}
 		
-		// Send email
-		
-		// Option recipe
 		LOGGER.error("========== Cron =>> Finish ==========");
 	}
 }

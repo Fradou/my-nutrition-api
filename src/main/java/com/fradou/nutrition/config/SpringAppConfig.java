@@ -2,13 +2,19 @@ package com.fradou.nutrition.config;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -34,38 +40,52 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @ComponentScan(basePackages="com.fradou.nutrition")
 @EnableScheduling
+@PropertySource("classpath:application.properties")
 public class SpringAppConfig implements WebMvcConfigurer {
 
+	@Autowired
+	private Environment env;
+	
+	/**
+	 * App static resources
+	 */
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 	
+	/**
+	 * 
+	 */
 	public void addInterceptors(InterceptorRegistry registry) {
 	    LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
 	    interceptor.setParamName("locale");
 	    registry.addInterceptor(interceptor);
 	}
 	
-	
-	
+	/**
+	 * 
+	 */
 	@Override
 	public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-		
-		
-		
 		WebMvcConfigurer.super.extendHandlerExceptionResolvers(resolvers);
 	}
 
+	/**
+	 * View resolver for jsp path
+	 * @return
+	 */
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		
 		viewResolver.setPrefix("/WEB-INF/view/");
 		viewResolver.setSuffix(".jsp");
-		
 		return viewResolver;
 	}
 	
+	/**
+	 * MessageSource for traduction file
+	 * @return
+	 */
 	@Bean
 	public MessageSource messageSource() {
 	    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
@@ -74,6 +94,10 @@ public class SpringAppConfig implements WebMvcConfigurer {
 	    return messageSource;
 	}
 	
+	/**
+	 * Local default parameters
+	 * @return
+	 */
 	@Bean
 	public LocaleResolver localeResolver(){
 	    CookieLocaleResolver resolver = new CookieLocaleResolver();
@@ -83,11 +107,38 @@ public class SpringAppConfig implements WebMvcConfigurer {
 	    return resolver;
 	}
 	
+	/**
+	 * Make objectMapper injection possible
+	 * @return
+	 */
 	@Bean
 	public ObjectMapper objectMapper() {
 	    ObjectMapper mapper = new ObjectMapper();
 
 	    return mapper;
+	}
+	
+	/**
+	 * Mail configuration
+	 * @return
+	 */
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost(env.getProperty("mail.server"));
+		mailSender.setPort(Integer.valueOf(env.getProperty("mail.port")));
+		
+		mailSender.setUsername(env.getProperty("mail.username"));
+		mailSender.setPassword(env.getProperty("mail.password"));
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
 	}
 
 }

@@ -2,8 +2,7 @@
 .classpath
 /target
 /.settings
-/src/main/webapp/WEB-INF/env.properties
 .idea/
 *.iml
-src/main/resources/db.properties
+*.properties
 *.log
