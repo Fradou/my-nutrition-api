@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.dao;
+package com.fradou.nutrition.mvc.dao.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,11 +13,12 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import com.fradou.nutrition.mvc.dao.PantryItemDAO;
 import com.fradou.nutrition.mvc.dao.generic.GenericDAOImpl;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
 
 @Repository
-public class PantryItemDAOImpl extends GenericDAOImpl<PantryItem> {
+public class PantryItemDAOImpl extends GenericDAOImpl<PantryItem> implements PantryItemDAO {
 
 	public PantryItemDAOImpl() {
 		setClazz(PantryItem.class);

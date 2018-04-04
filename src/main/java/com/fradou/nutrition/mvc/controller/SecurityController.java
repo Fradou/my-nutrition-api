@@ -14,17 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.entity.security.Role;
-import com.fradou.nutrition.mvc.service.RoleService;
-import com.fradou.nutrition.mvc.service.UserService;
+import com.fradou.nutrition.mvc.service.impl.RoleServiceImpl;
+import com.fradou.nutrition.mvc.service.impl.UserServiceImpl;
 
 @Controller
 public class SecurityController {
 	
 	@Autowired
-	private UserService uService;
+	private UserServiceImpl uService;
 	
 	@Autowired
-	private RoleService rService;
+	private RoleServiceImpl rService;
 
 	@GetMapping("/login")
 	public String login() {

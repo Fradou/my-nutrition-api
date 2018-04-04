@@ -11,7 +11,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fradou.nutrition.config.HibernateConfig;
-import com.fradou.nutrition.mvc.dao.IntakeDAOImpl;
+import com.fradou.nutrition.mvc.dao.impl.IntakeDAOImpl;
 import com.fradou.nutrition.mvc.entity.work.Intake;
 
 @RunWith(SpringJUnit4ClassRunner.class)

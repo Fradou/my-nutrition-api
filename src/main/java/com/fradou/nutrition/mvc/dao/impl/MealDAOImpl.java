@@ -1,4 +1,4 @@
-package com.fradou.nutrition.mvc.dao;
+package com.fradou.nutrition.mvc.dao.impl;
 
 import javax.persistence.EntityGraph;
 import javax.persistence.TypedQuery;
@@ -10,11 +10,12 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.fradou.nutrition.config.Constant;
+import com.fradou.nutrition.mvc.dao.MealDAO;
 import com.fradou.nutrition.mvc.dao.generic.GenericDAOImpl;
 import com.fradou.nutrition.mvc.entity.work.Meal;
 
 @Repository
-public class MealDAOImpl extends GenericDAOImpl<Meal> {
+public class MealDAOImpl extends GenericDAOImpl<Meal> implements MealDAO {
 
 	public MealDAOImpl() {
 		setClazz(Meal.class);

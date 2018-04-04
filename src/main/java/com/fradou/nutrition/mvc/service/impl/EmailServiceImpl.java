@@ -1,7 +1,8 @@
-package com.fradou.nutrition.mvc.service;
+package com.fradou.nutrition.mvc.service.impl;
 
 import java.io.File;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class EmailServiceImpl implements EmailServiceImpl {
+public class EmailServiceImpl {
 
     @Autowired
     public JavaMailSender emailSender;
@@ -52,8 +53,7 @@ public class EmailServiceImpl implements EmailServiceImpl {
         }
     }
     
-    @Override
-    public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
+    public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) throws MessagingException {
          
     	MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);

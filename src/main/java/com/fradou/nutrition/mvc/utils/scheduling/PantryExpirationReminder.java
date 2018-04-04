@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 import com.fradou.nutrition.config.Constant;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
-import com.fradou.nutrition.mvc.service.EmailServiceImpl;
-import com.fradou.nutrition.mvc.service.PantryItemService;
-import com.fradou.nutrition.mvc.service.UserService;
+import com.fradou.nutrition.mvc.service.impl.EmailServiceImpl;
+import com.fradou.nutrition.mvc.service.impl.PantryItemServiceImpl;
+import com.fradou.nutrition.mvc.service.impl.UserServiceImpl;
 
 @Component
 public class PantryExpirationReminder {
@@ -23,15 +23,15 @@ public class PantryExpirationReminder {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PantryExpirationReminder.class);
 	
 	@Autowired
-	PantryItemService pService;
+    PantryItemServiceImpl pService;
 	
 	@Autowired
-	UserService uService;
+	UserServiceImpl uService;
 	
 	@Autowired
-    EmailServiceImpl mService;
+	EmailServiceImpl mService;
 	
-	@Scheduled(cron = "1 * * * * *")
+	@Scheduled(cron = "0 0 5 * * *")
 	public void pantryExpirationCheck() {
 		
 		LOGGER.info("========== Cron =>> Start ==========");		
@@ -61,4 +61,23 @@ public class PantryExpirationReminder {
 		
 		LOGGER.info("========== Cron =>> Finish ==========");
 	}
+	
+	@Scheduled(cron = "1 * * * * *")
+	public void pantryExpiredDeletion() {
+
+		LOGGER.info("========== Cron =>> Start ==========");
+		
+		List<CustomUser> users = uService.findAllBy("autoDeleteAfterExpiration", true);
+		LocalDate today = LocalDate.now();
+		LOGGER.info("Ai trouvé " + users.size() + " utilisateurs qui veulent de la suppression auto.");
+		
+		for(CustomUser user : users) {
+			
+			int userId = user.getId();
+			
+		}
+		
+		LOGGER.info("========== Cron =>> Finish ==========");
+	}
+	
 }

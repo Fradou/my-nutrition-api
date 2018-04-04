@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
-import com.fradou.nutrition.mvc.service.UserService;
+import com.fradou.nutrition.mvc.service.impl.UserServiceImpl;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
-	private UserService uService;
+	private UserServiceImpl uService;
 
 	@GetMapping(value="/profile")
 	public String userProfile(Model model, Principal principal) {
