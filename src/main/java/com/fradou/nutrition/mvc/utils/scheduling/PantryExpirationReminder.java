@@ -72,9 +72,8 @@ public class PantryExpirationReminder {
 		LOGGER.info("Ai trouvé " + users.size() + " utilisateurs qui veulent de la suppression auto.");
 		
 		for(CustomUser user : users) {
-			
 			int userId = user.getId();
-			
+			pService.deleteExpiredItem(today, userId);		
 		}
 		
 		LOGGER.info("========== Cron =>> Finish ==========");

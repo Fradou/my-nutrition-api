@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityGraph;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -45,5 +46,25 @@ public class PantryItemDAOImpl extends GenericDAOImpl<PantryItem> implements Pan
 		query.setHint("javax.persistence.loadgraph", graph);
 		
 		return query.getResultList();
+	}
+
+	public void deleteExpiredItem(LocalDate referenceDate, Integer userId) {
+
+		CriteriaBuilder cb = getSession().getCriteriaBuilder();
+		CriteriaDelete<PantryItem> delete = cb.createCriteriaDelete(PantryItem.class);
+		
+		Root<PantryItem> root = delete.from(PantryItem.class);
+		
+		List<Predicate> predicates = new ArrayList<>();
+		if(userId != null && userId != 0) {
+			predicates.add(cb.equal(root.get("user"), userId));
+		}
+		predicates.add(cb.lessThan(root.get("expirationDate"), referenceDate));
+		
+		delete.where(cb.and(predicates.toArray(new Predicate[] {})));
+		
+		TypedQuery<PantryItem> query = getSession().createQuery(delete);
+		int entriesDeleted = query.executeUpdate();
+		System.out.println("Ai supprimée : " + entriesDeleted + " entries.");
 	}
 }

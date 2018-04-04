@@ -10,4 +10,5 @@ public interface PantryItemService extends GenericService <PantryItem> {
 
 	public List<PantryItem> getNearlyExpiredItem(LocalDate referenceDate, Integer userId);
 
+	public void deleteExpiredItem(LocalDate referenceDate, Integer userId);
 }

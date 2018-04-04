@@ -34,4 +34,9 @@ public class PantryItemServiceImpl extends GenericServiceImpl<PantryItem, Pantry
 	public List<PantryItem> getNearlyExpiredItem(LocalDate referenceDate, Integer userId){
 		return dao.getByExpiration(referenceDate, userId);
 	}
+
+	@Override
+	public void deleteExpiredItem(LocalDate referenceDate, Integer userId) {
+		dao.deleteExpiredItem(referenceDate, userId);
+	}
 }
