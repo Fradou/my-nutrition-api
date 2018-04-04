@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fradou.nutrition.mvc.dao.impl.RoleDAOImpl;
 import com.fradou.nutrition.mvc.entity.security.Role;
 import com.fradou.nutrition.mvc.service.RoleService;
-import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
+import com.fradou.nutrition.mvc.service.generic.GenericEntityServiceImpl;
 
 /**
  * Service for Role (Security)
@@ -16,7 +16,7 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class RoleServiceImpl extends GenericServiceImpl<Role, RoleDAOImpl> implements RoleService {
+public class RoleServiceImpl extends GenericEntityServiceImpl<Role, RoleDAOImpl> implements RoleService {
 
 	@Override
 	public boolean belongToUser(Role entity, int user_id) {

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fradou.nutrition.mvc.dao.impl.PantryItemDAOImpl;
 import com.fradou.nutrition.mvc.entity.work.PantryItem;
 import com.fradou.nutrition.mvc.service.PantryItemService;
-import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
+import com.fradou.nutrition.mvc.service.generic.GenericEntityServiceImpl;
 
 /**
  * Service for PantryItem (Nutrition)
@@ -19,7 +19,7 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class PantryItemServiceImpl extends GenericServiceImpl<PantryItem, PantryItemDAOImpl> implements PantryItemService {
+public class PantryItemServiceImpl extends GenericEntityServiceImpl<PantryItem, PantryItemDAOImpl> implements PantryItemService {
 
 	@Override
 	public boolean belongToUser(PantryItem item, int user_id) {

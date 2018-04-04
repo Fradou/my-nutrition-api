@@ -13,7 +13,7 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
  * @param <T>
  */
 @Component
-public interface GenericService<T extends GenericEntity> {
+public interface GenericEntityService<T extends GenericEntity> {
 
 	public int create(T entity);
 	

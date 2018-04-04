@@ -1,8 +1,8 @@
 package com.fradou.nutrition.mvc.service;
 
 import com.fradou.nutrition.mvc.entity.work.Food;
-import com.fradou.nutrition.mvc.service.generic.GenericService;
+import com.fradou.nutrition.mvc.service.generic.GenericEntityService;
 
-public interface FoodService extends GenericService<Food>  {
+public interface FoodService extends GenericEntityService<Food> {
 
 }

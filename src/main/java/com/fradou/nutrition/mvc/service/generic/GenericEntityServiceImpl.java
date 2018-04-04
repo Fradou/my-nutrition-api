@@ -24,7 +24,7 @@ import com.fradou.nutrition.mvc.utils.exception.ResourceNotFoundException;
  */
 @Component
 @Transactional
-public abstract class GenericServiceImpl<T extends GenericEntity, D extends GenericDAO<T>> implements GenericService<T> {
+public abstract class GenericEntityServiceImpl<T extends GenericEntity, D extends GenericDAO<T>> implements GenericEntityService<T> {
 
 	@Autowired
 	protected D dao;

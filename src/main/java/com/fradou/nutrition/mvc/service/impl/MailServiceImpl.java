@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class EmailServiceImpl {
+public class MailServiceImpl {
 
     @Autowired
     public JavaMailSender emailSender;
@@ -30,7 +30,7 @@ public class EmailServiceImpl {
     @Value("${mail.sender}")
     public String emailFrom;
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(EmailServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailServiceImpl.class);
     
     /**
      * Basic email sender

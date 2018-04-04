@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fradou.nutrition.mvc.dao.impl.MealDAOImpl;
 import com.fradou.nutrition.mvc.entity.work.Meal;
 import com.fradou.nutrition.mvc.service.MealService;
-import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
+import com.fradou.nutrition.mvc.service.generic.GenericEntityServiceImpl;
 
 /**
  * Service for Meal (nutrition entity)
@@ -16,7 +16,7 @@ import com.fradou.nutrition.mvc.service.generic.GenericServiceImpl;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class MealServiceImpl extends GenericServiceImpl<Meal, MealDAOImpl> implements MealService {
+public class MealServiceImpl extends GenericEntityServiceImpl<Meal, MealDAOImpl> implements MealService {
 
 	@Override
 	public boolean belongToUser(Meal meal, int user_id) {
