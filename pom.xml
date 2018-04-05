@@ -24,6 +24,7 @@
 		<jcl.slf4j.version>1.7.25</jcl.slf4j.version>
 		<logback.version>1.2.3</logback.version>
 		<jackson.version>2.9.3</jackson.version>
+		<oauth.version>2.3.0.RELEASE</oauth.version>
 	</properties>
 	  
 	<dependencies>
@@ -83,7 +84,7 @@
 			<version>${springsecurity.version}</version>
 		</dependency>
 		
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-oauth2-client</artifactId>
 		    <version>${springsecurity.version}</version>
@@ -92,6 +93,12 @@
 		   <groupId>org.springframework.security</groupId>
 		   <artifactId>spring-security-oauth2-jose</artifactId>
 		   <version>${springsecurity.version}</version>
+		</dependency>-->
+		
+		<dependency>
+		    <groupId>org.springframework.security.oauth</groupId>
+		    <artifactId>spring-security-oauth2</artifactId>
+		    <version>${oauth.version}</version>
 		</dependency>
 		
 		<!-- HIBERNATE -->
