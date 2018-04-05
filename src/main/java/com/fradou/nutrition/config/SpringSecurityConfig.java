@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 import com.fradou.nutrition.security.api.AuthenticationApiEntryPoint;
 import com.fradou.nutrition.security.api.AuthenticationSuccessApiHandler;
@@ -31,6 +32,7 @@ public class SpringSecurityConfig {
 	 */
 	@Configuration
 	@Order(1)
+	@EnableOAuth2Client
 	public static class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		@Autowired
@@ -102,6 +104,7 @@ public class SpringSecurityConfig {
 	 */
 	@Configuration
 	@Order(2)
+	@EnableOAuth2Client
 	public static class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 		@Autowired
 		@Qualifier("customUserDetailsService")
