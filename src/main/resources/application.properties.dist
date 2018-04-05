@@ -4,10 +4,11 @@ mail.server=
 mail.port=
 mail.sender=
 
-security.oauth2.client.clientId=
-security.oauth2.client.clientSecret=
-security.oauth2.client.accessTokenUri=https://github.com/login/oauth/access_token
-security.oauth2.client.userAuthorizationUri=https://github.com/login/oauth/authorize
-security.oauth2.client.tokenName=oauth_token
-security.oauth2.client.clientAuthenticationScheme=form
-security.oauth2.resource.userInfoUri=https://api.github.com/user
+spring.security.oauth2.client.registration.github.client-id=
+spring.security.oauth2.client.registration.github.client-secret=
+
+#security.oauth2.client.accessTokenUri=https://github.com/login/oauth/access_token
+#security.oauth2.client.userAuthorizationUri=https://github.com/login/oauth/authorize
+#security.oauth2.client.tokenName=oauth_token
+#security.oauth2.client.clientAuthenticationScheme=form
+#security.oauth2.resource.userInfoUri=https://api.github.com/user
