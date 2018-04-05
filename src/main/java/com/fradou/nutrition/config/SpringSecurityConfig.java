@@ -196,6 +196,8 @@ public class SpringSecurityConfig {
 				
 				.antMatchers("/register")
 					.permitAll()
+				.antMatchers("/loginSuccess")
+					.permitAll()
 					
 				.antMatchers("/user/**")
 					.hasRole("ADMIN")
