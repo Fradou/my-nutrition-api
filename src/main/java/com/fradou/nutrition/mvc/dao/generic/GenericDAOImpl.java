@@ -71,9 +71,18 @@ public abstract class GenericDAOImpl<T extends GenericEntity> implements Generic
 	}
 
 	@Override
-	public List<T> findAll() {
+	public List<T> findAll(String entityGraph) {
 		Query<T> query = getSession().createQuery("FROM " + clazz.getName());
+		if(entityGraph != null && !"".equals(entityGraph)) {
+			EntityGraph<T> graph = (EntityGraph<T>) getSession().createEntityGraph(entityGraph);
+			query.setHint("javax.persistence.loadgraph", graph);
+		}
 		return query.getResultList();
+	}
+	
+	@Override
+	public List<T> findAll(){
+		return findAll(null);
 	}
 
 	@Override

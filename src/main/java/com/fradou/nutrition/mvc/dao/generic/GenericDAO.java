@@ -25,6 +25,8 @@ public interface GenericDAO<T extends GenericEntity> {
 		
 	public void delete(T entity);
 		
+	public List<T> findAll(String entityGraph);
+	
 	public List<T> findAll();
 		
 	public int count();

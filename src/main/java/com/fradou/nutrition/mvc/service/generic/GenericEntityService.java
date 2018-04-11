@@ -29,6 +29,8 @@ public interface GenericEntityService<T extends GenericEntity> {
 	
 	public List<T> findAll();
 	
+	public List<T> findAll(String entityGraph);
+	
 	public T findUniqueBy(String field, String value);
 		
 	public boolean alreadyExists(String fieldName, String fieldValue);

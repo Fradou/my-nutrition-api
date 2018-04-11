@@ -57,6 +57,10 @@ public abstract class GenericEntityServiceImpl<T extends GenericEntity, D extend
 		return dao.findAll();
 	}
 	
+	public List<T> findAll(String entityGraph) {
+		return dao.findAll(entityGraph);
+	}
+	
 	public T findUniqueBy(String field, String value) {
 		return dao.findUniqueBy(field, value);
 	}
