@@ -9,7 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -18,6 +20,7 @@ import com.fradou.nutrition.mvc.entity.generic.GenericEntity;
 import com.fradou.nutrition.mvc.entity.security.CustomUser;
 import com.fradou.nutrition.mvc.utils.deserializer.EntityIdResolver;
 import com.fradou.nutrition.mvc.utils.serializer.PantryItemSerializer;
+import com.fradou.nutrition.mvc.utils.validator.ShareOrWeight;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +32,7 @@ import lombok.Setter;
  */
 @Entity
 @Table(name="pantry_item")
+@ShareOrWeight
 @Setter @Getter
 @JsonSerialize(using = PantryItemSerializer.class)
 @NamedEntityGraph(
@@ -51,6 +55,7 @@ public class PantryItem extends GenericEntity {
 	@Min(0)
 	private Integer share;
 	
+	@FutureOrPresent
 	private LocalDate expirationDate;
 	
 	private LocalDate purchaseDate;
@@ -61,6 +66,7 @@ public class PantryItem extends GenericEntity {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="food_id")
+	@NotNull
 	private Food food;
 	
 	@Override
