@@ -12,3 +12,8 @@ label > input {
 .error {
 	color:red;
 }
+
+body {
+	max-width: 1200px;
+	margin:auto;
+}

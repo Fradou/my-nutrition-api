@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css"> 
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 
+<a href="${contextPath}">Retour</a>
 
 <table id="items-table">
 	<thead>
@@ -31,5 +32,4 @@
 $(document).ready( function () {
     $('#items-table').DataTable();
 });
-
 </script>

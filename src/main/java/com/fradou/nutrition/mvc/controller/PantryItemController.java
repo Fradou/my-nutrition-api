@@ -19,5 +19,5 @@ public class PantryItemController {
 	public String indexPantry(Model model) {
 		model.addAttribute("items", pService.findAll("graph.PantryItemFood"));
 		return "pantry/item-list";
-	}
+	}	
 }
