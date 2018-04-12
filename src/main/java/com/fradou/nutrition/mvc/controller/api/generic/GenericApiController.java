@@ -157,7 +157,6 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable int id, Authentication authenticate, HttpServletRequest request) throws Exception {
 		
-		
 		if(isUserDependant) {
 			int user_id = getCurrentUser(authenticate).getId();
 			T entity = service.find(id);
@@ -183,12 +182,43 @@ public abstract class GenericApiController<T extends GenericEntity> {
 	 * @param id
 	 * @param entityUpdated
 	 * @param validationResult
+	 * @throws Exception 
 	 */
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable int id, @Valid @RequestBody T entityUpdated, BindingResult validationResult) {
+	public void update(@PathVariable int id, @Valid @RequestBody T entityUpdated, BindingResult validationResult, HttpServletRequest request, Authentication authenticate) throws Exception {
 		
-		service.find(entityUpdated.getId());
+		if(validationResult.hasErrors()) {
+			throw new Exception(entityUpdated.getClass() + " has error : "  + validationResult.getFieldError().getField());
+		}
+		
+		T oldEntity = service.find(entityUpdated.getId());
+		if(oldEntity == null) {
+			throw new NotBelongingToUserException();
+		}
+		
+		if(isUserDependant) {
+			int user_id = getCurrentUser(authenticate).getId();
+			if(service.belongToUser(oldEntity, user_id)) {
+				if(service.belongToUser(entityUpdated, user_id)) {
+					service.update(entityUpdated);
+				}
+				else {
+					throw new Exception("Not allowed to change id");
+				}
+			}
+			else {
+				throw new NotBelongingToUserException(entityUpdated.getClass(), HttpMethod.PUT);
+			}
+		}
+		else {
+			if(request.isUserInRole(PrimaryRole.ROLE_ADMIN.toString())) {
+				service.update(entityUpdated);
+			}
+			else { 
+				throw new NotBelongingToUserException();
+			}
+		}
 	}
 	
 	/**
