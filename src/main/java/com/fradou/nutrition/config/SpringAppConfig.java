@@ -15,7 +15,9 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -141,4 +143,8 @@ public class SpringAppConfig implements WebMvcConfigurer {
 		return mailSender;
 	}
 
+	@Bean
+	public TaskScheduler taskScheduler() {
+		return new ConcurrentTaskScheduler(); //single threaded by default
+	}
 }
