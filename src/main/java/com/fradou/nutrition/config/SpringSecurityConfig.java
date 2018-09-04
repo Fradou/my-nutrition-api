@@ -66,32 +66,33 @@ public class SpringSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 
-			http
+		/**	http
 				.antMatcher("/api/**").authorizeRequests()
 
 				.antMatchers("/api/user/**")
 					.hasRole("ADMIN")
-					
+
 				.antMatchers("/api/**")
 					.authenticated()
 					.and()
 
 				.csrf().disable()
-						
+
 				.exceptionHandling()
 					.authenticationEntryPoint(authenticationApiEntryPoint)
 					.accessDeniedHandler(accessDeniedApiHandler)
 					.and()
-						
+
 				.formLogin()
 					.loginPage("/api/login")
 					.successHandler(authenticationSuccessApiHandler)
 					.permitAll()
 					.and()
-				
+
 				.logout()
 					.logoutUrl("/api/logout")
-					.permitAll(); // .logoutSuccessHandler(logoutSuccessApiHandler)
+					.permitAll();**/ // .logoutSuccessHandler(logoutSuccessApiHandler)
+			http.authorizeRequests().anyRequest().permitAll();
 		}
 	}
 
@@ -122,15 +123,15 @@ public class SpringSecurityConfig {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 
-			http
+		/**	http
 				.authorizeRequests()
-				
+
 				.antMatchers("/register")
 					.permitAll()
-					
+
 				.antMatchers("/user/**")
 					.hasRole("ADMIN")
-				
+
 				.antMatchers("/**")
 					.authenticated()
 
@@ -147,7 +148,9 @@ public class SpringSecurityConfig {
 					// Enable standard logout
 					.logout().permitAll()
 
-					.and().exceptionHandling().accessDeniedPage("/access-denied");
+					.and().exceptionHandling().accessDeniedPage("/access-denied"); **/
+				http.authorizeRequests().anyRequest().permitAll();
+
 		}
 
 		/**
