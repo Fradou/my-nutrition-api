@@ -92,7 +92,7 @@ public class SpringSecurityConfig {
 				.logout()
 					.logoutUrl("/api/logout")
 					.permitAll();**/ // .logoutSuccessHandler(logoutSuccessApiHandler)
-			http.authorizeRequests().anyRequest().permitAll();
+			http.cors().and().authorizeRequests().anyRequest().permitAll();
 		}
 	}
 
@@ -149,7 +149,7 @@ public class SpringSecurityConfig {
 					.logout().permitAll()
 
 					.and().exceptionHandling().accessDeniedPage("/access-denied"); **/
-				http.authorizeRequests().anyRequest().permitAll();
+				http.cors().and().authorizeRequests().anyRequest().permitAll();
 
 		}
 
